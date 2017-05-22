@@ -18,7 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->integer('notificable_id');
             $table->integer('notificable_type');
             $table->integer('site_id');
-            $table->timestamp('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

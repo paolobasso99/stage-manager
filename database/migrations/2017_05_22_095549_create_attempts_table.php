@@ -16,8 +16,9 @@ class CreateAttemptsTable extends Migration
         Schema::create('attempts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('site_id');
-            $table->integer('status');
-            $table->integer('load');
+            $table->integer('status')->nullable();
+            $table->longText('message')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

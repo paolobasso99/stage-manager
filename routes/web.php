@@ -19,29 +19,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+use App\SiteChecker;
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+Route::get('/check',function(){
+    $checker = new SiteChecker;
+
+    return $checker->checkAll();
 });
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

@@ -17,7 +17,7 @@ class CreateSitesTable extends Migration
             $table->increments('id');
             $table->text('url');
             $table->integer('rate');
-            $table->timestamp('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
