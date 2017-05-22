@@ -29,6 +29,8 @@ class CheckSites implements ShouldQueue
      */
     public function handle()
     {
-        //
+        Log::info("Checking Cycle with Queues Begins");
+        app('siteChecker')->run();
+        Log::info("Checking Cycle with Queues Ends");
     }
 }

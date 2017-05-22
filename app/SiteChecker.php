@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 
 class SiteChecker
 {
-    public function checkAll()
+    public function run()
     {
         $sites = Site::all();
         $client = new Client();

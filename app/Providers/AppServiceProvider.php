@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('siteChecker', function ($app) {
+            return new \App\SiteChecker();
+        });
     }
 }
