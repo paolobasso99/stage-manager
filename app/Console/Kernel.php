@@ -24,9 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call(function () {
-        //     dispatch(new CheckSites());
-        // })->everyMinute();
+        $schedule->call(function () {
+            dispatch(new \App\Jobs\CheckSites);
+        })->everyMinute();
     }
 
     /**

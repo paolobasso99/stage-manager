@@ -11,16 +11,18 @@ class DownEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $side;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
-    }
-
+     public function __construct(Site $site)
+     {
+         $this->site = $site;
+     }
+    
     /**
      * Build the message.
      *

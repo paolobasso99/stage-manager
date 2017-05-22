@@ -11,14 +11,24 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Client;
 
+use Carbon\Carbon;
+
+use App\Mail\DownEmail;
+
 class SiteChecker
 {
     public function run()
     {
-        $sites = Site::all();
+        $sites = $this->sitesToCheck();
+
+        var_dump($sites);
+
         $client = new Client();
 
         foreach ($sites as $site) {
+
+            //Update checked_at
+            $site->checked_at = Carbon::now();
 
             try {
 
@@ -26,6 +36,9 @@ class SiteChecker
                     'connect_timeout' => 10
                 ]);
 
+                $site->tried = 0;
+
+                //Save attempt
                 Attempt::create([
                     'site_id' => $site->id,
                     'status' => $response->getStatusCode(),
@@ -34,8 +47,10 @@ class SiteChecker
 
             } catch (RequestException $e) {
 
-                $response = $e->getResponse();
+                $site->tried++;
 
+                //Save attempt
+                $response = $e->getResponse();
                 Attempt::create([
                     'site_id' => $site->id,
                     'status' => $response->getStatusCode(),
@@ -43,6 +58,10 @@ class SiteChecker
                 ]);
 
             } catch (ConnectException $e) {
+
+                $site->tried++;
+
+                //Save attempt
                 Attempt::create([
                     'site_id' => $site->id,
                     'status' => null,
@@ -51,7 +70,24 @@ class SiteChecker
 
             }
 
+            $site->save();
+
+            $this->sendEmailIfNeeded($site);
         }
 
+    }
+
+    private function sitesToCheck() {
+        return Site::where('checked_at', '>=', Carbon::now()->subMinutes('rate'))
+                ->orWhere('tried', '>', 0)
+                ->get();
+    }
+
+    private function sendEmailIfNeeded($site) {
+        $emails = ['example1@example.com', 'example2@example.com'];
+
+        if($site->tried == $site->rate){
+            DownEmail::to($emails)->send($site);
+        }
     }
 }
