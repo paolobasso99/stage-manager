@@ -12,9 +12,10 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        //
-    ];
+     protected $commands = [
+         Commands\Check\CheckAllSites::class,
+         Commands\Check\ResetAttemptsCounter::class
+     ];
 
     /**
      * Define the application's command schedule.

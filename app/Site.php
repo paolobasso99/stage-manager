@@ -21,10 +21,8 @@ class Site extends Model
 
     public function sendEmailIfNeeded()
     {
-        \Mail::to($this->notificable)->send(new Warning($this));
-
         if($this->tried % 5 == 0 && $this->tried < 20){
-
+            \Mail::to($this->notificable)->send(new Warning($this));
         }
 
         if ($this->tried == 20) {
@@ -54,6 +52,12 @@ class Site extends Model
         return Site::All();
         return Site::where('checked_at', '>=', \Carbon\Carbon::now()->subMinutes('rate'))
                     ->orWhere('tried', '>', 0)
+                    ->get();
+    }
+
+    public static function failed()
+    {
+        return Site::where('tried', '>', 0)
                     ->get();
     }
 }
