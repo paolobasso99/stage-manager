@@ -6,6 +6,7 @@
     </h1>
 
     <div class="page-content container-fluid">
+        @include('voyager::alerts')
         <div class="row">
             <div class="col-md-12">
 

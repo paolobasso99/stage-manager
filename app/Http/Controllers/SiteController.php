@@ -9,7 +9,9 @@ class SiteController extends Controller
 {
     public function index()
     {
-        return view('sites.index');
+        $sites = Site::all();
+
+        return view('sites.index')->with('sites', $sites);
 
     }
 
@@ -60,6 +62,14 @@ class SiteController extends Controller
         $site->rate = request('rate');
 
         $site->save();
+
+        return redirect(route('voyager.sites.index'));
+
+    }
+
+    public function destroy(Site $site)
+    {
+        $site->delete();
 
         return redirect(route('voyager.sites.index'));
 
