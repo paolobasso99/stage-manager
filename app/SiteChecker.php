@@ -67,6 +67,7 @@ class SiteChecker
 
         foreach ($sites as $site) {
             $site->tried = 0;
+            $site->down_from = null;
             $site->save();
         }
     }

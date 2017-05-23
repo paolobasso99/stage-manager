@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 use App\Mail\SiteDown\Warning;
 
-use App\Notificable;
+use App\Downtime;
 
 class Site extends Model
 {
@@ -37,14 +37,43 @@ class Site extends Model
         }
     }
 
+    public function startDownTime()
+    {
+        if ($this->down_from == null) {
+            $this->down_from = Carbon::now();
+        }
+    }
+
+    public function endDownTime()
+    {
+        if ($this->down_from != null) {
+            
+            Downtime::create([
+                'site_id' => $this->id,
+                'start_at' => $this->down_from,
+                'end_at' => Carbon::now()
+            ]);
+
+            $this->down_from = null;
+        }
+    }
+
     public function saveAttempt($response)
     {
         if($response != null){
 
-            if ($response->getStatusCode() === 200) {
+            if ($response->getStatusCode() == 200) {
+
+                //Success response
+                $this->endDownTime();
                 $this->tried = 0;
+
             } else {
+
+                //Bad response
+                $this->startDownTime();
                 $this->tried++;
+
             }
 
             Attempt::create([
@@ -56,6 +85,8 @@ class Site extends Model
 
         } else {
 
+            //Bad response
+            $this->startDownTime();
             $this->tried++;
 
             Attempt::create([
@@ -85,6 +116,7 @@ class Site extends Model
     public static function failed()
     {
         return Site::where('tried', '>', 0)
+                    ->orWhere('down_from', '!=', null)
                     ->get();
     }
 }
