@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\SiteDown;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class DownEmail extends Mailable
+use App\Site;
+
+class Warning extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -22,7 +24,7 @@ class DownEmail extends Mailable
      {
          $this->site = $site;
      }
-    
+
     /**
      * Build the message.
      *
@@ -30,6 +32,6 @@ class DownEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.down.warning')->with('site', $this->site);
     }
 }
