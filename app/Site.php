@@ -67,8 +67,7 @@ class Site extends Model
 
     public static function toCheck()
     {
-        return Site::All();
-        return Site::where('checked_at', '>=', \Carbon\Carbon::now()->subMinutes('rate'))
+        return Site::where('checked_at', '<=', \Carbon\Carbon::now()->subMinutes(5))
                     ->orWhere('tried', '>', 0)
                     ->get();
     }

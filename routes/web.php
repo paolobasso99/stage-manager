@@ -20,5 +20,5 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/check',function(){
-    app('SiteChecker')->checkAll();
+    app('SiteChecker')->check();
 });

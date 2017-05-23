@@ -11,19 +11,31 @@ use Carbon\Carbon;
 
 class SiteChecker
 {
-    public function checkAll()
+    public function check()
     {
         $sites = Site::toCheck();
 
         $client = new Client();
 
         foreach ($sites as $site) {
-            $this->check($site, $client);
+            $this->checkOne($site, $client);
         }
 
     }
 
-    public function check(Site $site, Client $client)
+    public function checkAll()
+    {
+        $sites = Site::all();
+
+        $client = new Client();
+
+        foreach ($sites as $site) {
+            $this->checkOne($site, $client);
+        }
+
+    }
+
+    public function checkOne(Site $site, Client $client)
     {
 
         //Update checked_at
