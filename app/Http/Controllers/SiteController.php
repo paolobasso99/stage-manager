@@ -42,4 +42,26 @@ class SiteController extends Controller
         return redirect(route('voyager.sites.index'));
 
     }
+
+    public function edit(Site $site)
+    {
+        return view('sites.edit')->with('site', $site);
+
+    }
+
+    public function update(Site $site)
+    {
+        $this->validate(request(), [
+            'url' => 'required|url|unique:sites',
+            'rate' => 'required|integer'
+        ]);
+
+        $site->url = request('url');
+        $site->rate = request('rate');
+
+        $site->save();
+
+        return redirect(route('voyager.sites.index'));
+
+    }
 }
