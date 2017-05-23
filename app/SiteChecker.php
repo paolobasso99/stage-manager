@@ -5,7 +5,6 @@ namespace App;
 use App\Site;
 
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Client;
 
 use Carbon\Carbon;
@@ -33,17 +32,7 @@ class SiteChecker
 
                 $site->saveAttempt($response);
 
-            } catch (RequestException $e) {
-
-                //Increase attempt counter
-                $site->tried++;
-
-                $site->saveAttempt($e->getResponse());
-
-            } catch (ConnectException $e) {
-
-                //Increase attempt counter
-                $site->tried++;
+            } catch (\Exception $e) {
 
                 $site->saveAttempt($e->getResponse());
 

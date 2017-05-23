@@ -38,7 +38,7 @@ class ResetAttemptsCounter extends Command
     public function handle()
     {
         $this->line('Resetting...');
-        app('siteChecker')->resetAttemptsCounter();
+        app('SiteChecker')->resetAttemptsCounter();
         $this->info('Reset complete');
     }
 }

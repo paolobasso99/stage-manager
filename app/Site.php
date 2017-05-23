@@ -24,8 +24,7 @@ class Site extends Model
         if($this->tried % 5 == 0 && $this->tried < 20){
             \Mail::to($this->notificable)->send(new Warning($this));
         }
-
-        if ($this->tried == 20) {
+        else if ($this->tried == 20) {
             \Mail::to($this->notificable)->send(new StopChecking($this));
         }
     }
@@ -33,12 +32,24 @@ class Site extends Model
     public function saveAttempt($response)
     {
         if($response != null){
+
+            if ($response->getStatusCode() === 200) {
+                $this->tried = 0;
+            } else {
+                $this->tried++;
+            }
+
             Attempt::create([
                 'site_id' => $this->id,
                 'status' => $response->getStatusCode(),
                 'message' => $response->getReasonPhrase()
             ]);
+
+
         } else {
+
+            $this->tried++;
+
             Attempt::create([
                 'site_id' => $this->id,
                 'status' => null,

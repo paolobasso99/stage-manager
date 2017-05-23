@@ -32,7 +32,7 @@ class CheckSites implements ShouldQueue
     {
         Log::info("Checking Cycle with Queues Begins");
 
-        app('siteChecker')->checkAll();
+        app('SiteChecker')->checkAll();
 
         Log::info("Checking Cycle with Queues Ends");
     }
