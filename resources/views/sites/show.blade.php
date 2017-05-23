@@ -2,18 +2,18 @@
 
 @section('content')
     <h1 class="page-title">
-                <i class=""></i> Viewing Sites &nbsp;
+        <i class="voyager-browser"></i> Viewing Sites &nbsp;
 
-                    <a href="{{ route('voyager.sites.edit', ['site' => $site]) }}" class="btn btn-info">
-                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;
-                    Edit
-                    </a>
-                        <a href="{{ route('voyager.sites.index') }}" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-list"></span>&nbsp;
-                    Return to List
-                    </a>
-                </h1>
-    <div class="page-content container-fluid">                
+        <a href="{{ route('voyager.sites.edit', ['site' => $site]) }}" class="btn btn-info">
+            <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+            Edit
+        </a>
+        <a href="{{ route('voyager.sites.index') }}" class="btn btn-warning">
+            <span class="glyphicon glyphicon-list"></span>&nbsp;
+            Return to List
+        </a>
+    </h1>
+    <div class="page-content container-fluid">
         <div class="row">
             <div class="col-md-12">
 
