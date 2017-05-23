@@ -18,36 +18,13 @@ class SiteChecker
         $client = new Client();
 
         foreach ($sites as $site) {
-            //Update checked_at
-            $site->checked_at = Carbon::now();
-
-            try {
-
-                $response = $client->get($site->url, [
-                    'connect_timeout' => 10
-                ]);
-
-                //Reset attempt counter
-                $site->tried = 0;
-
-                $site->saveAttempt($response);
-
-            } catch (\Exception $e) {
-
-                $site->saveAttempt($e->getResponse());
-
-            }
-
-            $site->save();
-
-            //$site->sendEmailIfNeeded();
+            $this->check($site, $client);
         }
 
     }
 
-    public function check(Site $sites)
+    public function check(Site $site, Client $client)
     {
-        $client = new Client();
 
         //Update checked_at
         $site->checked_at = Carbon::now();
@@ -58,22 +35,9 @@ class SiteChecker
                 'connect_timeout' => 10
             ]);
 
-            //Reset attempt counter
-            $site->tried = 0;
-
             $site->saveAttempt($response);
 
-        } catch (RequestException $e) {
-
-            //Increase attempt counter
-            $site->tried++;
-
-            $site->saveAttempt($e->getResponse());
-
-        } catch (ConnectException $e) {
-
-            //Increase attempt counter
-            $site->tried++;
+        } catch (\Exception $e) {
 
             $site->saveAttempt($e->getResponse());
 

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Mail\SiteDown\Warning;
 
+use App\Notificable;
+
 class Site extends Model
 {
     public function emails()
@@ -18,14 +20,19 @@ class Site extends Model
         return $this->morphedByMany('App\User', 'notificable');
     }
 
-
     public function sendEmailIfNeeded()
     {
-        if($this->tried % 5 == 0 && $this->tried < 20){
-            \Mail::to($this->notificable)->send(new Warning($this));
+        if($this->tried % config('check.checks_to_warn') == 0
+            && $this->tried < setting('check.checks_to_stop'))
+        {
+
+            \Mail::to()->send(new Warning($this));
+
         }
-        else if ($this->tried == 20) {
-            \Mail::to($this->notificable)->send(new StopChecking($this));
+        else if ($this->tried == setting('check.checks_to_stop')) {
+
+            \Mail::to()->send(new StopChecking($this));
+
         }
     }
 
