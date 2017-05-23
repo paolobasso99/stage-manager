@@ -20,9 +20,9 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
-use Carbon\Carbon;
 
 Route::get('/dummy',function(){
 
-    
+
+
 });
