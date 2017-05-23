@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 use App\Mail\SiteDown\Warning;
 
@@ -67,9 +68,18 @@ class Site extends Model
 
     public static function toCheck()
     {
-        return Site::where('checked_at', '<=', \Carbon\Carbon::now()->subMinutes(5))
-                    ->orWhere('tried', '>', 0)
-                    ->get();
+        $sites =  \App\Site::all();
+        $toCheck = array();
+
+        foreach ($sites as $site) {
+
+            if ($site->checked_at <= Carbon::now()->subMinutes($site->rate) || $site->tried > 0) {
+                $toCheck[] = $site;
+            }
+        }
+
+
+        return $toCheck;
     }
 
     public static function failed()

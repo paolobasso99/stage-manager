@@ -19,6 +19,10 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
-Route::get('/check',function(){
-    app('SiteChecker')->check();
+
+use Carbon\Carbon;
+
+Route::get('/dummy',function(){
+
+    
 });
