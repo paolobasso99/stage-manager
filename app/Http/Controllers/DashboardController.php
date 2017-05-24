@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -12,7 +13,28 @@ class DashboardController extends Controller
         $counter['sites'] = \App\Site::count();
         $counter['users'] = \App\User::count();
         $counter['emails'] = \App\Email::count();
+        $counter['downTimes'] = \App\Downtime::count();
 
-        return view('dashboard')->with('counter', $counter);
+        $downPerMonth = $this->getDownTimesPerMonth(5);
+
+        return view('dashboard')
+                   ->with('counter', $counter)
+                   ->with('lastDown', \App\Downtime::first())
+                   ->with('downPerMonth', $downPerMonth);
+    }
+
+    private function getDownTimesPerMonth($numberOfMonths) {
+
+        $stats = array();
+
+        for ($i = $numberOfMonths - 1; $i >= 0; $i--) {
+            $stats[Carbon::now()->subMonths($i)->format('F')] =
+            \App\Downtime::where([
+                ['end_at', '<=', Carbon::now()->subMonths($i)->lastOfMonth()],
+                ['end_at', '>=', Carbon::now()->subMonths($i)->firstOfMonth()]
+            ])->count();
+        }
+
+        return $stats;
     }
 }
