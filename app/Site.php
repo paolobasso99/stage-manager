@@ -13,6 +13,7 @@ use App\Downtime;
 
 class Site extends Model
 {
+
     public function emails()
     {
         return $this->morphedByMany('App\Email', 'notificable');
@@ -27,13 +28,20 @@ class Site extends Model
         return $this->hasMany('App\Downtime');
     }
 
+
+
     public function sendEmailIfNeeded()
     {
+        //Get addresses
         $addresses = array_merge(
             $this->users->pluck('email')->toArray(),
             $this->emails->pluck('address')->toArray()
         );
 
+        //Remove duplicates
+        $addresses = array_unique($addresses);
+
+        //Chek if notification is needed and send
         if($this->tried % config('check.checks_to_warn') == 0
             && $this->tried < config('check.checks_to_stop'))
         {
@@ -59,6 +67,7 @@ class Site extends Model
     {
         if ($this->down_from != null) {
 
+            //Create record of downtime and reset timer
             Downtime::create([
                 'site_id' => $this->id,
                 'start_at' => $this->down_from,
@@ -87,6 +96,7 @@ class Site extends Model
 
             }
 
+            //Save attempt
             Attempt::create([
                 'site_id' => $this->id,
                 'status' => $response->getStatusCode(),
@@ -100,6 +110,7 @@ class Site extends Model
             $this->startDownTime();
             $this->tried++;
 
+            //Save attempt
             Attempt::create([
                 'site_id' => $this->id,
                 'status' => null,
@@ -110,14 +121,20 @@ class Site extends Model
 
     public function getOnlineTime()
     {
+        //Get minutes since creation
         $minutes = Carbon::now()->diffInMinutes($this->created_at);
+
+        //Subtract minutes of downtime
         $minutes = $minutes - $this->getOfflineTime();
+
         return $minutes;
     }
 
     public function getOfflineTime()
     {
         $minutes = 0;
+
+        //Add minutes of downtime from database
         foreach($this->downtimes as $downtime){
             $start = Carbon::parse($downtime->start_at);
             $end =Carbon::parse($downtime->end_at);
@@ -135,7 +152,7 @@ class Site extends Model
         $toCheck = array();
 
         foreach ($sites as $site) {
-
+            //Check if last control was made too before the rate
             if ($site->checked_at <= Carbon::now()->subMinutes($site->rate) || $site->tried > 0) {
                 $toCheck[] = $site;
             }
@@ -147,6 +164,7 @@ class Site extends Model
 
     public static function failed()
     {
+        //Return sites that have failed last checking
         return Site::where('tried', '>', 0)
                     ->orWhere('down_from', '!=', null)
                     ->get();

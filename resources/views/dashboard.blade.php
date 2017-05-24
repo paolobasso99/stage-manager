@@ -10,7 +10,7 @@
                     <div class="panel-content">
                         <i class='voyager-browser'></i>
                         <h4>{{ $counter['sites'] }} Sites</h4>
-                        <a href="{{ route('voyager.sites.index') }}" class="btn btn-primary">View emails</a>
+                        <a href="{{ route('voyager.sites.index') }}" class="btn btn-primary">View sites</a>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                     <div class="panel-content">
                         <i class='voyager-person'></i>
                         <h4>{{ $counter['users'] }} Users</h4>
-                        <a href="{{ route('voyager.users.index') }}" class="btn btn-primary">View emails</a>
+                        <a href="{{ route('voyager.users.index') }}" class="btn btn-primary">View users</a>
                     </div>
                 </div>
             </div>

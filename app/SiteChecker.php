@@ -65,6 +65,7 @@ class SiteChecker
     {
         $sites = Site::failed();
 
+        //Make all sites not failed
         foreach ($sites as $site) {
             $site->tried = 0;
             $site->down_from = null;

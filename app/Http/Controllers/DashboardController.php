@@ -27,12 +27,16 @@ class DashboardController extends Controller
 
         $stats = array();
 
+        // $stats = ['Month' => times of down]
         for ($i = $numberOfMonths - 1; $i >= 0; $i--) {
+
+            //count from downtimes where end_at is in the month
             $stats[Carbon::now()->subMonths($i)->format('F')] =
             \App\Downtime::where([
                 ['end_at', '<=', Carbon::now()->subMonths($i)->lastOfMonth()],
                 ['end_at', '>=', Carbon::now()->subMonths($i)->firstOfMonth()]
             ])->count();
+
         }
 
         return $stats;
