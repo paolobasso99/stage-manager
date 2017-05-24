@@ -17,13 +17,15 @@
                     <h3 class="panel-title">Status</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0;">
-                    <p>
-                        @if ($site->down_from == null)
-                            Online
-                        @else
-                            Offline from {{ $site->down_from }}
-                        @endif
-                    </p>
+                    @if ($site->down_from == null)
+                        <p class="text-success">
+                            <strong>Online</strong>
+                        </p>
+                    @else
+                        <p class="text-danger">
+                            <strong>Offline from {{ $site->down_from }}</strong>
+                        </p>
+                    @endif
                 </div>
 
                 <hr style="margin:0;">
@@ -33,8 +35,8 @@
                 </div>
                 <div class="panel-body" style="padding-top:0;">
                     <p>
-                        @if (count($site->downtimes()->first() > 0))
-                            {{ $site->downtimes()->first() }}
+                        @if (count($site->downtimes()->first()) > 0)
+                            {{ $site->downtimes()->first()->end_at }}
                         @else
                             Never been offline.
                         @endif
@@ -76,19 +78,19 @@
         var pieChart = new Chart($("#pieChart"), {
             type: 'pie',
             data: {
-                labels: ["Offline", "Online"],
+                labels: ["Online", "Offline"],
                 datasets: [{
                     data: [
                         {{ $site->getOnlineTime() }},
                         {{ $site->getOfflineTime() }}
                     ],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(47, 237, 118, 0.8)',
+                        'rgba(204, 40, 40, 0.8)',
                     ],
                     borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(75, 192, 192, 1)',
+                        'rgba(47, 237, 118, 1)',
+                        'rgba(204, 40, 40, 1)',
                     ],
                     borderWidth: 1
                 }]

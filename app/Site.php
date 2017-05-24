@@ -114,7 +114,11 @@ class Site extends Model
     {
         $minutes = 0;
         foreach($this->downtimes as $downtime){
-            $minutes = $minutes + $downtime->start_at->diffInMinutes($downtime->end_at);
+            $start = Carbon::parse($downtime->start_at);
+            $end =Carbon::parse($downtime->end_at);
+
+
+            $minutes = $minutes + $start->diffInMinutes($end);
         }
 
         return $minutes;
