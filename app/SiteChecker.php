@@ -57,7 +57,7 @@ class SiteChecker
 
         $site->save();
 
-        //$site->sendEmailIfNeeded();
+        $site->sendEmailIfNeeded();
 
     }
 

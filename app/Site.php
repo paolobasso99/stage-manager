@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-use App\Mail;
+use Illuminate\Support\Facades\Mail;
 use App\Mail\SiteDown\Warning;
 use App\Mail\SiteDown\StopChecking;
 
@@ -29,16 +29,21 @@ class Site extends Model
 
     public function sendEmailIfNeeded()
     {
+        $addresses = array_merge(
+            $this->users->pluck('email')->toArray(),
+            $this->emails->pluck('address')->toArray()
+        );
+
         if($this->tried % config('check.checks_to_warn') == 0
-            && $this->tried < setting('check.checks_to_stop'))
+            && $this->tried < config('check.checks_to_stop'))
         {
 
-            Mail::to()->send(new Warning($this));
+            Mail::to($addresses)->send(new Warning($this));
 
         }
-        else if ($this->tried == setting('check.checks_to_stop')) {
+        if ($this->tried == config('check.checks_to_stop')) {
 
-            Mail::to()->send(new StopChecking($this));
+            Mail::to($addresses)->send(new StopChecking($this));
 
         }
     }

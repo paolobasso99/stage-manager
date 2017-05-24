@@ -14,5 +14,5 @@
 Voyager::routes();
 
 Route::get('dummy', function() {
-    
+    \App\Site::find(2)->sendEmailIfNeeded();
 });
