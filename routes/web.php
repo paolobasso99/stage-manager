@@ -16,5 +16,5 @@ Voyager::routes();
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 
 Route::get('dummy', function() {
-    redirect('/');
+    \App\Site::first()->sendEmailIfNeeded();
 });

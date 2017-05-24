@@ -13,15 +13,6 @@ use App\Downtime;
 
 class Site extends Model
 {
-    public function emails()
-    {
-        return $this->morphedByMany('App\Email', 'notificable');
-    }
-
-    public function users()
-    {
-        return $this->morphedByMany('App\User', 'notificable');
-    }
 
     public function downtimes(){
         return $this->hasMany('App\Downtime');
@@ -30,9 +21,11 @@ class Site extends Model
     public function sendEmailIfNeeded()
     {
         $addresses = array_merge(
-            $this->users->pluck('email')->toArray(),
-            $this->emails->pluck('address')->toArray()
+            \App\User::all()->pluck('email')->toArray(),
+            \App\Email::all()->pluck('address')->toArray()
         );
+
+        dd($addresses);
 
         if($this->tried % config('check.checks_to_warn') == 0
             && $this->tried < config('check.checks_to_stop'))
