@@ -41,9 +41,75 @@ class SiteController extends VoyagerBreadController
         if (view()->exists("voyager::$slug.read")) {
             $view = "voyager::$slug.read";
         }
+
+        //Added
         $site = Site::find($id);
 
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'site'));
+        $emails = \App\Email::all();
+
+        return view($view, compact(
+            'dataType',
+            'dataTypeContent',
+            'isModelTranslatable',
+            'site',
+            'emails'
+        ));
+    }
+
+    public function create(Request $request)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        Voyager::canOrFail('add_'.$dataType->name);
+
+        $dataTypeContent = (strlen($dataType->model_name) != 0)
+                            ? new $dataType->model_name()
+                            : false;
+
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        $view = 'voyager::bread.edit-add';
+
+        if (view()->exists("voyager::$slug.edit-add")) {
+            $view = "voyager::$slug.edit-add";
+        }
+
+        $emails = \App\Email::all();
+
+        return view($view, compact(
+            'dataType',
+            'dataTypeContent',
+            'isModelTranslatable',
+            'emails'
+        ));
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'url' => 'required|url|unique:sites',
+            'rate' => 'required|integer',
+            'emails.*' => 'integer'
+        ]);
+
+        $site = new Site();
+
+        $site->url = $request->url;
+        $site->rate = $request->rate;
+
+        if (isset($request->emails)) {
+            $site->emails()->attach($request->emails);
+        } else {
+            $site->emails()->attach(array());
+        }
+
+        $site->save();
+
+        return redirect(route('voyager.sites.edit', $site));
     }
 
     // public function index()

@@ -4,73 +4,107 @@
     @parent
 
     <div class="page-content container-fluid">
-        <h2>Stats</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Stats</h2>
 
-        <div class="col-md-6">
-            <canvas id="pieChart" width="400" height="400"></canvas>
-        </div>
-
-        <div class="col-md-6">
-            <div class="panel panel-bordered" style="padding-bottom:5px;">
-
-                <div class="panel-heading" style="border-bottom:0;">
-                    <h3 class="panel-title">Status</h3>
-                </div>
-                <div class="panel-body" style="padding-top:0;">
-                    @if ($site->down_from == null)
-                        <p class="text-success">
-                            <strong>Online</strong>
-                        </p>
-                    @else
-                        <p class="text-danger">
-                            <strong>Offline from {{ $site->down_from }}</strong>
-                        </p>
-                    @endif
+                <div class="col-md-6">
+                    <canvas id="pieChart" width="400" height="400"></canvas>
                 </div>
 
-                <hr style="margin:0;">
+                <div class="col-md-6">
+                    <div class="panel panel-bordered" style="padding-bottom:5px;">
 
-                <div class="panel-heading" style="border-bottom:0;">
-                    <h3 class="panel-title">Last time down</h3>
-                </div>
-                <div class="panel-body" style="padding-top:0;">
-                    <p>
-                        @if (count($site->downtimes()->first()) > 0)
-                            {{ $site->downtimes()->first()->end_at }}
-                        @else
-                            Never been offline.
-                        @endif
-                    </p>
-                </div>
+                        <div class="panel-heading" style="border-bottom:0;">
+                            <h3 class="panel-title">Status</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0;">
+                            @if ($site->down_from == null)
+                                <p class="text-success">
+                                    <strong>Online</strong>
+                                </p>
+                            @else
+                                <p class="text-danger">
+                                    <strong>Offline from {{ $site->down_from }}</strong>
+                                </p>
+                            @endif
+                        </div>
 
-                <hr style="margin:0;">
+                        <hr style="margin:0;">
 
-                <div class="panel-heading" style="border-bottom:0;">
-                    <h3 class="panel-title">Total online time</h3>
-                </div>
-                <div class="panel-body" style="padding-top:0;">
-                    <p>
-                        {{ $site->getOnlineTime() }}
-                    </p>
-                </div>
+                        <div class="panel-heading" style="border-bottom:0;">
+                            <h3 class="panel-title">Last time down</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0;">
+                            <p>
+                                @if (count($site->downtimes()->first()) > 0)
+                                    {{ $site->downtimes()->first()->end_at }}
+                                @else
+                                    Never been offline.
+                                @endif
+                            </p>
+                        </div>
 
-                <hr style="margin:0;">
+                        <hr style="margin:0;">
 
-                <div class="panel-heading" style="border-bottom:0;">
-                    <h3 class="panel-title">Total offline time</h3>
-                </div>
-                <div class="panel-body" style="padding-top:0;">
-                    <p>
-                        {{ $site->getOfflineTime() }}
-                    </p>
+                        <div class="panel-heading" style="border-bottom:0;">
+                            <h3 class="panel-title">Total online time</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0;">
+                            <p>
+                                {{ $site->getOnlineTime() }}
+                            </p>
+                        </div>
+
+                        <hr style="margin:0;">
+
+                        <div class="panel-heading" style="border-bottom:0;">
+                            <h3 class="panel-title">Total offline time</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0;">
+                            <p>
+                                {{ $site->getOfflineTime() }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Emails</h2>
+                <select class="select2" name="emails[]" multiple="multiple">
+                    @foreach ($emails as $email)
+
+                        <option value="{{ $email->id }}"
+                            @if (in_array($site->id , $email->sites()->pluck('site_id')->toArray()))
+                                selected
+                            @endif>
+
+                            {{ $email->address }}
+
+                        </option>
+
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
     </div>
 @endsection
 
 @section('javascript')
     @parent
+
+    <!-- Select2 -->
+    <script src="{{ asset('js/select2.full.min.js') }}"></script>
+    <script type="text/javascript">
+        $(".select2").select2({
+            placeholder: "Select emails",
+            allowClear: true
+        });
+    </script>
 
     <!-- Chart.js -->
     <script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
