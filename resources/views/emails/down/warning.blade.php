@@ -1,1 +1,0 @@
-Warning for {{ $site->url }}

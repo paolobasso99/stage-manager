@@ -32,6 +32,8 @@ class Warning extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.down.warning')->with('site', $this->site);
+        return $this->markdown('emails.siteDown.warning')
+                    ->subject('WARNING for ' . $this->site->url)
+                    ->with('site', $this->site);
     }
 }

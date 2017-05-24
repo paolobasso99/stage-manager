@@ -32,6 +32,8 @@ class StopChecking extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.down.stop')->with('site', $this->site);
+        return $this->markdown('emails.siteDown.stop')
+                    ->subject('LAST WARNING for ' . $this->site->url)
+                    ->with('site', $this->site);
     }
 }
