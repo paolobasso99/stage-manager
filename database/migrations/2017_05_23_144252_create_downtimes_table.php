@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDowntimeTable extends Migration
+class CreateDowntimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDowntimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('downtime', function (Blueprint $table) {
+        Schema::create('downtimes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('site_id');
             $table->timestamp('start_at')->nullable();
@@ -33,7 +33,7 @@ class CreateDowntimeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('downtime');
+        Schema::dropIfExists('downtimes');
 
         Schema::table('sites', function (Blueprint $table) {
             $table->dropColumn('down_from');

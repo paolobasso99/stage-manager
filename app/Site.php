@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
+use App\Mail;
 use App\Mail\SiteDown\Warning;
+use App\Mail\SiteDown\StopChecking;
 
 use App\Downtime;
 
@@ -21,18 +23,22 @@ class Site extends Model
         return $this->morphedByMany('App\User', 'notificable');
     }
 
+    public function downtimes(){
+        return $this->hasMany('App\Downtime');
+    }
+
     public function sendEmailIfNeeded()
     {
         if($this->tried % config('check.checks_to_warn') == 0
             && $this->tried < setting('check.checks_to_stop'))
         {
 
-            \Mail::to()->send(new Warning($this));
+            Mail::to()->send(new Warning($this));
 
         }
         else if ($this->tried == setting('check.checks_to_stop')) {
 
-            \Mail::to()->send(new StopChecking($this));
+            Mail::to()->send(new StopChecking($this));
 
         }
     }
@@ -47,7 +53,7 @@ class Site extends Model
     public function endDownTime()
     {
         if ($this->down_from != null) {
-            
+
             Downtime::create([
                 'site_id' => $this->id,
                 'start_at' => $this->down_from,
@@ -95,6 +101,23 @@ class Site extends Model
                 'message' => null
             ]);
         }
+    }
+
+    public function getOnlineTime()
+    {
+        $minutes = Carbon::now()->diffInMinutes($this->created_at);
+        $minutes = $minutes - $this->getOfflineTime();
+        return $minutes;
+    }
+
+    public function getOfflineTime()
+    {
+        $minutes = 0;
+        foreach($this->downtimes as $downtime){
+            $minutes = $minutes + $downtime->start_at->diffInMinutes($downtime->end_at);
+        }
+
+        return $minutes;
     }
 
     public static function toCheck()

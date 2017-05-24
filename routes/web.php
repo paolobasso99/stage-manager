@@ -12,3 +12,9 @@
 */
 
 Voyager::routes();
+
+Route::get('dummy', function() {
+    $site = \App\Site::first();
+
+    dd($site->getOfflineTime());
+});
