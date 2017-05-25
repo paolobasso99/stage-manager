@@ -73,7 +73,7 @@ class Site extends Model
         }
     }
 
-    public function saveAttempt($response)
+    public function saveAttempt($response, $transferTime = null)
     {
         if($response != null){
 
@@ -95,6 +95,7 @@ class Site extends Model
             Attempt::create([
                 'site_id' => $this->id,
                 'status' => $response->getStatusCode(),
+                'load_time' => $transferTime,
                 'message' => $response->getReasonPhrase()
             ]);
 
@@ -109,6 +110,7 @@ class Site extends Model
             Attempt::create([
                 'site_id' => $this->id,
                 'status' => null,
+                'load_time' => $transferTime,
                 'message' => null
             ]);
         }
