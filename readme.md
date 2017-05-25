@@ -1,10 +1,12 @@
 ## Install
 
-1. git clone https://github.com/paolobasso99/stage-manager.git
-2. composer Install
-3. mysql -u user -p < dump.sql
-4. Configurare mail in ```.env```
-5. Login -> User = admin@admin.com / password = password
+* git clone https://github.com/paolobasso99/stage-manager.git
+* L'estensione ```php-ldap``` deve essere installata nel LAMP
+* mysql -u user -p < dump.sql
+* Configurare mail in ```.env```
+* Configure LDAP in ```.env```
+* composer Install
+* Login -> User = admin@admin.com / password = password
 
 ## Commands
 
