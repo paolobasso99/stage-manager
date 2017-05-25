@@ -1,5 +1,11 @@
 @extends('voyager::bread.read')
 
+@section('css')
+    <style>
+
+    </style>
+@stop
+
 @section('content')
     @parent
 
@@ -71,24 +77,26 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Emails</h2>
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul>
-                            @foreach ($emails as $email)
+        @if (count($emails) > 0)
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Emails</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-inline">
+                                @foreach ($emails as $email)
 
-                                <li>
-                                    {{ $email->address }}
-                                </li>
+                                    <li class="label label-default">
+                                        {{ $email->address }}
+                                    </li>
 
-                            @endforeach
-                        </ul>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
 
     </div>
 @endsection

@@ -57,8 +57,8 @@
 
 
                             <div class="form-group">
-                                <label for="name">Emails</label>
-                                <select class="select2" name="emails[]" multiple="multiple">
+                                <label for="emails">Emails</label>
+                                <select class="select2" id="emails" name="emails[]" multiple="multiple">
                                     @foreach ($emails as $email)
 
                                         <option value="{{ $email->id }}"
@@ -74,8 +74,9 @@
 
                                     @endforeach
                                 </select>
+                                <label for="checkAll">Select All</label>
+                                <input type="checkbox" id="checkAll" >
                             </div>
-
 
                         </div><!-- panel-body -->
 
@@ -133,6 +134,16 @@
         $(".select2").select2({
             placeholder: "Select emails",
             allowClear: true
+        });
+
+        $("#checkAll").click(function(){
+            if($("#checkAll").is(':checked') ){
+                $("#emails > option").prop("selected","selected");// Select All Options
+                $("#emails").trigger("change");// Trigger change to select 2
+            }else{
+                $("#emails > option").removeAttr("selected");
+                $("#emails").trigger("change");// Trigger change to select 2
+            }
         });
     </script>
 @endsection

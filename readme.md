@@ -1,10 +1,6 @@
 ## To do
 
-1. GUI per relazionare sites and Notificable
-
-## Problems
-
-1. ```SiteController``` salvo le email ma polymorphic relation vuole site_id che non le viene fornito da ```sync()```, forse passare a ```ManyToMany```?
+1. ...
 
 ## Commands
 
