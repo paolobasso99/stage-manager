@@ -74,20 +74,19 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Emails</h2>
-                <select class="select2" name="emails[]" multiple="multiple">
-                    @foreach ($emails as $email)
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            @foreach ($emails as $email)
 
-                        <option value="{{ $email->id }}"
-                            @if (in_array($site->id , $email->sites()->pluck('site_id')->toArray()))
-                                selected
-                            @endif>
+                                <li>
+                                    {{ $email->address }}
+                                </li>
 
-                            {{ $email->address }}
-
-                        </option>
-
-                    @endforeach
-                </select>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -96,15 +95,6 @@
 
 @section('javascript')
     @parent
-
-    <!-- Select2 -->
-    <script src="{{ asset('js/select2.full.min.js') }}"></script>
-    <script type="text/javascript">
-        $(".select2").select2({
-            placeholder: "Select emails",
-            allowClear: true
-        });
-    </script>
 
     <!-- Chart.js -->
     <script src="{{ asset('js/Chart.bundle.min.js') }}"></script>

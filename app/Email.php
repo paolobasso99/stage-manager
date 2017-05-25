@@ -8,6 +8,6 @@ class Email extends Model
 {
     public function sites()
     {
-        return $this->morphToMany('App\Site', 'notificable');
+        return $this->hasMany('App\Site');
     }
 }

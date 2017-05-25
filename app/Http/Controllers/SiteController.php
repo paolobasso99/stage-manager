@@ -14,11 +14,11 @@ class SiteController extends VoyagerBreadController
 
     public function show(Request $request, $id)
     {
+        //BEGIN part copied from voyager/src/Http/Controllers/VoyagerBreadController
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
-        // Check permission
         Voyager::canOrFail('read_'.$dataType->name);
 
         $relationships = $this->getRelationships($dataType);
@@ -26,14 +26,11 @@ class SiteController extends VoyagerBreadController
             $model = app($dataType->model_name);
             $dataTypeContent = call_user_func([$model->with($relationships), 'findOrFail'], $id);
         } else {
-            // If Model doest exist, get data from table name
             $dataTypeContent = DB::table($dataType->name)->where('id', $id)->first();
         }
 
-        //Replace relationships' keys for labels and create READ links if a slug is provided.
         $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType, true);
 
-        // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
         $view = 'voyager::bread.read';
@@ -41,11 +38,12 @@ class SiteController extends VoyagerBreadController
         if (view()->exists("voyager::$slug.read")) {
             $view = "voyager::$slug.read";
         }
+        //END part copied
 
-        //Added
+
         $site = Site::find($id);
 
-        $emails = \App\Email::all();
+        $emails = $site->emails;
 
         return view($view, compact(
             'dataType',
@@ -58,18 +56,17 @@ class SiteController extends VoyagerBreadController
 
     public function create(Request $request)
     {
+        //BEGIN part copied from voyager/src/Http/Controllers/VoyagerBreadController
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
-        // Check permission
         Voyager::canOrFail('add_'.$dataType->name);
 
         $dataTypeContent = (strlen($dataType->model_name) != 0)
                             ? new $dataType->model_name()
                             : false;
 
-        // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
         $view = 'voyager::bread.edit-add';
@@ -77,6 +74,7 @@ class SiteController extends VoyagerBreadController
         if (view()->exists("voyager::$slug.edit-add")) {
             $view = "voyager::$slug.edit-add";
         }
+        //END part copied
 
         $emails = \App\Email::all();
 
@@ -88,10 +86,47 @@ class SiteController extends VoyagerBreadController
         ));
     }
 
+    public function edit(Request $request, $id)
+    {
+        //BEGIN part copied from voyager/src/Http/Controllers/VoyagerBreadController
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        Voyager::canOrFail('edit_'.$dataType->name);
+
+        $relationships = $this->getRelationships($dataType);
+
+        $dataTypeContent = (strlen($dataType->model_name) != 0)
+            ? app($dataType->model_name)->with($relationships)->findOrFail($id)
+            : DB::table($dataType->name)->where('id', $id)->first();
+
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        $view = 'voyager::bread.edit-add';
+
+        if (view()->exists("voyager::$slug.edit-add")) {
+            $view = "voyager::$slug.edit-add";
+        }
+        //End part copied
+
+        $emails = \App\Email::all();
+
+        $site = Site::find($id);
+
+        return view($view, compact(
+            'dataType',
+            'dataTypeContent',
+            'isModelTranslatable',
+            'site',
+            'emails'
+        ));
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
-            'url' => 'required|url|unique:sites',
+            'url' => 'required|url',
             'rate' => 'required|integer',
             'emails.*' => 'integer'
         ]);
@@ -101,15 +136,39 @@ class SiteController extends VoyagerBreadController
         $site->url = $request->url;
         $site->rate = $request->rate;
 
+        $site->save();
+
         if (isset($request->emails)) {
-            $site->emails()->attach($request->emails);
+            $site->emails()->sync($request->emails);
         } else {
-            $site->emails()->attach(array());
+            $site->emails()->sync(array());
         }
+
+        return redirect(route('voyager.sites.edit', $site));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'url' => 'required|url',
+            'rate' => 'required|integer',
+            'emails.*' => 'integer'
+        ]);
+
+        $site = Site::find($id);
+
+        $site->url = $request->url;
+        $site->rate = $request->rate;
 
         $site->save();
 
-        return redirect(route('voyager.sites.edit', $site));
+        if (isset($request->emails)) {
+            $site->emails()->sync($request->emails);
+        } else {
+            $site->emails()->sync(array());
+        }
+
+        return redirect(route('voyager.sites.show', $site));
     }
 
     // public function index()

@@ -61,7 +61,12 @@
                                 <select class="select2" name="emails[]" multiple="multiple">
                                     @foreach ($emails as $email)
 
-                                        <option value="{{ $email->id }}">
+                                        <option value="{{ $email->id }}"
+                                            @if (isset($dataTypeContent->id))
+                                                @if (in_array($email->id, $site->emails->pluck('id')->toArray()))
+                                                    selected
+                                                @endif
+                                            @endif>
 
                                             {{ $email->address }}
 

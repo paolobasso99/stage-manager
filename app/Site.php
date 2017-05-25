@@ -16,12 +16,7 @@ class Site extends Model
 
     public function emails()
     {
-        return $this->morphedByMany('App\Email', 'notificable');
-    }
-
-    public function users()
-    {
-        return $this->morphedByMany('App\User', 'notificable');
+        return $this->belongsToMany('App\Email');
     }
 
     public function downtimes(){
@@ -34,7 +29,7 @@ class Site extends Model
     {
         //Get addresses
         $addresses = array_merge(
-            $this->users->pluck('email')->toArray(),
+            \App\User::all()->pluck('email')->toArray(),
             $this->emails->pluck('address')->toArray()
         );
 

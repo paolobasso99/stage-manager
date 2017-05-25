@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificablesTable extends Migration
+class CreateEmailSiteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateNotificablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notificables', function (Blueprint $table) {
+        Schema::create('email_site', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('email_id');
             $table->integer('site_id');
-            $table->integer('notificable_id');
-            $table->string('notificable_type');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateNotificablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notificables');
+        Schema::dropIfExists('email_site');
     }
 }
