@@ -3,14 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Site;
 use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 
+use App\Site;
+use Carbon\Carbon;
+
 class SiteController extends VoyagerBreadController
 {
+
+    private function getLoadTimePerDay(Site $site, $numberOfDays) {
+        $stats = array();
+
+        // $stats = ['Day' => load time]
+        for ($i = $numberOfDays - 1; $i >= 0; $i--) {
+
+            //Select all attempts that happened in the day
+            $load_time = $site->attempts()->where([
+                ['created_at', '<=', Carbon::now()->subDays($i)->endOfDay()],
+                ['created_at', '>=', Carbon::now()->subDays($i)->startOfDay()]
+            ])->pluck('load_time')->toArray();
+
+            //Get average
+            if (count($load_time) > 0) {
+                $load_time = array_sum($load_time) / count($load_time);
+            } else {
+                $load_time = 0;
+            }
+
+            //Save load time
+            $stats[Carbon::now()->subDays($i)->format('l')] = $load_time;
+
+        }
+
+        return $stats;
+    }
 
     public function show(Request $request, $id)
     {
@@ -45,12 +74,15 @@ class SiteController extends VoyagerBreadController
 
         $emails = $site->emails;
 
+        $loadTimePerDay = $this->getLoadTimePerDay($site, 7);
+
         return view($view, compact(
             'dataType',
             'dataTypeContent',
             'isModelTranslatable',
             'site',
-            'emails'
+            'emails',
+            'loadTimePerDay'
         ));
     }
 
@@ -171,71 +203,4 @@ class SiteController extends VoyagerBreadController
         return redirect(route('voyager.sites.show', $site));
     }
 
-    // public function index()
-    // {
-    //     $sites = Site::all();
-    //
-    //     return view('sites.index')->with('sites', $sites);
-    //
-    // }
-
-    // public function show(Site $site)
-    // {
-    //     return view('sites.show')->with('site', $site);
-    //
-    // }
-
-    // public function create()
-    // {
-    //     return view('sites.create');
-    //
-    // }
-    //
-    // public function store()
-    // {
-    //     $this->validate(request(), [
-    //         'url' => 'required|url|unique:sites',
-    //         'rate' => 'required|integer'
-    //     ]);
-    //
-    //     $site = new Site();
-    //
-    //     $site->url = request('url');
-    //     $site->rate = request('rate');
-    //
-    //     $site->save();
-    //
-    //     return redirect(route('voyager.sites.index'));
-    //
-    // }
-    //
-    // public function edit(Site $site)
-    // {
-    //     return view('sites.edit')->with('site', $site);
-    //
-    // }
-    //
-    // public function update(Site $site)
-    // {
-    //     $this->validate(request(), [
-    //         'url' => 'required|url|unique:sites',
-    //         'rate' => 'required|integer'
-    //     ]);
-    //
-    //     $site->url = request('url');
-    //     $site->rate = request('rate');
-    //
-    //     $site->save();
-    //
-    //     return redirect(route('voyager.sites.index'));
-    //
-    // }
-    //
-    // public function destroy(Site $site)
-    // {
-    //     $site->delete();
-    //
-    //     return redirect(route('voyager.sites.index'));
-    //
-    // }
 }

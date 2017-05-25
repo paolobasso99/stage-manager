@@ -14,4 +14,4 @@
 
 ## To do
 
-1. Più velocità -> Queue per emails + guzzle async ?
+1. Più velocità -> Queue per emails ?

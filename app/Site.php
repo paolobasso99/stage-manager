@@ -19,6 +19,10 @@ class Site extends Model
         return $this->belongsToMany('App\Email');
     }
 
+    public function attempts(){
+        return $this->hasMany('App\Attempt');
+    }
+
     public function downtimes(){
         return $this->hasMany('App\Downtime');
     }
