@@ -7,6 +7,11 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin.user');
+    }
+
     public function index()
     {
         $counter = array();

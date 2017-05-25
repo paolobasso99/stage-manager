@@ -14,8 +14,3 @@
 Voyager::routes();
 
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
-
-Route::get('dummy', function(){
-    $client = new \GuzzleHttp\Client();
-    app('SiteChecker')->checkAll();
-});
