@@ -14,3 +14,11 @@
 Voyager::routes();
 
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
+
+//Dummy route
+use Adldap\Laravel\Facades\Adldap;
+
+Route::get('dummy', function(){
+    //dd(config('adldap'));
+    dd(Adldap::search()->users()->get());
+});
