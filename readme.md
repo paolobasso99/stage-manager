@@ -16,4 +16,5 @@
 
 ## To do
 
-1. Più velocità -> Queue per emails ?
+* rimuovere relation email_site se elimino una email
+* Più velocità -> Queue per emails ?

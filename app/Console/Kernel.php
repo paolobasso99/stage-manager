@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      protected $commands = [
          Commands\Check\CheckSites::class,
          Commands\Check\CheckAllSites::class,
-         Commands\Check\ResetAttemptsCounter::class
+         Commands\Check\ResetAttemptsCounter::class,
+         Commands\Check\SyncEmails::class
      ];
 
     /**

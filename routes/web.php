@@ -19,6 +19,11 @@ Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 use Adldap\Laravel\Facades\Adldap;
 
 Route::get('dummy', function(){
-    //dd(config('adldap'));
-    dd(Adldap::search()->users()->get());
+    $users = Adldap::search()->users()->get();
+
+    foreach ($users as $user) {
+        echo "<p>" . $user->mail[0] . "</p>";
+    }
+
+    //dd(Adldap::search()->users()->find('Newsletter')->mail);
 });
