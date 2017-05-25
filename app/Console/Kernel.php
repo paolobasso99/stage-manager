@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
          Commands\Check\CheckSites::class,
          Commands\Check\CheckAllSites::class,
          Commands\Check\ResetAttemptsCounter::class,
-         Commands\Check\SyncEmails::class
+         Commands\Check\Emails::class
      ];
 
     /**
@@ -30,6 +30,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             dispatch(new \App\Jobs\CheckSites);
         })->everyMinute();
+
+        $schedule->command('check:emails')->daily();
     }
 
     /**

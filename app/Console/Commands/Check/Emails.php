@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use App\Email;
 use Adldap\Laravel\Facades\Adldap;
 
-class syncEmails extends Command
+class Emails extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'check:syncEmails';
+    protected $signature = 'check:emails';
 
     /**
      * The console command description.
@@ -39,17 +39,23 @@ class syncEmails extends Command
      */
     public function handle()
     {
-        $this->line('Syncing...');
+        $this->line('Start syncing...');
 
         $ldapUsers = Adldap::search()->users()->get();
 
-        $users = array();
-
         foreach ($ldapUsers as $ldapUser) {
-            if(!Email::where('address', '=', $ldapUser->mail[0])->exists()){
-                Email::create([
-                    'address' => $ldapUser->mail[0]
-                ]);
+            //Check if it's null
+            if ($ldapUser->mail[0] != null) {
+                $this->comment('Syncing ' . $ldapUser->mail[0] . '...');
+
+                //Check if it already exist
+                if(!Email::where('address', '=', $ldapUser->mail[0])->exists()){
+                    //Create
+                    Email::create([
+                        'address' => $ldapUser->mail[0]
+                    ]);
+                }
+
             }
         }
 
