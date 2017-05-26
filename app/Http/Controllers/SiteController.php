@@ -160,7 +160,6 @@ class SiteController extends VoyagerBreadController
         $this->validate($request, [
             'url' => 'required|url',
             'rate' => 'required|integer',
-            'emails.*' => 'integer',
             'ssh_username' => 'string|nullable',
             'ssh_password' => 'string|nullable',
             'ssh_root' => 'string|nullable'
@@ -182,7 +181,7 @@ class SiteController extends VoyagerBreadController
             $site->emails()->sync(array());
         }
 
-        return redirect(route('voyager.sites.edit', $site));
+        return redirect(route('voyager.sites.index'));
     }
 
     public function update(Request $request, $id)
@@ -190,13 +189,18 @@ class SiteController extends VoyagerBreadController
         $this->validate($request, [
             'url' => 'required|url',
             'rate' => 'required|integer',
-            'emails.*' => 'integer'
+            'ssh_username' => 'string|nullable',
+            'ssh_password' => 'string|nullable',
+            'ssh_root' => 'string|nullable'
         ]);
 
         $site = Site::find($id);
 
         $site->url = $request->url;
         $site->rate = $request->rate;
+        $site->ssh_username = $request->ssh_username;
+        $site->ssh_password = $request->ssh_password;
+        $site->ssh_root = $request->ssh_root;
 
         $site->save();
 
@@ -209,4 +213,56 @@ class SiteController extends VoyagerBreadController
         return redirect(route('voyager.sites.show', $site));
     }
 
+    public function destroy(Request $request, $id)
+    {
+        Site::find($id)->emails()->detach();
+
+
+        //BEGIN part copied from voyager/src/Http/Controllers/VoyagerBreadController
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        Voyager::canOrFail('delete_'.$dataType->name);
+
+        $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
+
+        if (is_bread_translatable($data)) {
+            $data->deleteAttributeTranslations($data->getTranslatableAttributes());
+        }
+
+        foreach ($dataType->deleteRows as $row) {
+            if ($row->type == 'image') {
+                $this->deleteFileIfExists('/uploads/'.$data->{$row->field});
+
+                $options = json_decode($row->details);
+
+                if (isset($options->thumbnails)) {
+                    foreach ($options->thumbnails as $thumbnail) {
+                        $ext = explode('.', $data->{$row->field});
+                        $extension = '.'.$ext[count($ext) - 1];
+
+                        $path = str_replace($extension, '', $data->{$row->field});
+
+                        $thumb_name = $thumbnail->name;
+
+                        $this->deleteFileIfExists('/uploads/'.$path.'-'.$thumb_name.$extension);
+                    }
+                }
+            }
+        }
+
+        $data = $data->destroy($id)
+            ? [
+                'message'    => "Successfully Deleted {$dataType->display_name_singular}",
+                'alert-type' => 'success',
+            ]
+            : [
+                'message'    => "Sorry it appears there was a problem deleting this {$dataType->display_name_singular}",
+                'alert-type' => 'error',
+            ];
+
+        return redirect()->route("voyager.{$dataType->slug}.index")->with($data);
+        //END part copied
+    }
 }
