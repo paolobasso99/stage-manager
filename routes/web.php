@@ -14,10 +14,13 @@
 Voyager::routes();
 
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
+Route::post('ssh', 'SshController@runCommand')->name('ssh');
 
 
-//Dummy route
+//Dummy routes
 
 Route::get('dummy', function(){
 
 });
+
+Route::get('console', 'SshController@console');
