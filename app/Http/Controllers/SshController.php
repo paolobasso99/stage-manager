@@ -5,34 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use SSH;
 use Config;
+use Crypt;
 
 class SshController extends Controller
 {
+    private $output;
+
     public function __construct()
     {
         $this->middleware('admin.user');
     }
 
-    public function run() //$connection, $command
+    public function runCommand(Request $request)
     {
 
         try {
 
             $ip = gethostbyname(
-                parse_url('http://lab3.workup.it', PHP_URL_HOST)
+                parse_url($request->host, PHP_URL_HOST)
             );
 
-            Config::set('remote.connections.runtime.host', $ip);
-            Config::set('remote.connections.runtime.username', 'root');
-            Config::set('remote.connections.runtime.password', '%1t4_l4b3');
+            $password = Crypt::decrypt($request->password);
 
-            SSH::into('runtime')->run('pwd',function($line) {
-                echo $line.PHP_EOL;
+            Config::set('remote.connections.runtime.host', $ip);
+            Config::set('remote.connections.runtime.username', $request->username);
+            Config::set('remote.connections.runtime.password', $password);
+
+            SSH::into('runtime')->run($request->command,function($line) {
+                $this->output = $line;
             });
 
         } catch(\RunTimeException $e) {
-            echo 'No connection';
+            $this->output = 'Connection via SSH failed, check the credentials.';
         }
+
+        return $this->output;
 
     }
 

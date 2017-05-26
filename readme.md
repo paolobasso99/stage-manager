@@ -19,6 +19,7 @@
 ## To do
 
 * SSH
+* Fix assets
 
 ## Quando ho finito
 

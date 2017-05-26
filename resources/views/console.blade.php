@@ -6,43 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link rel="stylesheet" href="{{ asset('vendor/xterm/xterm.css') }}" />
-
-    <script src="{{ asset('vendor/xterm/xterm.js') }}"></script>
-    <script src="{{ asset('vendor/xterm/addons/fit/fit.js') }}"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('js/axios.js') }}"></script>
 
 </head>
 <body>
-    <div id="terminalContainer"></div>
+    <div id="terminal-container">
+        <form id="terminal-form" action="{{ route('ssh') }}" method="post">
+            {{ csrf_field() }}
+            <input id="terminal-input" type="text" name="command" value="">
+            <pre id="terminal-output">
+
+            </pre>
+            <input id="terminal-submit" type="submit" name="submit" value="Submit">
+        </form>
+    </div>
 
 
     <script>
-      window.addEventListener('load', function() {
-        var terminalContainer = document.getElementById('terminal-container');
-        var term = new Terminal({ cursorBlink: true });
-        term.open(terminalContainer);
-        term.fit();
 
-        var socket = io.connect();
-        socket.on('connect', function() {
-          term.write('\r\n*** Connected to backend***\r\n');
+        $("#terminal-form").submit(function(e){
+            console.log('Submit comand ...');
+            e.preventDefault();
 
-          // Browser -> Backend
-          term.on('data', function(data) {
-            socket.emit('data', data);
-          });
-
-          // Backend -> Browser
-          socket.on('data', function(data) {
-            term.write(data);
-          });
-
-          socket.on('disconnect', function() {
-            term.write('\r\n*** Disconnected from backend***\r\n');
-          });
+            axios({
+                method:'post',
+                url: '{{ route('ssh') }}',
+                timeout: 5000,
+                data: {
+                    command: $('#terminal-input').val(),
+                    host: 'http://lab3.workup.it',
+                    username: 'root',
+                    password: '{{ Crypt::encrypt('%1t4_l4b3') }}'
+                }
+            }).then(function (response) {
+                    $('#terminal-output').html(response.data);
+                    console.log(response);
+            });
         });
-      }, false);
+
     </script>
 </body>
 </html>
