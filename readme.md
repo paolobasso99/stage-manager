@@ -18,6 +18,7 @@
 
 ## To do
 
+* Fix login with mail
 * SSH
 
 ## Quando ho finito
