@@ -10,6 +10,6 @@ class Email extends Model
 
     public function sites()
     {
-        return $this->belongsToMany('App\Site', 'email_site');
+        return $this->hasMany('App\Site', 'email_site');
     }
 }

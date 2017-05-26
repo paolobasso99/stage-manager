@@ -1,15 +1,53 @@
 @extends('voyager::bread.read')
 
 @section('css')
-    <style>
-
-    </style>
-@stop
+    @if ($site->ssh_username != null && $site->ssh_password != null)
+        <style>
+        #ssh-form {
+            background-color: #000;
+            padding: 20px;
+            color: #63de00;
+        }
+        #ssh-form p {
+            margin: 0;
+        }
+        #ssh-form #ssh-input {
+            border: 0;
+            background-color: #000;
+        }
+        </style>
+    @endif
+@endsection
 
 @section('content')
     @parent
 
     <div class="page-content container-fluid">
+        @if ($site->ssh_username != null && $site->ssh_password != null)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-bordered" style="padding-bottom:5px;">
+
+                        <div class="panel-heading" style="border-bottom:0;">
+                            <h3 class="panel-title">SSH console</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0;">
+                            <form id="ssh-form" action="{{ route('ssh') }}" method="post">
+                                {{ csrf_field() }}
+
+                                <p>
+                                    {{ '[' . $site->ssh_username . '@' . parse_url($site->url, PHP_URL_HOST) . ']#' }}
+                                    <input autocomplete="off" id="ssh-input" type="text" name="command" value="">
+                                </p>
+                                <div id="ssh-output"></div>
+
+                                <input class="sr-only" id="ssh-submit" type="submit" name="submit" value="Submit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
@@ -107,6 +145,35 @@
 
 @section('javascript')
     @parent
+
+    @if ($site->ssh_username != null && $site->ssh_password != null)
+        <!-- SSH -->
+        <script src="{{ asset('js/axios.js') }}"></script>
+        <script>
+
+            $("#ssh-form").submit(function(e){
+                console.log('Submit comand ...');
+                e.preventDefault();
+
+                axios({
+                    method:'post',
+                    url: '{{ route('ssh') }}',
+                    timeout: 5000,
+                    data: {
+                        command: $('#ssh-input').val(),
+                        host: '{{ $site->url }}',
+                        username: '{{ $site->ssh_username }}',
+                        password: '{{ Crypt::encrypt($site->ssh_password) }}',
+                        root: '{{ strval($site->ssh_root) }}'
+                    }
+                }).then(function (response) {
+                        $('#ssh-output').html(response.data);
+                        console.log(response);
+                });
+            });
+
+        </script>
+    @endif
 
     <!-- Chart.js -->
     <script src="{{ asset('js/Chart.bundle.min.js') }}"></script>

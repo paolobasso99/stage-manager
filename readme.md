@@ -19,7 +19,10 @@
 ## To do
 
 * SSH
+* Fix mail login
+* Fix site creation (duble)
 * Fix assets
+* Fix email detach
 
 ## Quando ho finito
 

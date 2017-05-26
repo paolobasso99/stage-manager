@@ -31,8 +31,11 @@ class SshController extends Controller
             Config::set('remote.connections.runtime.username', $request->username);
             Config::set('remote.connections.runtime.password', $password);
 
-            SSH::into('runtime')->run($request->command,function($line) {
-                $this->output = $line;
+            SSH::into('runtime')->run([
+                'cd ' . strval($request->root),
+                $request->command
+            ],function($line) {
+                $this->output = $line.PHP_EOL;
             });
 
         } catch(\RunTimeException $e) {
@@ -47,5 +50,4 @@ class SshController extends Controller
     {
         return view('console');
     }
-
 }

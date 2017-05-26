@@ -43,8 +43,9 @@ return [
             'username'  => '',
             'password'  => '',
             'key'       => '',
+            'keytext'   => '',
             'keyphrase' => '',
-            'root'      => '/var/www',
+            'agent'     => '',
         ),
     ],
 

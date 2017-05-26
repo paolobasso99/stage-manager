@@ -160,13 +160,19 @@ class SiteController extends VoyagerBreadController
         $this->validate($request, [
             'url' => 'required|url',
             'rate' => 'required|integer',
-            'emails.*' => 'integer'
+            'emails.*' => 'integer',
+            'ssh_username' => 'string|nullable',
+            'ssh_password' => 'string|nullable',
+            'ssh_root' => 'string|nullable'
         ]);
 
         $site = new Site();
 
         $site->url = $request->url;
         $site->rate = $request->rate;
+        $site->ssh_username = $request->ssh_username;
+        $site->ssh_password = $request->ssh_password;
+        $site->ssh_root = $request->ssh_root;
 
         $site->save();
 

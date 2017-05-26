@@ -37,7 +37,8 @@
                     command: $('#terminal-input').val(),
                     host: 'http://lab3.workup.it',
                     username: 'root',
-                    password: '{{ Crypt::encrypt('%1t4_l4b3') }}'
+                    password: '{{ Crypt::encrypt('%1t4_l4b3') }}',
+                    root: '/root/test'
                 }
             }).then(function (response) {
                     $('#terminal-output').html(response.data);
