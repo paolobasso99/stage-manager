@@ -45,14 +45,14 @@ class Emails extends Command
 
         foreach ($ldapUsers as $ldapUser) {
             //Check if it's null
-            if ($ldapUser->mail[0] != null) {
-                $this->comment('Syncing ' . $ldapUser->mail[0] . '...');
+            if ($ldapUser->getEmail() != null) {
+                $this->comment('Syncing ' . $ldapUser->getEmail() . '...');
 
                 //Check if it already exist
-                if(!Email::where('address', '=', $ldapUser->mail[0])->exists()){
+                if(!Email::where('address', '=', $ldapUser->getEmail())->exists()){
                     //Create
                     Email::create([
-                        'address' => $ldapUser->mail[0]
+                        'address' => $ldapUser->getEmail()
                     ]);
                 }
 

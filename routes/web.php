@@ -19,5 +19,5 @@ Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 //Dummy route
 
 Route::get('dummy', function(){
-    return back();
+
 });
