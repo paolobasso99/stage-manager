@@ -2,8 +2,8 @@
 
 * git clone https://github.com/paolobasso99/stage-manager.git
 * L'estensione ```php-ldap``` deve essere installata nel LAMP
-* mysql -u user -p < dump.sql
-* Run ```composer install```
+* ```mysql -u user -p < dump.sql```
+* ```composer install```
 * Configurare mail in ```.env```
 * Configure LDAP in ```.env```
 * Login tramite LDAP
