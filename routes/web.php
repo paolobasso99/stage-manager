@@ -16,8 +16,11 @@ Voyager::routes();
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 
 
-//Dummy route
+//Dummy routes
 
 Route::get('dummy', function(){
     return back();
 });
+
+Route::get('ssh', 'SshController@run');
+Route::get('console', 'SshController@console');
