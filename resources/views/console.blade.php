@@ -7,44 +7,42 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/xterm/xterm.css') }}" />
-    
+
     <script src="{{ asset('vendor/xterm/xterm.js') }}"></script>
     <script src="{{ asset('vendor/xterm/addons/fit/fit.js') }}"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
 </head>
 <body>
     <div id="terminalContainer"></div>
+
+
     <script>
+      window.addEventListener('load', function() {
         var terminalContainer = document.getElementById('terminal-container');
         var term = new Terminal({ cursorBlink: true });
         term.open(terminalContainer);
+        term.fit();
 
-        var shellprompt = '$ ';
-        term.write(shellprompt);
+        var socket = io.connect();
+        socket.on('connect', function() {
+          term.write('\r\n*** Connected to backend***\r\n');
 
-        term.prompt = function () {
-            term.write('\r\n' + shellprompt);
-        };
+          // Browser -> Backend
+          term.on('data', function(data) {
+            socket.emit('data', data);
+          });
 
-        term.on('key', function (key, ev) {
-          var printable = (
-            !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey
-          );
+          // Backend -> Browser
+          socket.on('data', function(data) {
+            term.write(data);
+          });
 
-          if (ev.keyCode == 13) {
-            term.prompt();
-          } else if (ev.keyCode == 8) {
-           // Do not delete the prompt
-            if (term.x > 2) {
-              term.write('\b \b');
-            }
-          } else if (printable) {
-            term.write(key);
-          }
+          socket.on('disconnect', function() {
+            term.write('\r\n*** Disconnected from backend***\r\n');
+          });
         });
-
-        term.on('paste', function (data, ev) {
-          term.write(data);
-        });
+      }, false);
     </script>
 </body>
 </html>
