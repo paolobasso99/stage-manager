@@ -18,5 +18,8 @@
 
 ## To do
 
-* rimuovere relation email_site se elimino una email
-* Più velocità -> Queue per emails ?
+* SSH
+
+## Quando ho finito
+
+* Implementa ShouldQueue per le emails

@@ -17,8 +17,7 @@ Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 
 
 //Dummy route
-use Adldap\Laravel\Facades\Adldap;
 
 Route::get('dummy', function(){
-    dd(Adldap::search()->find('Matteo Faldani'));
+    return back();
 });
