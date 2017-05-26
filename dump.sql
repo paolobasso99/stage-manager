@@ -32,7 +32,7 @@ CREATE TABLE `attempts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `attempts` (
 
 LOCK TABLES `attempts` WRITE;
 /*!40000 ALTER TABLE `attempts` DISABLE KEYS */;
-INSERT INTO `attempts` VALUES (1,2,NULL,0.01,NULL,NULL,'2017-05-25 08:31:24','2017-05-25 08:31:24'),(2,11,200,0.89,'OK',NULL,'2017-05-25 08:31:24','2017-05-25 08:31:24'),(3,26,301,12.52,'Moved Permanently',NULL,'2017-05-25 08:31:39','2017-05-25 08:31:39'),(4,2,NULL,0.01,NULL,NULL,'2017-05-25 08:33:31','2017-05-25 08:33:31'),(5,11,200,0.37,'OK',NULL,'2017-05-25 08:33:31','2017-05-25 08:33:31'),(6,26,301,1.44,'Moved Permanently',NULL,'2017-05-25 08:33:34','2017-05-25 08:33:34'),(7,2,NULL,0.01,NULL,NULL,'2017-05-25 08:35:28','2017-05-25 08:35:28'),(8,11,200,0.81,'OK',NULL,'2017-05-25 08:35:29','2017-05-25 08:35:29'),(9,26,301,5.69,'Moved Permanently',NULL,'2017-05-25 08:35:40','2017-05-25 08:35:40'),(10,2,NULL,0.18,NULL,NULL,'2017-05-25 08:59:19','2017-05-25 08:59:19'),(11,11,200,1.43,'OK',NULL,'2017-05-25 08:59:20','2017-05-25 08:59:20'),(12,26,301,0.83,'Moved Permanently',NULL,'2017-05-25 08:59:26','2017-05-25 08:59:26'),(13,2,NULL,0.01,NULL,NULL,'2017-05-25 08:59:28','2017-05-25 08:59:28'),(14,11,200,0.67,'OK',NULL,'2017-05-25 08:59:28','2017-05-25 08:59:28'),(15,26,301,0.25,'Moved Permanently',NULL,'2017-05-25 08:59:31','2017-05-25 08:59:31');
+INSERT INTO `attempts` VALUES (1,2,NULL,0.01,NULL,NULL,'2017-05-25 08:31:24','2017-05-25 08:31:24'),(2,11,200,0.89,'OK',NULL,'2017-05-25 08:31:24','2017-05-25 08:31:24'),(3,26,301,12.52,'Moved Permanently',NULL,'2017-05-25 08:31:39','2017-05-25 08:31:39'),(4,2,NULL,0.01,NULL,NULL,'2017-05-25 08:33:31','2017-05-25 08:33:31'),(5,11,200,0.37,'OK',NULL,'2017-05-25 08:33:31','2017-05-25 08:33:31'),(6,26,301,1.44,'Moved Permanently',NULL,'2017-05-25 08:33:34','2017-05-25 08:33:34'),(7,2,NULL,0.01,NULL,NULL,'2017-05-25 08:35:28','2017-05-25 08:35:28'),(8,11,200,0.81,'OK',NULL,'2017-05-25 08:35:29','2017-05-25 08:35:29'),(9,26,301,5.69,'Moved Permanently',NULL,'2017-05-25 08:35:40','2017-05-25 08:35:40'),(10,2,NULL,0.18,NULL,NULL,'2017-05-25 08:59:19','2017-05-25 08:59:19'),(11,11,200,1.43,'OK',NULL,'2017-05-25 08:59:20','2017-05-25 08:59:20'),(12,26,301,0.83,'Moved Permanently',NULL,'2017-05-25 08:59:26','2017-05-25 08:59:26'),(13,2,NULL,0.01,NULL,NULL,'2017-05-25 08:59:28','2017-05-25 08:59:28'),(14,11,200,0.67,'OK',NULL,'2017-05-25 08:59:28','2017-05-25 08:59:28'),(15,26,301,0.25,'Moved Permanently',NULL,'2017-05-25 08:59:31','2017-05-25 08:59:31'),(16,2,NULL,0.05,NULL,NULL,'2017-05-26 05:11:29','2017-05-26 05:11:29'),(17,11,200,0.41,'OK',NULL,'2017-05-26 05:11:30','2017-05-26 05:11:30'),(18,26,301,0.02,'Moved Permanently',NULL,'2017-05-26 05:11:32','2017-05-26 05:11:32'),(19,2,NULL,0.01,NULL,NULL,'2017-05-26 05:11:34','2017-05-26 05:11:34'),(20,11,200,0.38,'OK',NULL,'2017-05-26 05:11:35','2017-05-26 05:11:35'),(21,26,301,0.02,'Moved Permanently',NULL,'2017-05-26 05:11:36','2017-05-26 05:11:36'),(22,2,NULL,0.01,NULL,NULL,'2017-05-26 05:11:37','2017-05-26 05:11:37'),(23,11,200,0.31,'OK',NULL,'2017-05-26 05:11:38','2017-05-26 05:11:38'),(24,26,301,0.18,'Moved Permanently',NULL,'2017-05-26 05:11:40','2017-05-26 05:11:40');
 /*!40000 ALTER TABLE `attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `jobs` (
   `created_at` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_reserved_at_index` (`queue`,`reserved_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +291,7 @@ CREATE TABLE `menu_items` (
 
 LOCK TABLES `menu_items` WRITE;
 /*!40000 ALTER TABLE `menu_items` DISABLE KEYS */;
-INSERT INTO `menu_items` VALUES (1,1,'Dashboard','/','_self','voyager-boat','#000000',NULL,1,'2017-05-22 07:41:30','2017-05-23 11:55:46',NULL,''),(4,1,'Users','users','_self','voyager-person','#000000',NULL,2,'2017-05-22 07:41:30','2017-05-23 11:55:53',NULL,''),(7,1,'Roles','roles','_self','voyager-lock','#000000',14,3,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(9,1,'Menu Builder','menus','_self','voyager-list','#000000',14,2,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(10,1,'Database','database','_self','voyager-data','#000000',NULL,5,'2017-05-22 07:41:30','2017-05-24 05:18:48',NULL,''),(11,1,'Settings','settings','_self','voyager-settings','#000000',14,1,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(13,1,'Emails','emails','_self','voyager-mail','#000000',NULL,4,'2017-05-22 08:18:07','2017-05-23 11:56:06',NULL,''),(14,1,'Tools','','_self','voyager-tools','#000000',NULL,6,'2017-05-22 11:18:26','2017-05-24 05:18:50',NULL,''),(15,1,'Sites','sites','_self','voyager-browser','#000000',NULL,3,'2017-05-24 04:58:26','2017-05-24 05:06:07',NULL,'');
+INSERT INTO `menu_items` VALUES (1,1,'Dashboard','/','_self','voyager-boat','#000000',NULL,1,'2017-05-22 07:41:30','2017-05-23 11:55:46',NULL,''),(7,1,'Roles','roles','_self','voyager-lock','#000000',14,3,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(9,1,'Menu Builder','menus','_self','voyager-list','#000000',14,2,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(10,1,'Database','database','_self','voyager-data','#000000',NULL,5,'2017-05-22 07:41:30','2017-05-24 05:18:48',NULL,''),(11,1,'Settings','settings','_self','voyager-settings','#000000',14,1,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(13,1,'Emails','emails','_self','voyager-mail','#000000',NULL,4,'2017-05-22 08:18:07','2017-05-23 11:56:06',NULL,''),(14,1,'Tools','','_self','voyager-tools','#000000',NULL,6,'2017-05-22 11:18:26','2017-05-24 05:18:50',NULL,''),(15,1,'Sites','sites','_self','voyager-browser','#000000',NULL,3,'2017-05-24 04:58:26','2017-05-24 05:06:07',NULL,'');
 /*!40000 ALTER TABLE `menu_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,7 +395,7 @@ CREATE TABLE `permission_role` (
 
 LOCK TABLES `permission_role` WRITE;
 /*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
-INSERT INTO `permission_role` VALUES (1,1),(1,2),(2,1),(2,2),(3,1),(3,2),(4,1),(5,1),(5,2),(6,1),(6,2),(7,1),(8,1),(9,1),(15,1),(15,2),(16,1),(16,2),(17,1),(18,1),(19,1),(20,1),(20,2),(21,1),(21,2),(22,1),(23,1),(24,1),(50,1),(50,2),(51,1),(51,2),(52,1),(52,2),(53,1),(53,2),(54,1),(54,2),(70,1),(70,2),(71,1),(71,2),(72,1),(72,2),(73,1),(73,2),(74,1),(74,2);
+INSERT INTO `permission_role` VALUES (1,1),(1,2),(2,1),(2,2),(3,1),(3,2),(4,1),(4,2),(5,1),(5,2),(6,1),(6,2),(7,1),(7,2),(8,1),(8,2),(9,1),(9,2),(15,1),(15,2),(16,1),(16,2),(17,1),(17,2),(18,1),(18,2),(19,1),(19,2),(20,1),(20,2),(21,1),(21,2),(22,1),(22,2),(23,1),(23,2),(24,1),(24,2),(50,1),(50,2),(51,1),(51,2),(52,1),(52,2),(53,1),(53,2),(54,1),(54,2),(70,1),(70,2),(71,1),(71,2),(72,1),(72,2),(73,1),(73,2),(74,1),(74,2);
 /*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -504,7 +504,7 @@ CREATE TABLE `sites` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -513,7 +513,7 @@ CREATE TABLE `sites` (
 
 LOCK TABLES `sites` WRITE;
 /*!40000 ALTER TABLE `sites` DISABLE KEYS */;
-INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',5,26,'2017-05-25 08:59:28','2017-05-25 07:08:23',NULL,'2017-05-22 11:02:11','2017-05-25 08:59:28'),(11,'https://www.google.it/',5,0,'2017-05-25 08:59:28',NULL,NULL,'2017-05-23 13:28:21','2017-05-25 08:59:28'),(26,'http://www.workup.it/ita/404status',5,19,'2017-05-25 08:59:31','2017-05-25 08:26:19',NULL,'2017-05-25 08:20:54','2017-05-25 08:59:31');
+INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',5,0,'2017-05-26 07:12:08',NULL,NULL,'2017-05-22 11:02:11','2017-05-26 05:12:08'),(11,'https://www.google.it/',5,0,'2017-05-26 05:11:37',NULL,NULL,'2017-05-23 13:28:21','2017-05-26 05:11:38'),(26,'http://www.workup.it/ita/404status',5,0,'2017-05-26 07:12:08',NULL,NULL,'2017-05-25 08:20:54','2017-05-26 05:12:08');
 /*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -567,7 +567,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -576,7 +576,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','MJBAnNXxjLaJ9acu6zB7Fcu2luLb56D7w2zw3WU3O0pMdheZ00sHnFRM5MPK','2017-05-22 07:41:31','2017-05-22 07:41:31');
+INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','0EeDJiVp3U7i1P6WtiOv9dYimLyVYOUlS7a89zYHU7BoAlic9vzGhH6Tz2sZ','2017-05-22 07:41:31','2017-05-22 07:41:31');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -589,4 +589,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-25 16:47:27
+-- Dump completed on 2017-05-26  9:13:22

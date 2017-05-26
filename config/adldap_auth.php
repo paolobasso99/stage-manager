@@ -240,6 +240,7 @@ return [
 
     'sync_attributes' => [
 
+        //'email' => 'userprincipalname',
         'email' => 'mail',
         'name' => 'cn',
 

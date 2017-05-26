@@ -6,7 +6,8 @@
 * Run ```composer install```
 * Configurare mail in ```.env```
 * Configure LDAP in ```.env```
-* Login -> User = admin@admin.com / password = password
+* Login tramite LDAP
+* Rimuovere user ```admin@admin.com```
 
 ## Commands
 
