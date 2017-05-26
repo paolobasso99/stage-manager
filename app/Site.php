@@ -14,6 +14,14 @@ use App\Downtime;
 class Site extends Model
 {
 
+    protected $fillable = [
+        'url',
+        'rate',
+        'ssh_username',
+        'ssh_password',
+        'ssh_root'
+    ];
+
     public function emails()
     {
         return $this->belongsToMany('App\Email', 'email_site');

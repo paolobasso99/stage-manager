@@ -161,10 +161,7 @@
                     timeout: 5000,
                     data: {
                         command: $('#ssh-input').val(),
-                        host: '{{ $site->url }}',
-                        username: '{{ $site->ssh_username }}',
-                        password: '{{ Crypt::encrypt($site->ssh_password) }}',
-                        root: '{{ strval($site->ssh_root) }}'
+                        site_id: {{ $site->id }}
                     }
                 }).then(function (response) {
                         $('#ssh-output').html(response.data);

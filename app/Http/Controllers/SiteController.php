@@ -181,7 +181,7 @@ class SiteController extends VoyagerBreadController
             $site->emails()->sync(array());
         }
 
-        return redirect(route('voyager.sites.index'));
+        return redirect('/');
     }
 
     public function update(Request $request, $id)

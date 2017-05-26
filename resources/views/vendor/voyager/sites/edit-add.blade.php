@@ -126,7 +126,7 @@
 
 
 @section('javascript')
-    @parent
+
 
     <!-- Select2 -->
     <script src="{{ asset('js/select2.full.min.js') }}"></script>

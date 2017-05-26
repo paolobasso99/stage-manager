@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use SSH;
 use Config;
-use Crypt;
+use App\Site;
 
 class SshController extends Controller
 {
@@ -18,22 +18,23 @@ class SshController extends Controller
 
     public function runCommand(Request $request)
     {
+        $site = Site::find($request->site_id);
+
+        $command = $request->command;
 
         try {
 
             $ip = gethostbyname(
-                parse_url($request->host, PHP_URL_HOST)
+                parse_url($site->url, PHP_URL_HOST)
             );
 
-            $password = Crypt::decrypt($request->password);
-
             Config::set('remote.connections.runtime.host', $ip);
-            Config::set('remote.connections.runtime.username', $request->username);
-            Config::set('remote.connections.runtime.password', $password);
+            Config::set('remote.connections.runtime.username', $site->ssh_username);
+            Config::set('remote.connections.runtime.password', $site->ssh_password);
 
             SSH::into('runtime')->run([
-                'cd ' . strval($request->root),
-                $request->command
+                'cd ' . strval($site->ssh_root),
+                $command
             ],function($line) {
                 $this->output = $line.PHP_EOL;
             });
