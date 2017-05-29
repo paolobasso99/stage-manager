@@ -9,7 +9,8 @@
 * Login tramite LDAP
 * Assegnare il ruolo di admin all'utente ```php artisan voyager:admin your@email.com```
 * ```php artisan check:emails``` per sincronizare le email con LDAP.
-* [Aggiungere Cron](https://laravel.com/docs/5.4/scheduling).
+* Aggiungere [Cron](https://laravel.com/docs/5.4/scheduling).
+
 
 ## Commands
 
@@ -22,10 +23,11 @@
 * ```php artisan check:reset```: Resetta il contatore dei siti che hanno fallito il controllo
 * ```php artisan check:emails```: Sincronizza emails con LDAP
 
+
 ## To do
 
 * Fix mail login
-* Fix site creation (duble)
+
 
 ## Quando ho finito
 

@@ -154,7 +154,7 @@
         });
 
         $("#key_id").select2({
-            placeholder: "Select a state",
+            placeholder: "Select a key",
             allowClear: true
         });
 

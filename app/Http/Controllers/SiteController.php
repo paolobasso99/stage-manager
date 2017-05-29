@@ -174,6 +174,20 @@ class SiteController extends VoyagerBreadController
 
     public function store(Request $request)
     {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        Voyager::canOrFail('add_'.$dataType->name);
+
+        //Validate fields with ajax
+        $val = $this->validateBread($request->all(), $dataType->addRows);
+
+        if ($val->fails()) {
+            return response()->json(['errors' => $val->messages()]);
+        }
+
         $this->validate($request, [
             'url' => 'required|url',
             'rate' => 'required|integer',
@@ -184,24 +198,22 @@ class SiteController extends VoyagerBreadController
             'key' => 'integer'
         ]);
 
-        $site = new Site();
+        if (!$request->ajax()) {
+            $data = $this->insertUpdateData($request, $slug, $dataType->addRows, new $dataType->model_name());
 
-        $site->url = $request->url;
-        $site->rate = $request->rate;
-        $site->ssh_username = $request->ssh_username;
-        $site->ssh_password = $request->ssh_password;
-        $site->ssh_root = $request->ssh_root;
-        $site->key_id = $request->key_id;
+            if (isset($request->emails)) {
+                $data->emails()->sync($request->emails);
+            } else {
+                $data->emails()->sync(array());
+            }
 
-        $site->save();
-
-        if (isset($request->emails)) {
-            $site->emails()->sync($request->emails);
-        } else {
-            $site->emails()->sync(array());
+            return redirect()
+                ->route("voyager.{$dataType->slug}.edit", ['id' => $data->id])
+                ->with([
+                        'message'    => "Successfully Added New {$dataType->display_name_singular}",
+                        'alert-type' => 'success',
+                    ]);
         }
-
-        return redirect('/');
     }
 
     public function update(Request $request, $id)
