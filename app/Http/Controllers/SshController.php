@@ -45,10 +45,18 @@ class SshController extends Controller
         Config::set('remote.connections.runtime.host', $ip);
         Config::set('remote.connections.runtime.username', $site->ssh_username);
 
-        if (count($site->key) > 0) {
-            Config::set('remote.connections.runtime.keytext', $site->key->key);
-            Config::set('remote.connections.runtime.keyphrase', $site->key->keyphrase);
+        if ($site->key_id != null) {
+            //Check if the key exist in the DB
+            if(!Key::exist($site->key_id)){
+                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
+            }
+
+            //Set key credentials
+            $key = Key::find($site->key_id);
+            Config::set('remote.connections.runtime.keytext', $key->key);
+            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
         } else {
+            //Use password credentials
             Config::set('remote.connections.runtime.password', $site->ssh_password);
         }
 

@@ -10,4 +10,9 @@ class Key extends Model
     {
         return $this->hasMany(Site::class);
     }
+
+    public static function exist($id)
+    {
+        return Key::where('id', '=', $id)->exists();
+    }
 }
