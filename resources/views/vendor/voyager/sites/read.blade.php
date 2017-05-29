@@ -46,6 +46,19 @@
                                 <a href="{{ route('ssh.dumps.download', $site) }}" target="_blank" class="btn btn-primary">
                                     Download dump
                                 </a>
+                                <hr>
+                                <form action="{{ route('ssh.dumps.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+
+                                    <div class="form-group">
+                                        <input type="file" name="dump" id="dump" />
+                                    </div>
+
+                                    <div class="form-group" style="margin: 0px;">
+
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Upload dump">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,60 @@ class SshController extends Controller
         $this->middleware('admin.user');
     }
 
+    public function dumpUpload(Site $site, Request $request)
+    {
+
+        $dumpName = 'dump-' . $site->url . '-' . \Carbon\Carbon::now()->timestamp . '.sql';
+
+        //Detect if can download the dump
+        if (!Voyager::can('ssh_all')) {
+            return 'You have not the permission to upload a dump.';
+        }
+
+        //Store lacal dump
+        $dumpLocalPath = $request->file('dump')->storeAs(
+            storage_path('dumps'), $dumpName
+        );
+
+        $this->setCredentials($site);
+
+        $command = 'mysqldump';
+        $command .= ' -u ' . $site->db_username;
+        $command .= ' -p' . $site->db_password;
+        $command .= ' ' . $site->db_database;
+        $command .= ' < ' . $dumpName;
+
+        //Perform command
+        try {
+            //Upload dump
+            SSH::into('runtime')->put(
+                $dumpLocalPath,
+                strval($site->ssh_root) . '/' . $dumpName
+            );
+
+            //Remove local dump
+            Storage::disk('local')->delete($dumpLocalPath);
+
+            //Apply dump
+            SSH::into('runtime')->run([
+                'cd ' . strval($site->ssh_root),
+                $command
+            ]);
+
+            //Remove remote dump
+            SSH::into('runtime')->run([
+                'cd ' . strval($site->ssh_root),
+                'rm ' . $dumpName
+            ]);
+
+        } catch(\RunTimeException $e) {
+            //Catch wrong credentials exception
+            return 'Connection via SSH failed, check the credentials.';
+        }
+
+        return back();
+    }
+
     public function dumpDownload(Site $site)
     {
         //Detect if can download the dump
@@ -70,7 +124,7 @@ class SshController extends Controller
 
         //Download dump and delete local version
         return response()->download(storage_path('dumps/' . $dumpName))
-                ->deleteFileAfterSend(true);;
+                ->deleteFileAfterSend(true);
 
     }
 
