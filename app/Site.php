@@ -27,6 +27,11 @@ class Site extends Model
         return $this->belongsToMany('App\Email', 'email_site');
     }
 
+    public function key()
+    {
+        return $this->belongsTo('App\Key');
+    }
+
     public function attempts(){
         return $this->hasMany('App\Attempt');
     }

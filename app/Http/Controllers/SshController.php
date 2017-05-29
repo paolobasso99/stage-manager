@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use SSH;
 use Config;
 use App\Site;
+use App\Key;
 
 class SshController extends Controller
 {
@@ -22,15 +23,21 @@ class SshController extends Controller
 
         $command = $request->command;
 
-        try {
+        $ip = gethostbyname(
+            parse_url($site->url, PHP_URL_HOST)
+        );
 
-            $ip = gethostbyname(
-                parse_url($site->url, PHP_URL_HOST)
-            );
+        Config::set('remote.connections.runtime.host', $ip);
+        Config::set('remote.connections.runtime.username', $site->ssh_username);
 
-            Config::set('remote.connections.runtime.host', $ip);
-            Config::set('remote.connections.runtime.username', $site->ssh_username);
+        if (count($site->key) > 0) {
+            Config::set('remote.connections.runtime.keytext', $site->key->key);
+            Config::set('remote.connections.runtime.keyphrase', $site->key->keyphrase);
+        } else {
             Config::set('remote.connections.runtime.password', $site->ssh_password);
+        }
+
+        try {
 
             SSH::into('runtime')->run([
                 'cd ' . strval($site->ssh_root),
@@ -45,10 +52,5 @@ class SshController extends Controller
 
         return $this->output;
 
-    }
-
-    public function console()
-    {
-        return view('console');
     }
 }

@@ -1,7 +1,7 @@
 @extends('voyager::bread.read')
 
 @section('css')
-    @if ($site->ssh_username != null && $site->ssh_password != null)
+    @if ($site->ssh_username != null)
         <style>
         #ssh-form {
             background-color: #000;
@@ -23,7 +23,7 @@
     @parent
 
     <div class="page-content container-fluid">
-        @if ($site->ssh_username != null && $site->ssh_password != null)
+        @if ($site->ssh_username != null)
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-bordered" style="padding-bottom:5px;">
@@ -146,7 +146,7 @@
 @section('javascript')
     @parent
 
-    @if ($site->ssh_username != null && $site->ssh_password != null)
+    @if ($site->ssh_username != null)
         <!-- SSH -->
         <script src="{{ asset('js/axios.js') }}"></script>
         <script>

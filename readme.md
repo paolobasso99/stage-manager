@@ -22,7 +22,6 @@
 * Fix site creation (duble)
 * Fix npm
 * SSH tramite chiave
-* SSH pass in backend
 * Ruoli composer, artisan, admin, normal
 
 ## Quando ho finito
