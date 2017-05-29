@@ -422,7 +422,7 @@ CREATE TABLE `permission_role` (
 
 LOCK TABLES `permission_role` WRITE;
 /*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
-INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,3),(1,4),(2,1),(2,3),(2,4),(3,1),(3,3),(3,4),(4,1),(4,3),(4,4),(5,1),(5,2),(5,3),(5,4),(6,1),(6,2),(6,3),(6,4),(7,1),(7,3),(7,4),(8,1),(8,3),(8,4),(9,1),(9,3),(9,4),(15,1),(15,2),(15,3),(15,4),(16,1),(16,2),(16,3),(16,4),(17,1),(17,3),(17,4),(18,1),(18,3),(18,4),(19,1),(19,3),(19,4),(20,1),(20,2),(20,3),(20,4),(21,1),(21,2),(21,3),(21,4),(22,1),(22,3),(22,4),(23,1),(23,3),(23,4),(24,1),(24,3),(24,4),(50,1),(50,2),(50,3),(50,4),(51,1),(51,2),(51,3),(51,4),(52,1),(52,3),(52,4),(53,1),(53,3),(53,4),(54,1),(54,3),(54,4),(75,1),(75,2),(75,3),(75,4),(76,1),(76,2),(76,3),(76,4),(77,1),(77,3),(77,4),(78,1),(78,3),(78,4),(79,1),(79,3),(79,4),(80,1),(81,1),(82,1),(83,1),(84,1);
+INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,4),(2,1),(2,4),(3,1),(3,4),(4,1),(4,4),(5,1),(5,2),(5,4),(6,1),(6,2),(6,4),(7,1),(7,4),(8,1),(8,4),(9,1),(9,4),(15,1),(15,2),(15,4),(16,1),(16,2),(16,4),(17,1),(18,1),(19,1),(20,1),(20,2),(20,4),(21,1),(21,2),(21,4),(22,1),(22,4),(23,1),(23,4),(24,1),(24,4),(50,1),(50,2),(50,4),(51,1),(51,2),(51,4),(52,1),(52,4),(53,1),(53,4),(54,1),(54,4),(75,1),(75,2),(75,4),(76,1),(76,2),(76,4),(77,1),(77,4),(78,1),(78,4),(79,1),(79,4),(80,1),(80,4),(81,1),(81,4),(82,1),(82,4),(83,1),(83,4),(84,1),(84,4),(86,1),(86,4),(87,1);
 /*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +442,7 @@ CREATE TABLE `permissions` (
   `permission_group_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `permissions_key_index` (`key`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +451,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,'browse_admin',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(2,'browse_database',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(3,'browse_media',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(4,'browse_settings',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(5,'browse_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(6,'read_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(7,'edit_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(8,'add_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(9,'delete_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(15,'browse_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(16,'read_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(17,'edit_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(18,'add_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(19,'delete_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(20,'browse_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(21,'read_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(22,'edit_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(23,'add_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(24,'delete_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(50,'browse_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(51,'read_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(52,'edit_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(53,'add_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(54,'delete_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(75,'browse_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(76,'read_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(77,'edit_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(78,'add_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(79,'delete_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(80,'browse_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(81,'read_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(82,'edit_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(83,'add_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(84,'delete_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL);
+INSERT INTO `permissions` VALUES (1,'browse_admin',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(2,'browse_database',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(3,'browse_media',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(4,'browse_settings',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(5,'browse_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(6,'read_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(7,'edit_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(8,'add_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(9,'delete_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(15,'browse_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(16,'read_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(17,'edit_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(18,'add_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(19,'delete_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(20,'browse_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(21,'read_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(22,'edit_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(23,'add_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(24,'delete_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(50,'browse_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(51,'read_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(52,'edit_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(53,'add_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(54,'delete_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(75,'browse_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(76,'read_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(77,'edit_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(78,'add_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(79,'delete_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(80,'browse_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(81,'read_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(82,'edit_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(83,'add_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(84,'delete_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(86,'ssh_artisan','Commands','2017-05-29 09:33:30','2017-05-29 09:33:35',NULL),(87,'ssh_all','Commands','2017-05-29 09:33:30','2017-05-29 09:33:35',NULL);
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -479,7 +479,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin','Administrator','2017-05-22 07:41:30','2017-05-22 07:41:30'),(2,'user','Normal User','2017-05-22 07:41:30','2017-05-22 07:41:30'),(3,'composer','Composer','2017-05-26 13:24:54','2017-05-26 13:24:54'),(4,'artisan','Artisan','2017-05-26 13:25:10','2017-05-26 13:25:10');
+INSERT INTO `roles` VALUES (1,'admin','Administrator','2017-05-22 07:41:30','2017-05-22 07:41:30'),(2,'user','Normal User','2017-05-22 07:41:30','2017-05-22 07:41:30'),(4,'artisan','Artisan','2017-05-26 13:25:10','2017-05-26 13:25:10');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -598,7 +598,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -607,7 +607,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','L0ychiZA6C98dMMCRRAy3FE4DnSnv3npLwpG4wwkgGbN8jyESmy8YkECIW6L','2017-05-22 07:41:31','2017-05-22 07:41:31');
+INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','L0ychiZA6C98dMMCRRAy3FE4DnSnv3npLwpG4wwkgGbN8jyESmy8YkECIW6L','2017-05-22 07:41:31','2017-05-22 07:41:31'),(2,4,'artisan','artisan@artisan.com','users/default.png','$2y$10$zuFDf2zFggpf8CqqbtLqzevtWOMuL/w.zpZ9q/YXfvRpZzMwVCGhC','K2TaKNQzyOTRV5YWLCtUlsCp43kVvTJWvzkTHcjgPgMAnWqmObk3FUzZzoJY','2017-05-29 07:40:33','2017-05-29 07:40:33'),(3,2,'Normal','normal@normal.com','users/default.png','$2y$10$3lgUuTtcDvrbOMkrq/hIzuNxGbYtOXPltVhF3F8Uvf.mKnD1ztQDy',NULL,'2017-05-29 08:12:48','2017-05-29 08:12:48');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -620,4 +620,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-29 11:26:22
+-- Dump completed on 2017-05-29 12:13:36

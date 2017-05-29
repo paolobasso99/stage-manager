@@ -76,12 +76,23 @@ class SiteController extends VoyagerBreadController
 
         $loadTimePerDay = $this->getLoadTimePerDay($site, 7);
 
+        //Show the SSH console?
+        $hasSsh = false;
+        if ($site->ssh_username != null) {
+
+            if (Voyager::can('ssh_artisan') || Voyager::can('ssh_all')) {
+                $hasSsh = true;
+            }
+
+        }
+
         return view($view, compact(
             'dataType',
             'dataTypeContent',
             'isModelTranslatable',
             'site',
             'emails',
+            'hasSsh',
             'loadTimePerDay'
         ));
     }

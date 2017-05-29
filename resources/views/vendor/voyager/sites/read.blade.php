@@ -4,7 +4,7 @@
     @parent
 
     <div class="page-content container-fluid">
-        @if ($site->ssh_username != null)
+        @if ($hasSsh)
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-bordered" style="padding-bottom:5px;">
@@ -132,7 +132,7 @@
 @section('javascript')
     @parent
 
-    @if ($site->ssh_username != null)
+    @if ($hasSsh)
         <!-- SSH -->
         <script>
 
