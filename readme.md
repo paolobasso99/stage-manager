@@ -20,9 +20,7 @@
 
 * Fix mail login
 * Fix site creation (duble)
-* Fix npm
 * Relazione site key gui
-* Ruoli composer, artisan, admin, normal
 
 ## Quando ho finito
 

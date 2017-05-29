@@ -69,7 +69,7 @@ CREATE TABLE `data_rows` (
   PRIMARY KEY (`id`),
   KEY `data_rows_data_type_id_foreign` (`data_type_id`),
   CONSTRAINT `data_rows_data_type_id_foreign` FOREIGN KEY (`data_type_id`) REFERENCES `data_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `data_rows` (
 
 LOCK TABLES `data_rows` WRITE;
 /*!40000 ALTER TABLE `data_rows` DISABLE KEYS */;
-INSERT INTO `data_rows` VALUES (26,3,'id','number','id',1,0,0,0,0,0,'',1),(27,3,'name','text','name',1,1,1,1,1,1,'',1),(28,3,'email','text','email',1,1,1,1,1,1,'',1),(29,3,'password','password','password',1,0,0,1,1,0,'',1),(30,3,'remember_token','text','remember_token',0,0,0,0,0,0,'',1),(31,3,'created_at','timestamp','created_at',0,1,1,0,0,0,'',1),(32,3,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(33,3,'avatar','image','avatar',0,1,1,1,1,1,'',1),(34,5,'id','number','id',1,0,0,0,0,0,'',1),(35,5,'name','text','name',1,1,1,1,1,1,'',1),(36,5,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(37,5,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(45,6,'id','number','id',1,0,0,0,0,0,'',1),(46,6,'name','text','Name',1,1,1,1,1,1,'',1),(47,6,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(48,6,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(49,6,'display_name','text','Display Name',1,1,1,1,1,1,'',1),(52,3,'role_id','text','role_id',1,1,1,1,1,1,'',1),(70,11,'id','hidden','Id',1,1,1,0,0,1,NULL,1),(71,11,'address','text','Address',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',2),(72,11,'deleted_at','timestamp','Deleted At',0,1,1,1,0,1,NULL,3),(73,11,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,4),(74,11,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,5),(102,15,'id','number','Id',1,1,1,0,0,0,NULL,1),(103,15,'url','text','Url',1,1,1,1,1,1,NULL,2),(104,15,'rate','number','Rate',1,1,1,1,1,1,NULL,3),(105,15,'tried','number','Tried',1,1,1,1,0,1,NULL,4),(106,15,'checked_at','timestamp','Checked At',1,1,1,1,0,1,NULL,5),(107,15,'down_from','timestamp','Down From',0,1,1,1,0,1,NULL,6),(108,15,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,7),(109,15,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,8),(110,15,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,9);
+INSERT INTO `data_rows` VALUES (26,3,'id','number','id',1,0,0,0,0,0,'',1),(27,3,'name','text','name',1,1,1,1,1,1,'',1),(28,3,'email','text','email',1,1,1,1,1,1,'',1),(29,3,'password','password','password',1,0,0,1,1,0,'',1),(30,3,'remember_token','text','remember_token',0,0,0,0,0,0,'',1),(31,3,'created_at','timestamp','created_at',0,1,1,0,0,0,'',1),(32,3,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(33,3,'avatar','image','avatar',0,1,1,1,1,1,'',1),(34,5,'id','number','id',1,0,0,0,0,0,'',1),(35,5,'name','text','name',1,1,1,1,1,1,'',1),(36,5,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(37,5,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(45,6,'id','number','id',1,0,0,0,0,0,'',1),(46,6,'name','text','Name',1,1,1,1,1,1,'',1),(47,6,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(48,6,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(49,6,'display_name','text','Display Name',1,1,1,1,1,1,'',1),(52,3,'role_id','text','role_id',1,1,1,1,1,1,'',1),(70,11,'id','hidden','Id',1,1,1,0,0,1,NULL,1),(71,11,'address','text','Address',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',2),(72,11,'deleted_at','timestamp','Deleted At',0,1,1,1,0,1,NULL,3),(73,11,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,4),(74,11,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,5),(111,16,'id','number','Id',1,1,1,0,0,1,NULL,1),(112,16,'url','text','Url',1,1,1,1,1,1,NULL,2),(113,16,'rate','number','Rate',1,0,1,1,1,1,NULL,3),(114,16,'ssh_username','text','Ssh Username',0,1,1,1,1,1,NULL,4),(115,16,'ssh_password','password','Ssh Password',0,0,0,1,1,0,NULL,5),(116,16,'ssh_root','text','Ssh Root',0,0,1,1,1,1,NULL,6),(117,16,'tried','number','Tried',1,0,1,1,0,1,NULL,7),(118,16,'checked_at','timestamp','Checked At',1,0,1,1,0,1,NULL,8),(119,16,'down_from','timestamp','Down From',0,1,1,1,0,1,NULL,9),(120,16,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,10),(121,16,'created_at','timestamp','Created At',0,0,1,1,0,1,NULL,11),(122,16,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,12),(123,17,'id','number','Id',1,1,1,0,0,1,NULL,1),(124,17,'name','text','Name',1,1,1,1,1,1,NULL,2),(125,17,'key','text_area','Key',1,0,0,1,1,1,NULL,3),(126,17,'keyphrase','password','Keyphrase',0,0,0,1,1,1,NULL,4),(127,17,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,5),(128,17,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,6);
 /*!40000 ALTER TABLE `data_rows` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +106,7 @@ CREATE TABLE `data_types` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `data_types_name_unique` (`name`),
   UNIQUE KEY `data_types_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `data_types` (
 
 LOCK TABLES `data_types` WRITE;
 /*!40000 ALTER TABLE `data_types` DISABLE KEYS */;
-INSERT INTO `data_types` VALUES (3,'users','users','User','Users','voyager-person','TCG\\Voyager\\Models\\User',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(5,'menus','menus','Menu','Menus','voyager-list','TCG\\Voyager\\Models\\Menu',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(6,'roles','roles','Role','Roles','voyager-lock','TCG\\Voyager\\Models\\Role',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(11,'emails','emails','Email','Emails','voyager-mail','App\\Email','EmailController',NULL,1,0,'2017-05-22 08:49:08','2017-05-26 05:20:01'),(15,'sites','sites','Site','Sites','voyager-browser','App\\Site','SiteController',NULL,1,0,'2017-05-24 11:08:47','2017-05-24 11:10:33');
+INSERT INTO `data_types` VALUES (3,'users','users','User','Users','voyager-person','TCG\\Voyager\\Models\\User',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(5,'menus','menus','Menu','Menus','voyager-list','TCG\\Voyager\\Models\\Menu',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(6,'roles','roles','Role','Roles','voyager-lock','TCG\\Voyager\\Models\\Role',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(11,'emails','emails','Email','Emails','voyager-mail','App\\Email','EmailController',NULL,1,0,'2017-05-22 08:49:08','2017-05-26 05:20:01'),(16,'sites','sites','Site','Sites','voyager-browser','App\\Site','SiteController',NULL,1,0,'2017-05-26 11:17:42','2017-05-26 11:17:42'),(17,'keys','keys','Key','Keys',NULL,'App\\Key',NULL,NULL,1,0,'2017-05-29 07:04:02','2017-05-29 07:04:02');
 /*!40000 ALTER TABLE `data_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +161,7 @@ CREATE TABLE `email_site` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `emails` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `emails_address_unique` (`address`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +197,7 @@ CREATE TABLE `emails` (
 
 LOCK TABLES `emails` WRITE;
 /*!40000 ALTER TABLE `emails` DISABLE KEYS */;
-INSERT INTO `emails` VALUES (5,'HealthMailbox3128e67e3eb348f88525540515a841d3@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(6,'HealthMailbox84a02921d3214c179046e7829a36bf49@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(7,'HealthMailboxe35ba78581254147ae989b221b78a603@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(8,'HealthMailboxbab3fbdfc31a4d42ad2756fe924423b5@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(9,'Migration.8f3e7716-2011-43e4-96b1-aba62d229136@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(10,'SystemMailbox{bb558c35-97f1-4cb9-8ff7-d53741dc928c}@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(11,'tisi@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(12,'HealthMailbox539ec4fa1ed045458ae4fca4f7529370@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(13,'bonin@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(14,'roncaglia@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(15,'pietrobon@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(16,'lorenzetto@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(17,'dalessi@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(18,'noreply@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(19,'sponsor@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(20,'newsletter@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(21,'freshnews@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(22,'bounce-nl@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(23,'HealthMailboxcadda44837ce4d26a36d4689bf140e75@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(24,'HealthMailbox026e0d6d9c68481d810c17743aea11cd@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(25,'alarm2@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(26,'vangelista@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(27,'cappello@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(28,'cortese@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(29,'scolaro@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(30,'battaglin@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(31,'project.management@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(32,'gambaretto@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(33,'20years@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(34,'pontarollo@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(35,'mattia.simonato@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(36,'spadaro@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(37,'HealthMailboxc4dab4bf3c4249449ca74aade10db9e3@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(38,'babushka@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(39,'rocchesso@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(40,'Rosati@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(41,'fontana@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(42,'PF-MailboxHierarchy@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(43,'tmpmigr13@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(44,'HealthMailbox0f988c7d866d45809d7e13c2d0c3beb2@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(45,'HealthMailbox4726dd5bd1494350a212f9e701737662@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(46,'HealthMailbox3158f0aa008b42ec875b4ac5bee95db0@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(47,'alarm3@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(48,'alarm@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(49,'Administrator@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(50,'sandrin@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(51,'alessandro.bizzotto@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(52,'faldani@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(53,'bizzotto@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(54,'aggujaro@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(55,'supporto@netica.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(56,'mattevi@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(57,'faxout@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(58,'tmpmigr@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(59,'fatture@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(60,'spano@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(61,'homar@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(62,'bentini@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(63,'simonato@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(64,'campesan@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(65,'guerra@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(66,'genilotti@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(67,'SystemMailbox{e0dc1c29-89c3-4034-b678-e6c29d823ed9}@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(68,'Marianna@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(69,'SystemMailbox{1f05a927-cf6e-4487-8e4a-670da3e426e4}@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(70,'DiscoverySearchMailbox{D919BA05-46A6-415f-80AD-7E09334BB852}@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(71,'FederatedEmail.4c1f4d8b-8179-4148-93bf-00a95fa1e042@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(72,'fietta@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(73,'mocellin@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(74,'fax@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(75,'mistretta@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(76,'prosdocimo@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(77,'compagnin@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45');
+INSERT INTO `emails` VALUES (5,'HealthMailbox3128e67e3eb348f88525540515a841d3@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(6,'HealthMailbox84a02921d3214c179046e7829a36bf49@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(7,'HealthMailboxe35ba78581254147ae989b221b78a603@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(8,'HealthMailboxbab3fbdfc31a4d42ad2756fe924423b5@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(9,'Migration.8f3e7716-2011-43e4-96b1-aba62d229136@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(10,'SystemMailbox{bb558c35-97f1-4cb9-8ff7-d53741dc928c}@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(11,'tisi@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(12,'HealthMailbox539ec4fa1ed045458ae4fca4f7529370@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(13,'bonin@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(14,'roncaglia@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(15,'pietrobon@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(16,'lorenzetto@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(17,'dalessi@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(18,'noreply@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(19,'sponsor@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(20,'newsletter@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(21,'freshnews@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(22,'bounce-nl@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(23,'HealthMailboxcadda44837ce4d26a36d4689bf140e75@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(24,'HealthMailbox026e0d6d9c68481d810c17743aea11cd@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(25,'alarm2@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(26,'vangelista@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(27,'cappello@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(28,'cortese@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(29,'scolaro@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(30,'battaglin@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(31,'project.management@workup.it',NULL,'2017-05-25 12:35:44','2017-05-25 12:35:44'),(32,'gambaretto@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(33,'20years@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(34,'pontarollo@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(35,'mattia.simonato@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(36,'spadaro@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(37,'HealthMailboxc4dab4bf3c4249449ca74aade10db9e3@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(38,'babushka@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(39,'rocchesso@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(40,'Rosati@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(41,'fontana@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(42,'PF-MailboxHierarchy@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(43,'tmpmigr13@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(44,'HealthMailbox0f988c7d866d45809d7e13c2d0c3beb2@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(45,'HealthMailbox4726dd5bd1494350a212f9e701737662@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(46,'HealthMailbox3158f0aa008b42ec875b4ac5bee95db0@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(47,'alarm3@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(48,'alarm@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(49,'Administrator@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(50,'sandrin@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(51,'alessandro.bizzotto@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(52,'faldani@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(53,'bizzotto@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(54,'aggujaro@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(55,'supporto@netica.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(56,'mattevi@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(57,'faxout@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(58,'tmpmigr@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(59,'fatture@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(60,'spano@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(61,'homar@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(62,'bentini@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(63,'simonato@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(64,'campesan@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(65,'guerra@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(66,'genilotti@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(67,'SystemMailbox{e0dc1c29-89c3-4034-b678-e6c29d823ed9}@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(68,'Marianna@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(69,'SystemMailbox{1f05a927-cf6e-4487-8e4a-670da3e426e4}@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(70,'DiscoverySearchMailbox{D919BA05-46A6-415f-80AD-7E09334BB852}@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(71,'FederatedEmail.4c1f4d8b-8179-4148-93bf-00a95fa1e042@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(72,'fietta@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(73,'mocellin@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(74,'fax@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(75,'mistretta@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(76,'prosdocimo@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(77,'compagnin@workup.it',NULL,'2017-05-25 12:35:45','2017-05-25 12:35:45'),(83,'example@example.com',NULL,'2017-05-26 12:49:24','2017-05-26 12:49:24');
 /*!40000 ALTER TABLE `emails` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,6 +258,34 @@ LOCK TABLES `jobs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `keys`
+--
+
+DROP TABLE IF EXISTS `keys`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `keys` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keyphrase` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `keys`
+--
+
+LOCK TABLES `keys` WRITE;
+/*!40000 ALTER TABLE `keys` DISABLE KEYS */;
+INSERT INTO `keys` VALUES (1,'workup','-----BEGIN RSA PRIVATE KEY-----\n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\n-----END RSA PRIVATE KEY-----',NULL,'2017-05-29 08:17:38','2017-05-29 08:17:41');
+/*!40000 ALTER TABLE `keys` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `menu_items`
 --
 
@@ -281,7 +309,7 @@ CREATE TABLE `menu_items` (
   PRIMARY KEY (`id`),
   KEY `menu_items_menu_id_foreign` (`menu_id`),
   CONSTRAINT `menu_items_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +318,7 @@ CREATE TABLE `menu_items` (
 
 LOCK TABLES `menu_items` WRITE;
 /*!40000 ALTER TABLE `menu_items` DISABLE KEYS */;
-INSERT INTO `menu_items` VALUES (1,1,'Dashboard','/','_self','voyager-boat','#000000',NULL,1,'2017-05-22 07:41:30','2017-05-23 11:55:46',NULL,''),(7,1,'Roles','roles','_self','voyager-lock','#000000',14,3,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(9,1,'Menu Builder','menus','_self','voyager-list','#000000',14,2,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(10,1,'Database','database','_self','voyager-data','#000000',NULL,5,'2017-05-22 07:41:30','2017-05-24 05:18:48',NULL,''),(11,1,'Settings','settings','_self','voyager-settings','#000000',14,1,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(13,1,'Emails','emails','_self','voyager-mail','#000000',NULL,4,'2017-05-22 08:18:07','2017-05-23 11:56:06',NULL,''),(14,1,'Tools','','_self','voyager-tools','#000000',NULL,6,'2017-05-22 11:18:26','2017-05-24 05:18:50',NULL,''),(15,1,'Sites','sites','_self','voyager-browser','#000000',NULL,3,'2017-05-24 04:58:26','2017-05-24 05:06:07',NULL,'');
+INSERT INTO `menu_items` VALUES (1,1,'Dashboard','/','_self','voyager-boat','#000000',NULL,1,'2017-05-22 07:41:30','2017-05-23 11:55:46',NULL,''),(7,1,'Roles','roles','_self','voyager-lock','#000000',14,3,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(9,1,'Menu Builder','menus','_self','voyager-list','#000000',14,2,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(10,1,'Database','database','_self','voyager-data','#000000',NULL,6,'2017-05-22 07:41:30','2017-05-29 07:04:45',NULL,''),(11,1,'Settings','settings','_self','voyager-settings','#000000',14,1,'2017-05-22 07:41:30','2017-05-24 05:18:50',NULL,''),(13,1,'Emails','emails','_self','voyager-mail','#000000',NULL,3,'2017-05-22 08:18:07','2017-05-26 13:23:45',NULL,''),(14,1,'Tools','','_self','voyager-tools','#000000',NULL,7,'2017-05-22 11:18:26','2017-05-29 07:04:45',NULL,''),(15,1,'Sites','sites','_self','voyager-browser','#000000',NULL,2,'2017-05-24 04:58:26','2017-05-26 13:23:45',NULL,''),(16,1,'Users','users','_self','voyager-person','#000000',NULL,4,'2017-05-26 13:19:25','2017-05-26 13:23:59',NULL,''),(17,1,'SSH keys','keys','_self','voyager-key','#000000',NULL,5,'2017-05-29 07:04:41','2017-05-29 07:04:45',NULL,'');
 /*!40000 ALTER TABLE `menu_items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +361,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +370,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (43,'2014_10_12_000000_create_users_table',1),(44,'2016_01_01_000000_add_voyager_user_fields',1),(45,'2016_01_01_000000_create_data_types_table',1),(46,'2016_01_01_000000_create_pages_table',1),(47,'2016_01_01_000000_create_posts_table',1),(48,'2016_02_15_204651_create_categories_table',1),(49,'2016_05_19_173453_create_menu_table',1),(50,'2016_10_21_190000_create_roles_table',1),(51,'2016_10_21_190000_create_settings_table',1),(52,'2016_11_30_135954_create_permission_table',1),(53,'2016_11_30_141208_create_permission_role_table',1),(54,'2016_12_26_201236_data_types__add__server_side',1),(55,'2017_01_13_000000_add_route_to_menu_items_table',1),(56,'2017_01_14_005015_create_translations_table',1),(57,'2017_01_15_000000_add_permission_group_id_to_permissions_table',1),(58,'2017_01_15_000000_create_permission_groups_table',1),(69,'2017_01_15_000000_make_table_name_nullable_in_permissions_table',2),(70,'2017_03_06_000000_add_controller_to_data_types_table',2),(76,'2017_04_21_000000_add_order_to_data_rows_table',3),(77,'2017_05_22_095144_create_sites_table',3),(78,'2017_05_22_095158_create_emails_table',3),(79,'2017_05_22_095212_create_notifications_table',3),(81,'2017_05_22_095549_create_attempts_table',4),(82,'2017_05_22_134031_create_jobs_table',5),(83,'2017_05_22_134042_create_failed_jobs_table',5),(84,'2017_05_22_143142_add_tried_and_checked_at_columns',6),(85,'2017_05_23_071524_create_notifications_table',7),(86,'2017_05_23_071524_create_notificables_table',8),(92,'2017_05_23_144252_create_downtimes_table',9),(93,'2017_05_25_071218_create_email_site_table',10),(95,'2017_05_25_090027_add_load_time_column_to_attempts_table',11);
+INSERT INTO `migrations` VALUES (43,'2014_10_12_000000_create_users_table',1),(44,'2016_01_01_000000_add_voyager_user_fields',1),(45,'2016_01_01_000000_create_data_types_table',1),(46,'2016_01_01_000000_create_pages_table',1),(47,'2016_01_01_000000_create_posts_table',1),(48,'2016_02_15_204651_create_categories_table',1),(49,'2016_05_19_173453_create_menu_table',1),(50,'2016_10_21_190000_create_roles_table',1),(51,'2016_10_21_190000_create_settings_table',1),(52,'2016_11_30_135954_create_permission_table',1),(53,'2016_11_30_141208_create_permission_role_table',1),(54,'2016_12_26_201236_data_types__add__server_side',1),(55,'2017_01_13_000000_add_route_to_menu_items_table',1),(56,'2017_01_14_005015_create_translations_table',1),(57,'2017_01_15_000000_add_permission_group_id_to_permissions_table',1),(58,'2017_01_15_000000_create_permission_groups_table',1),(69,'2017_01_15_000000_make_table_name_nullable_in_permissions_table',2),(70,'2017_03_06_000000_add_controller_to_data_types_table',2),(76,'2017_04_21_000000_add_order_to_data_rows_table',3),(77,'2017_05_22_095144_create_sites_table',3),(78,'2017_05_22_095158_create_emails_table',3),(79,'2017_05_22_095212_create_notifications_table',3),(81,'2017_05_22_095549_create_attempts_table',4),(82,'2017_05_22_134031_create_jobs_table',5),(83,'2017_05_22_134042_create_failed_jobs_table',5),(84,'2017_05_22_143142_add_tried_and_checked_at_columns',6),(85,'2017_05_23_071524_create_notifications_table',7),(86,'2017_05_23_071524_create_notificables_table',8),(92,'2017_05_23_144252_create_downtimes_table',9),(93,'2017_05_25_071218_create_email_site_table',10),(95,'2017_05_25_090027_add_load_time_column_to_attempts_table',11),(96,'2017_05_26_131208_add_ssh_collumns_to_site_table',12),(101,'2017_05_29_070304_cretae_ssh_keys_table',13);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +422,7 @@ CREATE TABLE `permission_role` (
 
 LOCK TABLES `permission_role` WRITE;
 /*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
-INSERT INTO `permission_role` VALUES (1,1),(1,2),(2,1),(2,2),(3,1),(3,2),(4,1),(4,2),(5,1),(5,2),(6,1),(6,2),(7,1),(7,2),(8,1),(8,2),(9,1),(9,2),(15,1),(15,2),(16,1),(16,2),(17,1),(17,2),(18,1),(18,2),(19,1),(19,2),(20,1),(20,2),(21,1),(21,2),(22,1),(22,2),(23,1),(23,2),(24,1),(24,2),(50,1),(50,2),(51,1),(51,2),(52,1),(52,2),(53,1),(53,2),(54,1),(54,2),(70,1),(70,2),(71,1),(71,2),(72,1),(72,2),(73,1),(73,2),(74,1),(74,2);
+INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,3),(1,4),(2,1),(2,3),(2,4),(3,1),(3,3),(3,4),(4,1),(4,3),(4,4),(5,1),(5,2),(5,3),(5,4),(6,1),(6,2),(6,3),(6,4),(7,1),(7,3),(7,4),(8,1),(8,3),(8,4),(9,1),(9,3),(9,4),(15,1),(15,2),(15,3),(15,4),(16,1),(16,2),(16,3),(16,4),(17,1),(17,3),(17,4),(18,1),(18,3),(18,4),(19,1),(19,3),(19,4),(20,1),(20,2),(20,3),(20,4),(21,1),(21,2),(21,3),(21,4),(22,1),(22,3),(22,4),(23,1),(23,3),(23,4),(24,1),(24,3),(24,4),(50,1),(50,2),(50,3),(50,4),(51,1),(51,2),(51,3),(51,4),(52,1),(52,3),(52,4),(53,1),(53,3),(53,4),(54,1),(54,3),(54,4),(75,1),(75,2),(75,3),(75,4),(76,1),(76,2),(76,3),(76,4),(77,1),(77,3),(77,4),(78,1),(78,3),(78,4),(79,1),(79,3),(79,4),(80,1),(81,1),(82,1),(83,1),(84,1);
 /*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +442,7 @@ CREATE TABLE `permissions` (
   `permission_group_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `permissions_key_index` (`key`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,7 +451,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,'browse_admin',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(2,'browse_database',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(3,'browse_media',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(4,'browse_settings',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(5,'browse_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(6,'read_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(7,'edit_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(8,'add_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(9,'delete_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(15,'browse_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(16,'read_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(17,'edit_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(18,'add_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(19,'delete_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(20,'browse_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(21,'read_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(22,'edit_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(23,'add_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(24,'delete_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(50,'browse_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(51,'read_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(52,'edit_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(53,'add_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(54,'delete_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(70,'browse_sites','sites','2017-05-24 11:08:47','2017-05-24 11:08:47',NULL),(71,'read_sites','sites','2017-05-24 11:08:47','2017-05-24 11:08:47',NULL),(72,'edit_sites','sites','2017-05-24 11:08:47','2017-05-24 11:08:47',NULL),(73,'add_sites','sites','2017-05-24 11:08:47','2017-05-24 11:08:47',NULL),(74,'delete_sites','sites','2017-05-24 11:08:47','2017-05-24 11:08:47',NULL);
+INSERT INTO `permissions` VALUES (1,'browse_admin',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(2,'browse_database',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(3,'browse_media',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(4,'browse_settings',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(5,'browse_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(6,'read_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(7,'edit_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(8,'add_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(9,'delete_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(15,'browse_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(16,'read_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(17,'edit_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(18,'add_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(19,'delete_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(20,'browse_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(21,'read_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(22,'edit_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(23,'add_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(24,'delete_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(50,'browse_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(51,'read_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(52,'edit_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(53,'add_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(54,'delete_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(75,'browse_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(76,'read_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(77,'edit_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(78,'add_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(79,'delete_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(80,'browse_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(81,'read_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(82,'edit_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(83,'add_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(84,'delete_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL);
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +470,7 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +479,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin','Administrator','2017-05-22 07:41:30','2017-05-22 07:41:30'),(2,'user','Normal User','2017-05-22 07:41:30','2017-05-22 07:41:30');
+INSERT INTO `roles` VALUES (1,'admin','Administrator','2017-05-22 07:41:30','2017-05-22 07:41:30'),(2,'user','Normal User','2017-05-22 07:41:30','2017-05-22 07:41:30'),(3,'composer','Composer','2017-05-26 13:24:54','2017-05-26 13:24:54'),(4,'artisan','Artisan','2017-05-26 13:25:10','2017-05-26 13:25:10');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -496,6 +524,10 @@ CREATE TABLE `sites` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `url` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `rate` int(11) NOT NULL,
+  `ssh_username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ssh_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ssh_root` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key_id` int(11) DEFAULT NULL,
   `tried` int(11) NOT NULL DEFAULT '0',
   `checked_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `down_from` timestamp NULL DEFAULT NULL,
@@ -503,7 +535,7 @@ CREATE TABLE `sites` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -512,7 +544,7 @@ CREATE TABLE `sites` (
 
 LOCK TABLES `sites` WRITE;
 /*!40000 ALTER TABLE `sites` DISABLE KEYS */;
-INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',5,1,'2017-05-26 05:18:24','2017-05-26 05:18:24',NULL,'2017-05-22 11:02:11','2017-05-26 05:18:24'),(11,'https://www.google.it/',5,0,'2017-05-26 05:18:24',NULL,NULL,'2017-05-23 13:28:21','2017-05-26 05:18:27'),(26,'http://www.workup.it/ita/404status',5,1,'2017-05-26 05:18:30','2017-05-26 05:18:30',NULL,'2017-05-25 08:20:54','2017-05-26 05:18:30');
+INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',5,NULL,NULL,NULL,NULL,1,'2017-05-26 05:18:24','2017-05-26 05:18:24',NULL,'2017-05-22 11:02:11','2017-05-26 05:18:24'),(11,'https://www.google.it/',5,NULL,NULL,NULL,NULL,0,'2017-05-26 05:18:24',NULL,NULL,'2017-05-23 13:28:21','2017-05-26 05:18:27'),(26,'http://www.workup.it/ita/404status',5,NULL,NULL,NULL,NULL,1,'2017-05-26 05:18:30','2017-05-26 05:18:30',NULL,'2017-05-25 08:20:54','2017-05-26 05:18:30'),(38,'http://lab3.workup.it',5,'root','%1t4_l4b3',NULL,NULL,0,'2017-05-26 13:30:38',NULL,NULL,'2017-05-26 11:30:38','2017-05-26 11:30:38'),(104,'http://138.68.90.95',5,'workup',NULL,NULL,1,0,'2017-05-29 08:21:56',NULL,NULL,'2017-05-29 08:06:13','2017-05-29 08:06:22');
 /*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,7 +598,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -575,7 +607,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','L0ychiZA6C98dMMCRRAy3FE4DnSnv3npLwpG4wwkgGbN8jyESmy8YkECIW6L','2017-05-22 07:41:31','2017-05-22 07:41:31'),(3,2,'ldap_workup','ldap_workup@bassano.workup.it','users/default.png','$2y$10$X5giycAeknrZpENjFDMgKeNTm3CNVw.LmZtE8TQ./z6iva2Xdi736','DUdwvGmWkJ8YmBIlfDwQdA2lMcvWZtiIiEkjAYLrFNBCyt0pVku8q2a3B1Ia','2017-05-26 05:37:43','2017-05-26 05:37:43');
+INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','L0ychiZA6C98dMMCRRAy3FE4DnSnv3npLwpG4wwkgGbN8jyESmy8YkECIW6L','2017-05-22 07:41:31','2017-05-22 07:41:31');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -588,4 +620,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-26  9:56:51
+-- Dump completed on 2017-05-29 11:26:22

@@ -19,4 +19,4 @@ Route::post('ssh', 'SshController@runCommand')->name('ssh');
 
 //Dummy routes
 
-Route::get('dummy', 'SshController@runCommand');
+Route::get('dummy');
