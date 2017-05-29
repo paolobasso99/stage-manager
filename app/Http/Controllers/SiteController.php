@@ -121,11 +121,14 @@ class SiteController extends VoyagerBreadController
 
         $emails = \App\Email::all();
 
+        $keys = \App\Key::all();
+
         return view($view, compact(
             'dataType',
             'dataTypeContent',
             'isModelTranslatable',
-            'emails'
+            'emails',
+            'keys'
         ));
     }
 
@@ -173,7 +176,9 @@ class SiteController extends VoyagerBreadController
             'rate' => 'required|integer',
             'ssh_username' => 'string|nullable',
             'ssh_password' => 'string|nullable',
-            'ssh_root' => 'string|nullable'
+            'ssh_root' => 'string|nullable',
+            'emails.*' => 'integer',
+            'key' => 'integer'
         ]);
 
         $site = new Site();
@@ -183,6 +188,7 @@ class SiteController extends VoyagerBreadController
         $site->ssh_username = $request->ssh_username;
         $site->ssh_password = $request->ssh_password;
         $site->ssh_root = $request->ssh_root;
+        $site->key_id = $request->key_id;
 
         $site->save();
 

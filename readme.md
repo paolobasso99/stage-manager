@@ -20,7 +20,6 @@
 
 * Fix mail login
 * Fix site creation (duble)
-* Relazione site key gui
 
 ## Quando ho finito
 

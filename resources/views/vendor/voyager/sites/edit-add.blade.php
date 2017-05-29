@@ -55,10 +55,29 @@
                                 </div>
                             @endforeach
 
+                            <div class="form-group">
+                                <label for="key_id">Ssh key</label>
+                                <select class="form-control" id="key_id" name="key_id">
+                                    @foreach ($keys as $key)
+
+                                        <option value="{{ $key->id }}"
+                                            @if (isset($dataTypeContent->id))
+                                                @if ($key->id == $site->key_id)
+                                                    selected
+                                                @endif
+                                            @endif>
+
+                                            {{ $key->name }}
+
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <label for="emails">Emails</label>
-                                <select class="select2" id="emails" name="emails[]" multiple="multiple">
+                                <select class="form-control" id="emails" name="emails[]" multiple="multiple">
                                     @foreach ($emails as $email)
 
                                         <option value="{{ $email->id }}"
@@ -129,8 +148,13 @@
 
     <!-- Select2 -->
     <script type="text/javascript">
-        $(".select2").select2({
+        $("#emails").select2({
             placeholder: "Select emails",
+            allowClear: true
+        });
+
+        $("#key_id").select2({
+            placeholder: "Select a state",
             allowClear: true
         });
 
