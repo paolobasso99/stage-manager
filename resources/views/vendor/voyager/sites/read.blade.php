@@ -33,7 +33,27 @@
                     </div>
                 </div>
             </div>
+
+            @if ($site->db_database != null)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-bordered" style="padding-bottom:5px;">
+
+                            <div class="panel-heading" style="border-bottom:0;">
+                                <h3 class="panel-title">Database</h3>
+                            </div>
+                            <div class="panel-body" style="padding-top:0;">
+                                <button id="dump-download" class="btn btn-primary" type="button">
+                                    Download dump
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         @endif
+
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
@@ -136,22 +156,40 @@
         <!-- SSH -->
         <script>
 
-            $("#ssh-form").submit(function(e){
+            $("#dump-download").click(function(){
                 console.log('Submit comand ...');
-                e.preventDefault();
 
                 axios({
                     method:'post',
-                    url: '{{ route('ssh') }}',
+                    url: '{{ route('ssh.dump.download') }}',
                     data: {
-                        command: $('#ssh-input').val(),
                         site_id: {{ $site->id }}
                     }
                 }).then(function (response) {
-                        $('#ssh-output').html(response.data);
-                        console.log(response);
+                    
                 });
             });
+
+            @if ($site->db_database != null)
+
+                $("#ssh-form").submit(function(e){
+                    console.log('Submit comand ...');
+                    e.preventDefault();
+
+                    axios({
+                        method:'post',
+                        url: '{{ route('ssh') }}',
+                        data: {
+                            command: $('#ssh-input').val(),
+                            site_id: {{ $site->id }}
+                        }
+                    }).then(function (response) {
+                            $('#ssh-output').html(response.data);
+                            console.log(response);
+                    });
+                });
+
+            @endif
 
         </script>
     @endif

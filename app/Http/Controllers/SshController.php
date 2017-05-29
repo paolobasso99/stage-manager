@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 use SSH;
+use Storage;
 use Config;
 use App\Site;
 use App\Key;
@@ -16,6 +17,62 @@ class SshController extends Controller
     public function __construct()
     {
         $this->middleware('admin.user');
+    }
+
+    public function dumpDownload()
+    {
+        $site = Site::find(104);
+
+        //Detect if can download the dump
+        if (!Voyager::can('ssh_all')) {
+            return 'You have not the permission to download a dump.';
+        }
+
+        //Get ip
+        $ip = gethostbyname(
+            parse_url($site->url, PHP_URL_HOST)
+        );
+
+        //Set login credentials
+        Config::set('remote.connections.runtime.host', $ip);
+        Config::set('remote.connections.runtime.username', $site->ssh_username);
+
+        if ($site->key_id != null) {
+            //Check if the key exist in the DB
+            if(!Key::exist($site->key_id)){
+                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
+            }
+
+            //Set key credentials
+            $key = Key::find($site->key_id);
+            Config::set('remote.connections.runtime.keytext', $key->key);
+            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
+        } else {
+            //Use password credentials
+            Config::set('remote.connections.runtime.password', $site->ssh_password);
+        }
+
+        //Perform command
+        try {
+
+            SSH::into('runtime')->run([
+                'cd ' . strval($site->ssh_root),
+                'mysqldump -u ' . $site->db_username . ' --p' . $site->db_password .' '. $site->db_database .' > dump.sql'
+            ],function($line) {
+                $this->output = $line.PHP_EOL;
+            });
+
+            Storage::disk('local')->put(storage_path('dumps/dump.sql'), '');
+
+            SSH::into('runtime')->get(strval($site->ssh_root) . '/dump.sql', storage_path('dumps/dump.sql'));
+
+        } catch(\RunTimeException $e) {
+            //Catch wrong credentials exception
+            return 'Connection via SSH failed, check the credentials.';
+        }
+
+        return $this->output;
+
     }
 
     public function runCommand(Request $request)
