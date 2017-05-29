@@ -127,9 +127,7 @@
 
 @section('javascript')
 
-
     <!-- Select2 -->
-    <script src="{{ asset('js/select2.full.min.js') }}"></script>
     <script type="text/javascript">
         $(".select2").select2({
             placeholder: "Select emails",

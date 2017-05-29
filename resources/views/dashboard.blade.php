@@ -74,7 +74,6 @@
     @parent
 
     <!-- Chart.js -->
-    <script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
     <script>
         var chart = new Chart($("#chart"), {
             type: 'bar',

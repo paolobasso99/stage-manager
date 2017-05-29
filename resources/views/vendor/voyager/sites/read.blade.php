@@ -1,24 +1,5 @@
 @extends('voyager::bread.read')
 
-@section('css')
-    @if ($site->ssh_username != null)
-        <style>
-        #ssh-form {
-            background-color: #000;
-            padding: 20px;
-            color: #63de00;
-        }
-        #ssh-form p {
-            margin: 0;
-        }
-        #ssh-form #ssh-input {
-            border: 0;
-            background-color: #000;
-        }
-        </style>
-    @endif
-@endsection
-
 @section('content')
     @parent
 
@@ -35,13 +16,18 @@
                             <form id="ssh-form" action="{{ route('ssh') }}" method="post">
                                 {{ csrf_field() }}
 
-                                <p>
-                                    {{ '[' . $site->ssh_username . '@' . parse_url($site->url, PHP_URL_HOST) . ']#' }}
-                                    <input autocomplete="off" id="ssh-input" type="text" name="command" value="">
-                                </p>
-                                <div id="ssh-output"></div>
+                                <div class="form-group">
+                                    <span>
+                                        {{ '[' . $site->ssh_username . '@' . parse_url($site->url, PHP_URL_HOST) . ']#' }}
+                                    </span>
+                                    <input autocomplete="off" id="ssh-input" type="text" name="ssh-input" value="">
+                                </div>
 
-                                <input class="sr-only" id="ssh-submit" type="submit" name="submit" value="Submit">
+                                <div class="form-group" style="margin: 0px;">
+                                    <div id="ssh-output"></div>
+
+                                    <input class="sr-only" id="ssh-submit" type="submit" name="submit" value="Submit">
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -148,7 +134,6 @@
 
     @if ($site->ssh_username != null)
         <!-- SSH -->
-        <script src="{{ asset('js/axios.js') }}"></script>
         <script>
 
             $("#ssh-form").submit(function(e){
@@ -158,7 +143,6 @@
                 axios({
                     method:'post',
                     url: '{{ route('ssh') }}',
-                    timeout: 5000,
                     data: {
                         command: $('#ssh-input').val(),
                         site_id: {{ $site->id }}
@@ -173,7 +157,6 @@
     @endif
 
     <!-- Chart.js -->
-    <script src="{{ asset('js/Chart.bundle.min.js') }}"></script>
     <script>
         var onlineTime = new Chart($("#onlineTime"), {
             type: 'pie',
