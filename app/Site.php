@@ -24,20 +24,20 @@ class Site extends Model
 
     public function emails()
     {
-        return $this->belongsToMany('App\Email', 'email_site');
+        return $this->belongsToMany(Email::class, 'email_site');
     }
 
-    public function key()
+    public function keyId()
     {
-        return $this->belongsTo('App\Key');
+        return $this->belongsTo(Key::class);
     }
 
     public function attempts(){
-        return $this->hasMany('App\Attempt');
+        return $this->hasMany(Attempt::class);
     }
 
     public function downtimes(){
-        return $this->hasMany('App\Downtime');
+        return $this->hasMany(Downtime::class);
     }
 
 

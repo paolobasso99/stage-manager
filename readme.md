@@ -2,19 +2,25 @@
 
 * git clone https://github.com/paolobasso99/stage-manager.git
 * L'estensione ```php-ldap``` deve essere installata nel LAMP
-* ```mysql -u user -p < dump.sql```
+* ```mysql -u user -p database-name < dump.sql```
 * ```composer install```
-* Configurare mail in ```.env```
-* Configure LDAP in ```.env```
+* Copiare ```.env.example``` in ```.env```
+* Configurare LDAP/mail/database in ```.env```
 * Login tramite LDAP
-* Rimuovere user ```admin@admin.com```
+* Assegnare il ruolo di admin all'utente ```php artisan voyager:admin your@email.com```
+* ```php artisan check:emails``` per sincronizare le email con LDAP.
+* [Aggiungere Cron](https://laravel.com/docs/5.4/scheduling).
 
 ## Commands
 
-* ```check``` Controlla i siti che dovrebbero essere controllati.
-* ```check:all``` Controlla tutti i siti.
-* ```check:reset``` Resetta il contatore dei siti che hanno fallito il controllo
-* ```check:emails``` Sincronizza emails con LDAP
+# Voyager
+* ```php artisan voyager:admin your@email.com```: Assegna il ruolo di admin all'utente.
+
+# Check
+* ```php artisan check```: Controlla i siti che dovrebbero essere controllati.
+* ```php artisan check:all```: Controlla tutti i siti.
+* ```php artisan check:reset```: Resetta il contatore dei siti che hanno fallito il controllo
+* ```php artisan check:emails```: Sincronizza emails con LDAP
 
 ## To do
 

@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function sites()
     {
-        return $this->morphToMany('App\Site', 'notificable');
+        return $this->morphToMany(Site::class, 'notificable');
     }
 }

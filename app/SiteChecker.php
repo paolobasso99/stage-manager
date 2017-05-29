@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Site;
-
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use GuzzleHttp\TransferStats;
