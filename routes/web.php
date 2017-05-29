@@ -12,9 +12,10 @@
 */
 
 Voyager::routes();
-
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
+
 Route::post('ssh', 'SshController@runCommand')->name('ssh');
+Route::get('dumps/download/{site}', 'SshController@dumpDownload')->name('ssh.dumps.download');
 
 
 //Dummy routes

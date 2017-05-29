@@ -19,37 +19,8 @@ class SshController extends Controller
         $this->middleware('admin.user');
     }
 
-    private function setCredentials($site) {
-        //Get ip
-        $ip = gethostbyname(
-            parse_url($site->url, PHP_URL_HOST)
-        );
-
-        //Set login credentials
-        Config::set('remote.connections.runtime.host', $ip);
-        Config::set('remote.connections.runtime.username', $site->ssh_username);
-
-        //Use key or password
-        if ($site->key_id != null) {
-            //Check if the key exist in the DB
-            if(!Key::exist($site->key_id)){
-                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
-            }
-
-            //Set key credentials
-            $key = Key::find($site->key_id);
-            Config::set('remote.connections.runtime.keytext', $key->key);
-            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
-        } else {
-            //Use password credentials
-            Config::set('remote.connections.runtime.password', $site->ssh_password);
-        }
-    }
-
-    public function dumpDownload()
+    public function dumpDownload(Site $site)
     {
-        $site = Site::find(104);
-
         //Detect if can download the dump
         if (!Voyager::can('ssh_all')) {
             return 'You have not the permission to download a dump.';
@@ -71,9 +42,7 @@ class SshController extends Controller
             SSH::into('runtime')->run([
                 'cd ' . strval($site->ssh_root),
                 $command
-            ],function($line) {
-                $this->output = $line.PHP_EOL;
-            });
+            ]);
 
             //Create empty dump in local
             Storage::disk('local')->put(
@@ -99,7 +68,9 @@ class SshController extends Controller
             return 'Connection via SSH failed, check the credentials.';
         }
 
-        return response()->download(storage_path('dumps/' . $dumpName));
+        //Download dump and delete local version
+        return response()->download(storage_path('dumps/' . $dumpName))
+                ->deleteFileAfterSend(true);;
 
     }
 
@@ -140,5 +111,32 @@ class SshController extends Controller
 
         return $this->output;
 
+    }
+
+    private function setCredentials($site) {
+        //Get ip
+        $ip = gethostbyname(
+            parse_url($site->url, PHP_URL_HOST)
+        );
+
+        //Set login credentials
+        Config::set('remote.connections.runtime.host', $ip);
+        Config::set('remote.connections.runtime.username', $site->ssh_username);
+
+        //Use key or password
+        if ($site->key_id != null) {
+            //Check if the key exist in the DB
+            if(!Key::exist($site->key_id)){
+                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
+            }
+
+            //Set key credentials
+            $key = Key::find($site->key_id);
+            Config::set('remote.connections.runtime.keytext', $key->key);
+            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
+        } else {
+            //Use password credentials
+            Config::set('remote.connections.runtime.password', $site->ssh_password);
+        }
     }
 }
