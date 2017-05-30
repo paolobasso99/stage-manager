@@ -47,11 +47,11 @@
                                     Download dump
                                 </a>
                                 <hr>
-                                <form action="{{ route('ssh.dumps.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                <form class="form-inline" action="{{ route('ssh.dumps.upload', $site) }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
 
                                     <div class="form-group">
-                                        <input type="file" name="dump" id="dump" />
+                                        <input class="btn btn-default" type="file" name="dump" id="dump" />
                                     </div>
 
                                     <div class="form-group" style="margin: 0px;">

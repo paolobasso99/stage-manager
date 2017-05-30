@@ -26,7 +26,6 @@
 
 ## To do
 
-* DB dump dei siti
 * Check SSl
 * Fix mail login
 * Migliorare GUI
