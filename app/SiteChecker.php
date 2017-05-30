@@ -57,6 +57,8 @@ class SiteChecker
                 }
             ]);
 
+        } catch (CouldNotDownloadCertificate $e) {
+            //
         } catch (GuzzleException $e) {
             //
         }

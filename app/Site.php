@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SiteDown\Warning;
 use App\Mail\SiteDown\StopChecking;
 
+use Spatie\SslCertificate\SslCertificate;
+use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
+
 use App\Downtime;
 
 class Site extends Model
@@ -90,6 +93,25 @@ class Site extends Model
         }
     }
 
+    public function checkCertificate()
+    {
+        if($this->check_certificate){
+
+            try {
+
+                return SslCertificate::createForHostName($this->url)->isValid();
+
+            } catch (CouldNotDownloadCertificate $exception) {
+
+                return false;
+
+            }
+
+        }
+
+        return null;
+    }
+
     public function saveAttempt($response, $transferTime = null)
     {
         if($response != null){
@@ -113,9 +135,9 @@ class Site extends Model
                 'site_id' => $this->id,
                 'status' => $response->getStatusCode(),
                 'load_time' => $transferTime,
-                'message' => $response->getReasonPhrase()
+                'message' => $response->getReasonPhrase(),
+                'certificate_validity' => $this->checkCertificate()
             ]);
-
 
         } else {
 
@@ -128,7 +150,8 @@ class Site extends Model
                 'site_id' => $this->id,
                 'status' => null,
                 'load_time' => $transferTime,
-                'message' => null
+                'message' => null,
+                'certificate_validity' => $this->checkCertificate()
             ]);
         }
     }
