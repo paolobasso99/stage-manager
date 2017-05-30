@@ -26,7 +26,7 @@
 
 ## To do
 
-* Check SSl
+* Refactoring (eventi?)
 * Fix mail login
 * Migliorare GUI
 
