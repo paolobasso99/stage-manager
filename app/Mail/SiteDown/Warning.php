@@ -13,7 +13,7 @@ class Warning extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $side;
+    protected $side;
 
     /**
      * Create a new message instance.

@@ -76,6 +76,7 @@ class SiteChecker
         //Make all sites not failed
         foreach ($sites as $site) {
             $site->tried = 0;
+            $site->certificate_attempts = 0;
             $site->down_from = null;
             $site->save();
         }

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SiteDown\Warning;
 use App\Mail\SiteDown\StopChecking;
+use App\Mail\CertificateCheckFail;
 
 use Spatie\SslCertificate\SslCertificate;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
@@ -48,13 +49,10 @@ class Site extends Model
     public function sendEmailIfNeeded()
     {
         //Get addresses
-        $addresses = array_merge(
-            \App\User::all()->pluck('email')->toArray(),
-            $this->emails->pluck('address')->toArray()
-        );
+        $addresses = $this->emails->pluck('address')->toArray();
 
-        //Remove duplicates
-        $addresses = array_unique($addresses);
+        //Testing emails
+        $addresses[] = 'admin@admin.com';
 
         //Chek if notification is needed and send
         if($this->tried % config('check.checks_to_warn') == 0
@@ -67,6 +65,12 @@ class Site extends Model
         if ($this->tried == config('check.checks_to_stop')) {
 
             Mail::to($addresses)->send(new StopChecking($this));
+
+        }
+
+        if ($this->certificate_attempts == config('check.certificate_attempts_to_notificate')) {
+
+            Mail::to($addresses)->send(new CertificateCheckFail($this));
 
         }
     }
@@ -93,15 +97,27 @@ class Site extends Model
         }
     }
 
-    public function checkCertificate()
+    public function getCertificateValidity()
     {
         if($this->check_certificate){
 
             try {
 
-                return SslCertificate::createForHostName($this->url)->isValid();
+                $certificatValidity = SslCertificate::createForHostName($this->url)->isValid();
+
+                if ($certificatValidity) {
+                    $this->certificate_attempts = 0;
+                } else {
+                    $this->certificate_attempts++;
+                }
+                $this->save();
+
+                return $certificatValidity;
 
             } catch (CouldNotDownloadCertificate $exception) {
+
+                $this->certificate_attempts++;
+                $this->save();
 
                 return false;
 
@@ -136,7 +152,7 @@ class Site extends Model
                 'status' => $response->getStatusCode(),
                 'load_time' => $transferTime,
                 'message' => $response->getReasonPhrase(),
-                'certificate_validity' => $this->checkCertificate()
+                'certificate_validity' => $this->getCertificateValidity()
             ]);
 
         } else {
@@ -151,7 +167,7 @@ class Site extends Model
                 'status' => null,
                 'load_time' => $transferTime,
                 'message' => null,
-                'certificate_validity' => $this->checkCertificate()
+                'certificate_validity' => $this->getCertificateValidity()
             ]);
         }
     }
@@ -190,10 +206,15 @@ class Site extends Model
 
         foreach ($sites as $site) {
             //Check if last control was made too before the rate
-            if ($site->checked_at <= Carbon::now()->subMinutes($site->rate) || $site->tried > 0) {
+            if ($site->checked_at <= Carbon::now()->subMinutes($site->rate)) {
                 $toCheck[] = $site;
             }
         }
+
+        $toCheck = array_merge(
+            $toCheck,
+            Site::failed()->toArray()
+        );
 
 
         return $toCheck;
@@ -204,6 +225,7 @@ class Site extends Model
         //Return sites that have failed last checking
         return Site::where('tried', '>', 0)
                     ->orWhere('down_from', '!=', null)
+                    ->orWhere('certificate_attempts', '>', 0)
                     ->get();
     }
 }

@@ -26,7 +26,7 @@ class AddCertificateColumnsToAttemptsTable extends Migration
     public function down()
     {
         Schema::table('attempts', function (Blueprint $table) {
-            $table->dropColum('certificate_validity');
+            $table->dropColumn('certificate_validity');
         });
     }
 }

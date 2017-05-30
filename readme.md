@@ -33,4 +33,5 @@
 
 ## Quando ho finito
 
+* Rimuovi testing email dall'invio
 * Implementa ShouldQueue per le emails

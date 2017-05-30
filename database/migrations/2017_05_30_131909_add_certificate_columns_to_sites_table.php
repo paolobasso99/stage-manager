@@ -15,7 +15,7 @@ class AddCertificateColumnsToSitesTable extends Migration
     {
         Schema::table('sites', function (Blueprint $table) {
             $table->boolean('check_certificate')->after('db_password')->default(false);
-            $table->boolean('certificate_validity')->nullable()->after('check_certificate');
+            $table->integer('certificate_attempts')->after('check_certificate')->default(0);
         });
     }
 
@@ -29,7 +29,7 @@ class AddCertificateColumnsToSitesTable extends Migration
         Schema::table('sites', function (Blueprint $table) {
             $table->dropColumn([
                 'check_certificate',
-                'certificate_validity'
+                'certificate_attempts'
             ]);
         });
     }

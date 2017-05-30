@@ -15,8 +15,10 @@ return [
     |
     */
 
-    'checks_to_warn' => env('CHECKS_TO_WARN', '5'),
+    'checks_to_warn' => '5',
 
-    'checks_to_stop' => env('CHECKS_TO_STOP', '20'),
+    'checks_to_stop' => '20',
+
+    'certificate_attempts_to_notificate' => '5',
 
 ];
