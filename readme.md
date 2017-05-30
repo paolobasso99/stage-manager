@@ -29,9 +29,10 @@
 * Refactoring (eventi?)
 * Fix mail login
 * Migliorare GUI
+* Guzzle async (?)
 
 
 ## Quando ho finito
 
-* Rimuovi testing email dall'invio
+* Rimuovi testing email
 * Implementa ShouldQueue per le emails

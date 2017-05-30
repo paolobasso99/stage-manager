@@ -21,7 +21,7 @@ class SshController extends Controller
 
     public function dumpUpload(Site $site, Request $request)
     {
-
+        //Set dump name
         $dumpName = 'dump-' . $site->url . '-' . \Carbon\Carbon::now()->timestamp . '.sql';
 
         //Detect if can download the dump
@@ -34,15 +34,17 @@ class SshController extends Controller
             storage_path('dumps'), $dumpName
         );
 
+        //Set SSH credentials
         $this->setCredentials($site);
 
-        $command = 'mysqldump';
-        $command .= ' -u ' . $site->db_username;
-        $command .= ' -p' . $site->db_password;
-        $command .= ' ' . $site->db_database;
-        $command .= ' < ' . $dumpName;
+        //Define the dump command
+        $dumpCommand = 'mysqldump';
+        $dumpCommand .= ' -u ' . $site->db_username;
+        $dumpCommand .= ' -p' . $site->db_password;
+        $dumpCommand .= ' ' . $site->db_database;
+        $dumpCommand .= ' < ' . $dumpName;
 
-        //Perform command
+        //Perform task
         try {
             //Upload dump
             SSH::into('runtime')->put(
@@ -53,10 +55,10 @@ class SshController extends Controller
             //Remove local dump
             Storage::disk('local')->delete($dumpLocalPath);
 
-            //Apply dump
+            //Apply remote dump
             SSH::into('runtime')->run([
                 'cd ' . strval($site->ssh_root),
-                $command
+                $dumpCommand
             ]);
 
             //Remove remote dump

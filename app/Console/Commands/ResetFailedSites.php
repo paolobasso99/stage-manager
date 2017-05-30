@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands\Check;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class resetFailed extends Command
+class ResetFailedSites extends Command
 {
     /**
      * The name and signature of the console command.

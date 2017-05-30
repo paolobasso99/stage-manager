@@ -10,6 +10,20 @@ use Carbon\Carbon;
 
 class SiteChecker
 {
+    public function resetFailed()
+    {
+        //Get all failed
+        $sites = Site::failed();
+
+        //Reset their stats
+        foreach ($sites as $site) {
+            $site->tried = 0;
+            $site->certificate_attempts = 0;
+            $site->down_from = null;
+            $site->save();
+        }
+    }
+
     //Check the sites that needs to be check
     public function check()
     {
@@ -39,17 +53,20 @@ class SiteChecker
     //Chek one site
     public function checkOne(Site $site, Client $client)
     {
-        //Update checked_at
-        $site->checked_at = Carbon::now();
 
         try {
 
-            $response = $client->get($site->url, [
-                'connect_timeout' => 10,
+            //Use the Guzzle client to perform a GET request
+            $client->get($site->url, [
+
+                //Set client options
                 'allow_redirects' => false,
+                'connect_timeout' => config('check.guzzle.connect_timeout'),
                 'headers' => [
-                    'User-Agent' => 'Workup Site Checker'
+                    'User-Agent' => config('check.guzzle.user_agent')
                 ],
+
+                //Perform request
                 'on_stats' => function (TransferStats $stats) use ($site) {
 
                     $site->saveAttempt(
@@ -64,24 +81,6 @@ class SiteChecker
             //
         }
 
-        $site->save();
-
-        $site->sendEmailIfNeeded();
-
-    }
-
-    public function resetFailed()
-    {
-        //Get all failed
-        $sites = Site::failed();
-
-        //Reset their stats
-        foreach ($sites as $site) {
-            $site->tried = 0;
-            $site->certificate_attempts = 0;
-            $site->down_from = null;
-            $site->save();
-        }
     }
 
 }

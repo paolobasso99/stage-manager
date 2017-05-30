@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Console\Commands\Check;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Email;
 use Adldap\Laravel\Facades\Adldap;
 
-class Emails extends Command
+class SyncEmailsWithLDAP extends Command
 {
     /**
      * The name and signature of the console command.

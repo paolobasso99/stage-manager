@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Check;
+namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 

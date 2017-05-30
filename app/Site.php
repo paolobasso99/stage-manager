@@ -58,14 +58,14 @@ class Site extends Model
         $addresses[] = 'admin@admin.com';
 
         //Chek if notification is needed and send
-        if($this->tried % config('check.checks_to_warn') == 0
-            && $this->tried < config('check.checks_to_stop'))
+        if($this->tried % config('check.response_attempts_to_notificate') == 0
+            && $this->tried < config('check.response_attempts_to_stop'))
         {
 
             Mail::to($addresses)->send(new Warning($this));
 
         }
-        if ($this->tried == config('check.checks_to_stop')) {
+        if ($this->tried == config('check.response_attempts_to_stop')) {
 
             Mail::to($addresses)->send(new StopChecking($this));
 
@@ -133,6 +133,9 @@ class Site extends Model
 
     public function saveAttempt($response, $transferTime = null)
     {
+        //Update checked_at
+        $this->checked_at = Carbon::now();
+
         if($response != null){
 
             if ($response->getStatusCode() == 200) {
@@ -173,6 +176,10 @@ class Site extends Model
                 'certificate_validity' => $this->getCertificateValidity()
             ]);
         }
+
+        $this->save();
+
+        $this->sendEmailIfNeeded();
     }
 
     public function getOnlineTime()
