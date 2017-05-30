@@ -4,21 +4,21 @@ namespace App\Console\Commands\Check;
 
 use Illuminate\Console\Command;
 
-class CheckSites extends Command
+class resetFailed extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'check';
+    protected $signature = 'check:reset';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Check sites that need it.';
+    protected $description = 'Reset failed sites.';
 
     /**
      * Create a new command instance.
@@ -37,8 +37,8 @@ class CheckSites extends Command
      */
     public function handle()
     {
-        $this->line('Checking...');
-        app('SiteChecker')->check();
-        $this->info('Check complete');
+        $this->line('Resetting...');
+        app('SiteChecker')->resetFailed();
+        $this->info('Reset complete');
     }
 }

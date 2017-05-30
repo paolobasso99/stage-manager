@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SiteDown\Warning;
-use App\Mail\SiteDown\StopChecking;
-use App\Mail\CertificateCheckFail;
+use App\Mail\ResponseFail\Warning;
+use App\Mail\ResponseFail\Stop;
+use App\Mail\CertificateFail;
 
 use Spatie\SslCertificate\SslCertificate;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
@@ -26,24 +26,27 @@ class Site extends Model
         'ssh_root'
     ];
 
+    //Relation with emails table
     public function emails()
     {
         return $this->belongsToMany(Email::class, 'email_site');
     }
 
+    //Relation with keys table
     public function keyId()
     {
         return $this->belongsTo(Key::class);
     }
 
+    //Relation with attempts table
     public function attempts(){
         return $this->hasMany(Attempt::class);
     }
 
+    //Relation with downtimes table
     public function downtimes(){
         return $this->hasMany(Downtime::class);
     }
-
 
 
     public function sendEmailIfNeeded()
@@ -222,7 +225,6 @@ class Site extends Model
 
     public static function failed()
     {
-        //Return sites that have failed last checking
         return Site::where('tried', '>', 0)
                     ->orWhere('down_from', '!=', null)
                     ->orWhere('certificate_attempts', '>', 0)

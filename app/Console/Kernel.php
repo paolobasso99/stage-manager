@@ -13,10 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
      protected $commands = [
-         Commands\Check\CheckSites::class,
-         Commands\Check\CheckAllSites::class,
-         Commands\Check\ResetAttemptsCounter::class,
-         Commands\Check\Emails::class
+         Commands\CheckSites::class,
+         Commands\CheckAllSites::class,
+         Commands\ResetFailedSites::class,
+         Commands\SyncEmailsWithLDAP::class
      ];
 
     /**
@@ -27,10 +27,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //Add a checking job every minute
         $schedule->call(function () {
             dispatch(new \App\Jobs\CheckSites);
         })->everyMinute();
 
+        //Sync emails with LDAP daily
         $schedule->command('check:emails')->daily();
     }
 

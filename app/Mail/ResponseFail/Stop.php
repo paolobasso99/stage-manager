@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\ResponseFail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class CertificateCheckFail extends Mailable
+class StopChecking extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class CertificateCheckFail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.certificateFail')
-                    ->subject('SSL chek fails for ' . $this->site->url)
+        return $this->markdown('emails.responseFail.stop')
+                    ->subject('LAST WARNING for ' . $this->site->url)
                     ->with('site', $this->site);
     }
 }

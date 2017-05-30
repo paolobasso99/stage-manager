@@ -13,7 +13,7 @@ class Emails extends Command
      *
      * @var string
      */
-    protected $signature = 'check:emails';
+    protected $signature = 'check:sync-emails';
 
     /**
      * The console command description.
@@ -44,9 +44,9 @@ class Emails extends Command
         $ldapUsers = Adldap::search()->users()->get();
 
         foreach ($ldapUsers as $ldapUser) {
-            //Check if it's null
+            //Check if it has an email
             if ($ldapUser->getEmail() != null) {
-                $this->comment('Syncing ' . $ldapUser->getEmail() . '...');
+                $this->comment('Syncing ' . $ldapUser->getEmail() . ' ...');
 
                 //Check if it already exist
                 if(!Email::where('address', '=', $ldapUser->getEmail())->exists()){

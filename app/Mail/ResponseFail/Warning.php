@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\SiteDown;
+namespace App\Mail\ResponseFail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class StopChecking extends Mailable
+class Warning extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class StopChecking extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.siteDown.stop')
-                    ->subject('LAST WARNING for ' . $this->site->url)
+        return $this->markdown('emails.responseFail.warning')
+                    ->subject('WARNING for ' . $this->site->url)
                     ->with('site', $this->site);
     }
 }

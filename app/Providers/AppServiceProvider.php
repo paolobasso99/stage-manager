@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //Register the checker
         $this->app->singleton('SiteChecker', function ($app) {
             return new \App\SiteChecker();
         });

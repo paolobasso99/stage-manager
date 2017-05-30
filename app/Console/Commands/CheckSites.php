@@ -4,21 +4,21 @@ namespace App\Console\Commands\Check;
 
 use Illuminate\Console\Command;
 
-class ResetAttemptsCounter extends Command
+class CheckSites extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'check:reset';
+    protected $signature = 'check';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Reset the attempt counter of all sites.';
+    protected $description = 'Check sites that need to be checked.';
 
     /**
      * Create a new command instance.
@@ -37,8 +37,8 @@ class ResetAttemptsCounter extends Command
      */
     public function handle()
     {
-        $this->line('Resetting...');
-        app('SiteChecker')->resetAttemptsCounter();
-        $this->info('Reset complete');
+        $this->line('Checking...');
+        app('SiteChecker')->check();
+        $this->info('Check complete');
     }
 }

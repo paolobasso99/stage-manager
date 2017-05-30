@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 class SiteChecker
 {
+    //Check the sites that needs to be check
     public function check()
     {
         $sites = Site::toCheck();
@@ -22,6 +23,7 @@ class SiteChecker
 
     }
 
+    //Check all the sites
     public function checkAll()
     {
         $sites = Site::all();
@@ -34,6 +36,7 @@ class SiteChecker
 
     }
 
+    //Chek one site
     public function checkOne(Site $site, Client $client)
     {
         //Update checked_at
@@ -57,9 +60,7 @@ class SiteChecker
                 }
             ]);
 
-        } catch (CouldNotDownloadCertificate $e) {
-            //
-        } catch (GuzzleException $e) {
+        }catch (GuzzleException $e) {
             //
         }
 
@@ -69,11 +70,12 @@ class SiteChecker
 
     }
 
-    public function resetAttemptsCounter()
+    public function resetFailed()
     {
+        //Get all failed
         $sites = Site::failed();
 
-        //Make all sites not failed
+        //Reset their stats
         foreach ($sites as $site) {
             $site->tried = 0;
             $site->certificate_attempts = 0;

@@ -8,7 +8,7 @@
 * Configurare LDAP/mail/database in ```.env```
 * Login tramite LDAP
 * Assegnare il ruolo di admin all'utente ```php artisan voyager:admin your@email.com```
-* ```php artisan check:emails``` per sincronizare le email con LDAP.
+* ```php artisan check:sync-emails``` per sincronizare le email con LDAP.
 * Aggiungere [Cron](https://laravel.com/docs/5.4/scheduling).
 
 
@@ -21,7 +21,7 @@
 * ```php artisan check```: Controlla i siti che dovrebbero essere controllati.
 * ```php artisan check:all```: Controlla tutti i siti.
 * ```php artisan check:reset```: Resetta il contatore dei siti che hanno fallito il controllo
-* ```php artisan check:emails```: Sincronizza emails con LDAP
+* ```php artisan check:sync-emails```: Sincronizza emails con LDAP
 
 
 ## To do

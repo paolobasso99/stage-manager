@@ -7,7 +7,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Log;
 
 class CheckSites implements ShouldQueue
 {
@@ -30,10 +29,6 @@ class CheckSites implements ShouldQueue
      */
     public function handle()
     {
-        Log::info("Checking Cycle with Queues Begins");
-
         app('SiteChecker')->check();
-
-        Log::info("Checking Cycle with Queues Ends");
     }
 }
