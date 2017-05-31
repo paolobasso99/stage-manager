@@ -26,7 +26,6 @@
 
 ## To do
 
-* Refactoring (eventi?)
 * Fix mail login
 * Migliorare GUI
 * Guzzle async (?)
