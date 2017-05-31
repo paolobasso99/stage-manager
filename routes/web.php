@@ -14,11 +14,11 @@
 Voyager::routes();
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 
-Route::post('ssh', 'SshController@runCommand')->name('ssh');
-Route::get('dumps/{site}', 'SshController@dumpDownload')->name('ssh.dumps.download');
-Route::post('dumps/{site}', 'SshController@dumpUpload')->name('ssh.dumps.upload');
 
+Route::post('ssh', 'SshCommandsController@run')->name('ssh');
 
-//Dummy routes
+Route::get('dumps/{site}', 'DumpController@download')->name('dumps.download');
+Route::post('dumps/{site}', 'DumpController@upload')->name('dumps.upload');
 
-Route::get('dummy', 'SshController@dumpDownload');
+Route::get('sites-available/{site}', 'SitesAvailableController@download')->name('sites-available.download');
+Route::post('sites-available/{site}', 'SitesAvailableController@upload')->name('sites-available.upload');

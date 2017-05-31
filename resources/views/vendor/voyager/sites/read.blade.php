@@ -65,6 +65,37 @@
                 </div>
             @endif
 
+            @if ($hasSitesAvailable)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-bordered" style="padding-bottom:5px;">
+
+                            <div class="panel-heading" style="border-bottom:0;">
+                                <h3 class="panel-title">Sites available</h3>
+                            </div>
+                            <div class="panel-body" style="padding-top:0;">
+                                <a href="{{ route('ssh.sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
+                                    Get {{ $site->domain }}
+                                </a>
+                                <hr>
+                                <form class="form-inline" action="{{ route('ssh.sites-available.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+
+                                    <div class="form-group">
+                                        <input class="btn btn-default" type="file" name="dump" id="dump" />
+                                    </div>
+
+                                    <div class="form-group" style="margin: 0px;">
+
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Upload dump">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         @endif
 
         <div class="row">
