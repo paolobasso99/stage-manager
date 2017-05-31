@@ -39,6 +39,8 @@ class SiteChecker
     //Chek one site
     public function checkOne(Site $site, Client $client)
     {
+        //Update checked_at
+        $site->checked_at = Carbon::now();
 
         try {
 
@@ -46,21 +48,17 @@ class SiteChecker
             $client->get($site->url, [
 
                 //Set client options
-                'allow_redirects' => false,
+                'allow_redirects' => config('check.guzzle.allow_redirects'),
                 'connect_timeout' => config('check.guzzle.connect_timeout'),
                 'headers' => [
                     'User-Agent' => config('check.guzzle.user_agent')
                 ],
-                
+
                 //Perform request
-                'on_stats' => function (TransferStats $stats) use ($site) {
-
-                    $site->saveAttempt(
-                        $stats->getResponse(),
-                        $stats->getTransferTime()
-                    );
-
+                'on_stats' => function (TransferStats $statistics) use ($site) {
+                    $site->processResponse($statistics);
                 }
+                
             ]);
 
         } catch (GuzzleException $e) {

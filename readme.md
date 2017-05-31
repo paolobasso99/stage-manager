@@ -29,6 +29,8 @@
 * Fix mail login
 * Migliorare GUI
 * Guzzle async (?)
+* Cron tab
+* Edit site-available
 
 
 ## Quando ho finito

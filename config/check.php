@@ -11,6 +11,9 @@ return [
         //Set max connection time
         'connect_timeout' => 10,
 
+        //Allows redirects
+        'allow_redirects' => true,
+
     ],
 
     //Config for mails
