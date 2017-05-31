@@ -12,8 +12,10 @@ use App\Email;
 
 class EmailController extends VoyagerBreadController
 {
+    //Destroy an email
     public function destroy(Request $request, $id)
     {
+        //Detach related sites
         Email::find($id)->sites()->detach();
 
 

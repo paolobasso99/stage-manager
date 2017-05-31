@@ -27,6 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //Relation with sites table
     public function sites()
     {
         return $this->morphToMany(Site::class, 'notificable');

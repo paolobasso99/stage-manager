@@ -12,6 +12,7 @@ class DashboardController extends Controller
         $this->middleware('admin.user');
     }
 
+    //Display the dashboard
     public function index()
     {
         $counter = array();
@@ -28,6 +29,7 @@ class DashboardController extends Controller
                    ->with('downPerMonth', $downPerMonth);
     }
 
+    //Get an array rapresenting the number of downtimes per month
     private function getDownTimesPerMonth($numberOfMonths) {
 
         $stats = array();

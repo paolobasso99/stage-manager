@@ -11,19 +11,26 @@ return [
         //Set max connection time
         'connect_timeout' => 10,
 
+        //Set other custom options
+        'custom' => [
+            //Example: 'user_agent' => 'Workup Site Checker',
+        ],
+
     ],
 
-    //Config for emails
+    //Config for mails
+    'mail' => [
 
+        //Number of checks needed to send an email of bad response
+        'response_attempts_to_notificate' => '5',
 
-    //Number of checks needed to send an email of bad response
-    'response_attempts_to_notificate' => '5',
+        //Number of checks needed to send the last
+        //email of bad response and stop sending notifications
+        'response_attempts_to_stop' => '20',
 
-    //Number of checks needed to send the last
-    //email of bad response and stop sending notifications
-    'response_attempts_to_stop' => '20',
+        //Number of checks needed to send an email of failed certificate check
+        'certificate_attempts_to_notificate' => '5',
 
-    //Number of checks needed to send an email of failed certificate check
-    'certificate_attempts_to_notificate' => '5',
+    ],
 
 ];

@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            @if (Voyager::can('ssh_all') && $site->db_database != null)
+            @if ($hasDump)
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-bordered" style="padding-bottom:5px;">

@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
 class SiteController extends VoyagerBreadController
 {
-
+    //Get an array rapresenting the average load time per day
     private function getLoadTimePerDay(Site $site, $numberOfDays) {
         $stats = array();
 
@@ -78,14 +78,21 @@ class SiteController extends VoyagerBreadController
 
         //Show the SSH console?
         $hasSsh = false;
-        if ($site->ssh_username != null) {
 
+        if ($site->ssh_username != null) {
             if (Voyager::can('ssh_artisan') || Voyager::can('ssh_all')) {
                 $hasSsh = true;
             }
-
         }
 
+        //Show dump manager?
+        $hasDump = false;
+
+        if ($site->db_database != null && Voyager::can('ssh_all')) {
+            $hasDump = true;
+        }
+
+        //Return the view
         return view($view, compact(
             'dataType',
             'dataTypeContent',
@@ -93,6 +100,7 @@ class SiteController extends VoyagerBreadController
             'site',
             'emails',
             'hasSsh',
+            'hasDump',
             'loadTimePerDay'
         ));
     }

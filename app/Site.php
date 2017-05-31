@@ -58,20 +58,20 @@ class Site extends Model
         $addresses[] = 'admin@admin.com';
 
         //Chek if notification is needed and send
-        if($this->tried % config('check.response_attempts_to_notificate') == 0
-            && $this->tried < config('check.response_attempts_to_stop'))
+        if($this->tried % config('check.mail.response_attempts_to_notificate') == 0
+            && $this->tried < config('check.mail.response_attempts_to_stop'))
         {
 
             Mail::to($addresses)->send(new Warning($this));
 
         }
-        if ($this->tried == config('check.response_attempts_to_stop')) {
+        if ($this->tried == config('check.mail.response_attempts_to_stop')) {
 
             Mail::to($addresses)->send(new StopChecking($this));
 
         }
 
-        if ($this->certificate_attempts == config('check.certificate_attempts_to_notificate')) {
+        if ($this->certificate_attempts == config('check.mail.certificate_attempts_to_notificate')) {
 
             Mail::to($addresses)->send(new CertificateCheckFail($this));
 

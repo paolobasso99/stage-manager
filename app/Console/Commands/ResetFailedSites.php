@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Site;
 
 class ResetFailedSites extends Command
 {
@@ -38,7 +39,21 @@ class ResetFailedSites extends Command
     public function handle()
     {
         $this->line('Resetting...');
-        app('SiteChecker')->resetFailed();
+
+        //Get all failed sites
+        $sites = Site::failed();
+
+        //Reset their stats
+        foreach ($sites as $site) {
+
+            $this->comment('Resetting ' . $site->url . ' ...');
+
+            $site->tried = 0;
+            $site->certificate_attempts = 0;
+            $site->down_from = null;
+            $site->save();
+        }
+
         $this->info('Reset complete');
     }
 }

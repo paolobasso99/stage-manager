@@ -19,6 +19,75 @@ class SshController extends Controller
         $this->middleware('admin.user');
     }
 
+    //Given a site set the credentials for ssh
+    private function setCredentials(Site $site) {
+        //Get ip
+        $ip = gethostbyname(
+            parse_url($site->url, PHP_URL_HOST)
+        );
+
+        //Set login credentials
+        Config::set('remote.connections.runtime.host', $ip);
+        Config::set('remote.connections.runtime.username', $site->ssh_username);
+
+        //Use key or password
+        if ($site->key_id != null) {
+            //Check if the key exist in the DB
+            if(!Key::exist($site->key_id)){
+                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
+            }
+
+            //Set key credentials
+            $key = Key::find($site->key_id);
+            Config::set('remote.connections.runtime.keytext', $key->key);
+            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
+        } else {
+            //Use password credentials
+            Config::set('remote.connections.runtime.password', $site->ssh_password);
+        }
+    }
+
+    //Run a command from a post request
+    public function runCommand(Request $request)
+    {
+        $site = Site::find($request->site_id);
+
+        //Detect if can run the command
+        $command = $request->command;
+        if (!Voyager::can('ssh_all')) {
+
+            if (!Voyager::can('ssh_artisan')) {
+                return 'You have not the permission to run "' . $command . '".';
+            }
+
+            if (!preg_match("/\s*(composer{1}|php artisan{1})\s+.*/", $command)) {
+                return 'You have not the permission to run "' . $command . '".';
+            }
+
+        }
+
+        $this->setCredentials($site);
+
+        //Perform command
+        try {
+
+            SSH::into('runtime')->run([
+                'cd ' . strval($site->ssh_root),
+                $command
+            ],function($line) {
+                $this->output = $line.PHP_EOL;
+            });
+
+        } catch(\RunTimeException $e) {
+            //Catch wrong credentials exception
+            return 'Connection via SSH failed, check the credentials.';
+        }
+
+        return $this->output;
+
+    }
+
+    //Upload a dump
     public function dumpUpload(Site $site, Request $request)
     {
         //Set dump name
@@ -75,6 +144,7 @@ class SshController extends Controller
         return back();
     }
 
+    //Download a dump
     public function dumpDownload(Site $site)
     {
         //Detect if can download the dump
@@ -128,71 +198,5 @@ class SshController extends Controller
         return response()->download(storage_path('dumps/' . $dumpName))
                 ->deleteFileAfterSend(true);
 
-    }
-
-    public function runCommand(Request $request)
-    {
-        $site = Site::find($request->site_id);
-
-        //Detect if can run the command
-        $command = $request->command;
-        if (!Voyager::can('ssh_all')) {
-
-            if (!Voyager::can('ssh_artisan')) {
-                return 'You have not the permission to run "' . $command . '".';
-            }
-
-            if (!preg_match("/\s*(composer)+|(php artisan)+\s+/", $command)) {
-                return 'You have not the permission to run "' . $command . '".';
-            }
-
-        }
-
-        $this->setCredentials($site);
-
-        //Perform command
-        try {
-
-            SSH::into('runtime')->run([
-                'cd ' . strval($site->ssh_root),
-                $command
-            ],function($line) {
-                $this->output = $line.PHP_EOL;
-            });
-
-        } catch(\RunTimeException $e) {
-            //Catch wrong credentials exception
-            return 'Connection via SSH failed, check the credentials.';
-        }
-
-        return $this->output;
-
-    }
-
-    private function setCredentials($site) {
-        //Get ip
-        $ip = gethostbyname(
-            parse_url($site->url, PHP_URL_HOST)
-        );
-
-        //Set login credentials
-        Config::set('remote.connections.runtime.host', $ip);
-        Config::set('remote.connections.runtime.username', $site->ssh_username);
-
-        //Use key or password
-        if ($site->key_id != null) {
-            //Check if the key exist in the DB
-            if(!Key::exist($site->key_id)){
-                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
-            }
-
-            //Set key credentials
-            $key = Key::find($site->key_id);
-            Config::set('remote.connections.runtime.keytext', $key->key);
-            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
-        } else {
-            //Use password credentials
-            Config::set('remote.connections.runtime.password', $site->ssh_password);
-        }
     }
 }

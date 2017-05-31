@@ -10,20 +10,6 @@ use Carbon\Carbon;
 
 class SiteChecker
 {
-    public function resetFailed()
-    {
-        //Get all failed
-        $sites = Site::failed();
-
-        //Reset their stats
-        foreach ($sites as $site) {
-            $site->tried = 0;
-            $site->certificate_attempts = 0;
-            $site->down_from = null;
-            $site->save();
-        }
-    }
-
     //Check the sites that needs to be check
     public function check()
     {
@@ -66,6 +52,11 @@ class SiteChecker
                     'User-Agent' => config('check.guzzle.user_agent')
                 ],
 
+                //Set custom guzzle options
+                foreach (config('check.guzzle.custom') as $key => $value) {
+                    $key => $value,
+                }
+
                 //Perform request
                 'on_stats' => function (TransferStats $stats) use ($site) {
 
@@ -77,7 +68,7 @@ class SiteChecker
                 }
             ]);
 
-        }catch (GuzzleException $e) {
+        } catch (GuzzleException $e) {
             //
         }
 
