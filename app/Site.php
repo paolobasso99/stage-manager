@@ -14,6 +14,7 @@ use Spatie\SslCertificate\SslCertificate;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
 use App\Downtime;
+use App\Attempt;
 
 class Site extends Model
 {
@@ -222,34 +223,6 @@ class Site extends Model
         }
 
         return $minutes;
-    }
-
-    public function setSshCredentials()
-    {
-        //Get ip
-        $ip = gethostbyname(
-            parse_url($this->url, PHP_URL_HOST)
-        );
-
-        //Set login credentials
-        Config::set('remote.connections.runtime.host', $ip);
-        Config::set('remote.connections.runtime.username', $this->ssh_username);
-
-        //Use key or password
-        if ($this->key_id != null) {
-            //Check if the key exist in the DB
-            if(!Key::exist($this->key_id)){
-                return 'The key with an "id" of "' . $this->key_id . '" does not exist';
-            }
-
-            //Set key credentials
-            $this = Key::find($this->key_id);
-            Config::set('remote.connections.runtime.keytext', $this->key);
-            Config::set('remote.connections.runtime.keyphrase', $this->keyphrase);
-        } else {
-            //Use password credentials
-            Config::set('remote.connections.runtime.password', $this->ssh_password);
-        }
     }
 
     //Get if the site is failed

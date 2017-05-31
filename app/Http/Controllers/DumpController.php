@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use TCG\Voyager\Facades\Voyager;
 
-class DumpController extends Controller
+use SSH;
+use Storage;
+
+use App\Site;
+
+class DumpController extends SshController
 {
-    public function __construct()
-    {
-        $this->middleware('admin.user');
-    }
-
 
     public function upload(Site $site, Request $request)
     {
@@ -24,12 +25,12 @@ class DumpController extends Controller
 
         $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
 
-        $localFile = $request->file('dump')->storeAs(
+        $localFile = $request->file('file')->storeAs(
             storage_path('dumps'), $fileName
         );
 
 
-        $site->setSshCredentials();
+        $this->setSshCredentials($site);;
 
         //Define the command
         $command = 'mysqldump';
@@ -69,7 +70,7 @@ class DumpController extends Controller
         }
 
 
-        $site->setSshCredentials();
+        $this->setSshCredentials($site);;
 
         $fileName = 'dump-' . $site->db_database . '-' . \Carbon\Carbon::now()->timestamp . '.sql';
 

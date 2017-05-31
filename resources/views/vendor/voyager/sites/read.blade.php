@@ -43,15 +43,15 @@
                                 <h3 class="panel-title">Database</h3>
                             </div>
                             <div class="panel-body" style="padding-top:0;">
-                                <a href="{{ route('ssh.dumps.download', $site) }}" target="_blank" class="btn btn-primary">
+                                <a href="{{ route('dumps.download', $site) }}" target="_blank" class="btn btn-primary">
                                     Download dump
                                 </a>
                                 <hr>
-                                <form class="form-inline" action="{{ route('ssh.dumps.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                <form class="form-inline" action="{{ route('dumps.upload', $site) }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
 
                                     <div class="form-group">
-                                        <input class="btn btn-default" type="file" name="dump" id="dump" />
+                                        <input class="btn btn-default" type="file" name="file" id="file" />
                                     </div>
 
                                     <div class="form-group" style="margin: 0px;">
@@ -74,20 +74,20 @@
                                 <h3 class="panel-title">Sites available</h3>
                             </div>
                             <div class="panel-body" style="padding-top:0;">
-                                <a href="{{ route('ssh.sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
+                                <a href="{{ route('sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
                                     Get {{ $site->domain }}
                                 </a>
                                 <hr>
-                                <form class="form-inline" action="{{ route('ssh.sites-available.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                <form class="form-inline" action="{{ route('sites-available.upload', $site) }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
 
                                     <div class="form-group">
-                                        <input class="btn btn-default" type="file" name="dump" id="dump" />
+                                        <input class="btn btn-default" type="file" name="file" id="file" />
                                     </div>
 
                                     <div class="form-group" style="margin: 0px;">
 
-                                        <input class="btn btn-primary" type="submit" name="submit" value="Upload dump">
+                                        <input class="btn btn-primary" type="submit" name="submit" value="Upload {{ $site->domain }}">
                                     </div>
                                 </form>
                             </div>

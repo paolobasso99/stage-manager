@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
+
 use SSH;
 use Storage;
-use Config;
+
 use App\Site;
-use App\Key;
 
-class SshCommandsController extends Controller
+class SshCommandsController extends SshController
 {
-    private $output;
-
-    public function __construct()
-    {
-        $this->middleware('admin.user');
-    }
 
     //Run a command from a post request
     public function run(Request $request)
@@ -38,7 +32,7 @@ class SshCommandsController extends Controller
 
         }
 
-        $site->setSshCredentials();
+        $this->setSshCredentials($site);;
 
         //Perform command
         try {
