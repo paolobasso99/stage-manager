@@ -11,11 +11,6 @@ return [
         //Set max connection time
         'connect_timeout' => 10,
 
-        //Set other custom options
-        'custom' => [
-            //Example: 'user_agent' => 'Workup Site Checker',
-        ],
-
     ],
 
     //Config for mails

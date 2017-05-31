@@ -51,12 +51,7 @@ class SiteChecker
                 'headers' => [
                     'User-Agent' => config('check.guzzle.user_agent')
                 ],
-
-                //Set custom guzzle options
-                foreach (config('check.guzzle.custom') as $key => $value) {
-                    $key => $value,
-                }
-
+                
                 //Perform request
                 'on_stats' => function (TransferStats $stats) use ($site) {
 

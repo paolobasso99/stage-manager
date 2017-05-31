@@ -126,13 +126,13 @@ class SshController extends Controller
 
             //Apply remote dump
             SSH::into('runtime')->run([
-                'cd ' . strval($site->ssh_root),
+                'cd',
                 $dumpCommand
             ]);
 
             //Remove remote dump
             SSH::into('runtime')->run([
-                'cd ' . strval($site->ssh_root),
+                'cd',
                 'rm ' . $dumpName
             ]);
 
@@ -166,7 +166,7 @@ class SshController extends Controller
         try {
             //Create remote dump
             SSH::into('runtime')->run([
-                'cd ' . strval($site->ssh_root),
+                'cd',
                 $command
             ]);
 
@@ -184,7 +184,7 @@ class SshController extends Controller
 
             //Remove remote dump
             SSH::into('runtime')->run([
-                'cd ' . strval($site->ssh_root),
+                'cd',
                 'rm ' . $dumpName
             ]);
 
