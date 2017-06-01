@@ -243,6 +243,40 @@
                     </div>
                 @endif
 
+                @if ($hasSitesAvailable)
+                    <div id="crontab" class="tab-pane">
+
+                        <div class="panel-heading" style="border-bottom:0;">
+                            <h3 class="panel-title">Crontab</h3>
+                        </div>
+                        <div class="panel-body" style="padding-top:0;">
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <a href="{{ route('crontab.download', $site) }}" target="_blank" class="btn btn-primary">
+                                        Download crontab
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <form action="{{ route('crontab.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+
+                                        <div class="form-group">
+                                            <input class="btn btn-default" type="file" name="file" id="file" />
+                                        </div>
+
+                                        <div class="form-group" style="margin: 0px;">
+
+                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload crontab">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                @endif
+
             @endif
         </div>
 

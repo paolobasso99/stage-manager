@@ -96,7 +96,7 @@ class SiteController extends VoyagerBreadController
             $hasSitesAvailable = true;
         }
 
-        $hasCrontab = false;
+        $hasCrontab = $hasSsh;
 
         //Return the view
         return view($view, compact(

@@ -37,7 +37,7 @@ class DumpController extends SshController
         }
 
 
-        $fileName = bcrypt($site->url . \Carbon\Carbon::now()->timestamp) . '.sql';
+        $fileName = parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp . '.sql';
 
         $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
 
@@ -91,7 +91,7 @@ class DumpController extends SshController
 
         $this->setSshCredentials($site);;
 
-        $fileName = 'dump-' . $site->db_database . '-' . \Carbon\Carbon::now()->timestamp . '.sql';
+        $fileName = parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp . '.sql';
 
         $localFile = storage_path('dumps/' . $fileName);
         $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
@@ -126,7 +126,7 @@ class DumpController extends SshController
         }
 
         //Download dump and delete local version
-        return response()->download($localFile)->deleteFileAfterSend(true);
+        return response()->download($localFile, 'dump.sql')->deleteFileAfterSend(true);
 
     }
 }

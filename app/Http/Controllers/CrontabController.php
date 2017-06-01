@@ -11,9 +11,8 @@ use Validator;
 
 use App\Site;
 
-class SitesAvailableController extends SshController
+class CrontabController extends SshController
 {
-
     public function upload(Site $site, Request $request)
     {
         //Validate the request
@@ -37,15 +36,14 @@ class SitesAvailableController extends SshController
         }
 
         $fileName = parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp;
-
-        $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
+        $remoteFile = '/etc/crontab';
 
         //Store local file
         $localFile = $request->file('file')->storeAs(
             storage_path('sites-available'), $fileName
         );
 
-        $this->setSshCredentials($site);
+        $this->setSshCredentials($site);;
 
 
         //Perform task
@@ -66,7 +64,7 @@ class SitesAvailableController extends SshController
         }
 
         return back()->with([
-                'message'    => "Successfully uploaded " . $site->domain,
+                'message'    => "File successfully uploaded ",
                 'alert-type' => 'success',
             ]);
     }
@@ -84,7 +82,7 @@ class SitesAvailableController extends SshController
         $this->setSshCredentials($site);;
 
         $localFile = storage_path('sites-available/' . parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp);
-        $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
+        $remoteFile = '/etc/crontab';
 
         //Perform command
         try {
@@ -104,7 +102,7 @@ class SitesAvailableController extends SshController
         }
 
         //Download file and delete local version
-        return response()->download($localFile, $site->domain)->deleteFileAfterSend(true);
+        return response()->download($localFile, 'crontab')->deleteFileAfterSend(true);
 
     }
 }

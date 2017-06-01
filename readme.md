@@ -28,7 +28,6 @@
 
 * Fix mail login
 * Guzzle async (?)
-* Cron tab
 * fix conf upload
 
 

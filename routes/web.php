@@ -22,3 +22,6 @@ Route::post('dumps/{site}', 'DumpController@upload')->name('dumps.upload');
 
 Route::get('sites-available/{site}', 'SitesAvailableController@download')->name('sites-available.download');
 Route::post('sites-available/{site}', 'SitesAvailableController@upload')->name('sites-available.upload');
+
+Route::get('crontab/{site}', 'CrontabController@download')->name('crontab.download');
+Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload');
