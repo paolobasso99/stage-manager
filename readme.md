@@ -30,6 +30,7 @@
 * Migliorare GUI
 * Guzzle async (?)
 * Cron tab
+* fix dump/conf upload
 
 
 ## Quando ho finito

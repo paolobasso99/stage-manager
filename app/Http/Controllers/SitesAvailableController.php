@@ -7,6 +7,7 @@ use TCG\Voyager\Facades\Voyager;
 
 use SSH;
 use Storage;
+use Validator;
 
 use App\Site;
 
@@ -15,20 +16,33 @@ class SitesAvailableController extends SshController
 
     public function upload(Site $site, Request $request)
     {
-        //Detect if can download the dump
-        if (!Voyager::can('ssh_all')) {
-            return 'You have not the permission to upload this file.';
+        //Validate the request
+        $validator = Validator::make($request->only('radius'), [
+            'file' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with([
+                    'message'    => "A file is required.",
+                    'alert-type' => 'error',
+                ]);
         }
 
+        //Check permissions
+        if (!Voyager::can('ssh_all')) {
+            return back()->with([
+                    'message'    => "You have not the permission to upload this file.",
+                    'alert-type' => 'error',
+                ]);
+        }
 
-        $fileName = $site->domain . '-' . \Carbon\Carbon::now()->timestamp;
-
+        $fileName = bcrypt($site->domain . \Carbon\Carbon::now()->timestamp);
         $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
 
+        //Store local file
         $localFile = $request->file('file')->storeAs(
             storage_path('sites-available'), $fileName
         );
-
 
         $this->setSshCredentials($site);;
 
@@ -42,22 +56,28 @@ class SitesAvailableController extends SshController
             //Remove local file
             Storage::disk('local')->delete($localFile);
 
-            //Delete remote file
-            SSH::into('runtime')->run('rm ' . $remoteFile);
-
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception
-            return 'Connection via SSH failed, check the credentials.';
+            return back()->with([
+                    'message'    => "Connection via SSH failed, check the credentials.",
+                    'alert-type' => 'error',
+                ]);
         }
 
-        return back();
+        return back()->with([
+                'message'    => "Successfully uploaded " . $site->domain,
+                'alert-type' => 'success',
+            ]);
     }
 
     public function download(Site $site)
     {
-        //Detect if can download the dump
+        //Check permissions
         if (!Voyager::can('ssh_all')) {
-            return 'You have not the permission to download a dump.';
+            return back()->with([
+                    'message'    => "You have not the permission to download this file.",
+                    'alert-type' => 'error',
+                ]);
         }
 
         $this->setSshCredentials($site);;
@@ -76,7 +96,10 @@ class SitesAvailableController extends SshController
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception
-            return 'Connection via SSH failed, check the credentials.';
+            return back()->with([
+                    'message'    => "Connection via SSH failed, check the credentials.",
+                    'alert-type' => 'error',
+                ]);
         }
 
         //Download file and delete local version

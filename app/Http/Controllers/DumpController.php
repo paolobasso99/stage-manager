@@ -7,6 +7,7 @@ use TCG\Voyager\Facades\Voyager;
 
 use SSH;
 use Storage;
+use Validator;
 
 use App\Site;
 
@@ -15,13 +16,28 @@ class DumpController extends SshController
 
     public function upload(Site $site, Request $request)
     {
-        //Detect if can download the dump
+        //Validate the request
+        $validator = Validator::make($request->only('radius'), [
+            'file' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with([
+                    'message'    => "A file is required.",
+                    'alert-type' => 'error',
+                ]);
+        }
+
+        //Check permissions
         if (!Voyager::can('ssh_all')) {
-            return 'You have not the permission to upload a dump.';
+            return back()->with([
+                    'message'    => "You have not the permission to upload this file.",
+                    'alert-type' => 'error',
+                ]);
         }
 
 
-        $fileName = 'dump-' . $site->url . '-' . \Carbon\Carbon::now()->timestamp . '.sql';
+        $fileName = bcrypt($site->url . \Carbon\Carbon::now()->timestamp) . '.sql';
 
         $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
 
@@ -64,9 +80,12 @@ class DumpController extends SshController
 
     public function download(Site $site)
     {
-        //Detect if can download the dump
+        //Check permissions
         if (!Voyager::can('ssh_all')) {
-            return 'You have not the permission to download a dump.';
+            return back()->with([
+                    'message'    => "You have not the permission to download this file.",
+                    'alert-type' => 'error',
+                ]);
         }
 
 
