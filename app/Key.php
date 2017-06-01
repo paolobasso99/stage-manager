@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Key extends Model
 {
+    use SoftDeletes;
+
     //Relation with sites table
     public function sites()
     {

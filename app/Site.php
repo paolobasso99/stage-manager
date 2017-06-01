@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Mail;
@@ -18,6 +19,7 @@ use App\Attempt;
 
 class Site extends Model
 {
+    use SoftDeletes;
 
     protected $fillable = [
         'url',
