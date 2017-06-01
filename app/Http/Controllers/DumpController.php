@@ -119,7 +119,10 @@ class DumpController extends SshController
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception
-            return 'Connection via SSH failed, check the credentials.';
+            return back()->with([
+                    'message'    => "Connection via SSH failed, check the credentials.",
+                    'alert-type' => 'error',
+                ]);
         }
 
         //Download dump and delete local version

@@ -85,9 +85,9 @@ class SiteController extends VoyagerBreadController
         }
 
         //Show dump manager?
-        $hasDump = false;
+        $hasDatabase = false;
         if ($site->db_database != null && Voyager::can('ssh_all')) {
-            $hasDump = true;
+            $hasDatabase = true;
         }
 
         //Show sites-available manager?
@@ -95,6 +95,8 @@ class SiteController extends VoyagerBreadController
         if ($site->domain != null && Voyager::can('ssh_all')) {
             $hasSitesAvailable = true;
         }
+
+        $hasCrontab = false;
 
         //Return the view
         return view($view, compact(
@@ -104,8 +106,9 @@ class SiteController extends VoyagerBreadController
             'site',
             'emails',
             'hasSsh',
-            'hasDump',
+            'hasDatabase',
             'hasSitesAvailable',
+            'hasCrontab',
             'loadTimePerDay'
         ));
     }

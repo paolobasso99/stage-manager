@@ -42,7 +42,6 @@ CREATE TABLE `attempts` (
 
 LOCK TABLES `attempts` WRITE;
 /*!40000 ALTER TABLE `attempts` DISABLE KEYS */;
-INSERT INTO `attempts` VALUES (221,2,NULL,0.02,NULL,NULL,NULL,'2017-05-31 12:01:13','2017-05-31 12:01:13'),(222,26,301,0.24,'Moved Permanently',1,NULL,'2017-05-31 12:01:14','2017-05-31 12:01:14'),(223,26,404,0.29,'Not Found',1,NULL,'2017-05-31 12:01:14','2017-05-31 12:01:14'),(224,38,403,0.02,'Forbidden',0,NULL,'2017-05-31 12:01:14','2017-05-31 12:01:14');
 /*!40000 ALTER TABLE `attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +69,7 @@ CREATE TABLE `data_rows` (
   PRIMARY KEY (`id`),
   KEY `data_rows_data_type_id_foreign` (`data_type_id`),
   CONSTRAINT `data_rows_data_type_id_foreign` FOREIGN KEY (`data_type_id`) REFERENCES `data_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +78,7 @@ CREATE TABLE `data_rows` (
 
 LOCK TABLES `data_rows` WRITE;
 /*!40000 ALTER TABLE `data_rows` DISABLE KEYS */;
-INSERT INTO `data_rows` VALUES (26,3,'id','number','id',1,0,0,0,0,0,'',1),(27,3,'name','text','name',1,1,1,1,1,1,'',1),(28,3,'email','text','email',1,1,1,1,1,1,'',1),(29,3,'password','password','password',1,0,0,1,1,0,'',1),(30,3,'remember_token','text','remember_token',0,0,0,0,0,0,'',1),(31,3,'created_at','timestamp','created_at',0,1,1,0,0,0,'',1),(32,3,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(33,3,'avatar','image','avatar',0,1,1,1,1,1,'',1),(34,5,'id','number','id',1,0,0,0,0,0,'',1),(35,5,'name','text','name',1,1,1,1,1,1,'',1),(36,5,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(37,5,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(45,6,'id','number','id',1,0,0,0,0,0,'',1),(46,6,'name','text','Name',1,1,1,1,1,1,'',1),(47,6,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(48,6,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(49,6,'display_name','text','Display Name',1,1,1,1,1,1,'',1),(52,3,'role_id','text','role_id',1,1,1,1,1,1,'',1),(70,11,'id','hidden','Id',1,1,1,0,0,1,NULL,1),(71,11,'address','text','Address',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',2),(72,11,'deleted_at','timestamp','Deleted At',0,1,1,1,0,1,NULL,3),(73,11,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,4),(74,11,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,5),(111,16,'id','number','Id',1,1,1,0,0,1,NULL,1),(112,16,'url','text','Url',1,1,1,1,1,1,NULL,2),(113,16,'rate','number','Rate',1,0,1,1,1,1,NULL,3),(114,16,'ssh_username','text','Ssh Username',0,1,1,1,1,1,NULL,4),(115,16,'ssh_password','password','Ssh Password',0,0,0,1,1,0,NULL,5),(116,16,'ssh_root','text','Ssh Root',0,0,1,1,1,1,NULL,6),(117,16,'tried','number','Tried',1,0,1,1,0,1,NULL,7),(118,16,'checked_at','timestamp','Checked At',1,0,1,1,0,1,NULL,8),(119,16,'down_from','timestamp','Down From',0,1,1,1,0,1,NULL,9),(120,16,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,10),(121,16,'created_at','timestamp','Created At',0,0,1,1,0,1,NULL,11),(122,16,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,12),(123,17,'id','number','Id',1,1,1,0,0,1,NULL,1),(124,17,'name','text','Name',1,1,1,1,1,1,NULL,2),(125,17,'key','text_area','Key',1,0,0,1,1,1,NULL,3),(126,17,'keyphrase','password','Keyphrase',0,0,0,1,1,1,NULL,4),(127,17,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,5),(128,17,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,6);
+INSERT INTO `data_rows` VALUES (26,3,'id','number','id',1,0,0,0,0,0,'',1),(27,3,'name','text','name',1,1,1,1,1,1,'',1),(28,3,'email','text','email',1,1,1,1,1,1,'',1),(29,3,'password','password','password',1,0,0,1,1,0,'',1),(30,3,'remember_token','text','remember_token',0,0,0,0,0,0,'',1),(31,3,'created_at','timestamp','created_at',0,1,1,0,0,0,'',1),(32,3,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(33,3,'avatar','image','avatar',0,1,1,1,1,1,'',1),(34,5,'id','number','id',1,0,0,0,0,0,'',1),(35,5,'name','text','name',1,1,1,1,1,1,'',1),(36,5,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(37,5,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(45,6,'id','number','id',1,0,0,0,0,0,'',1),(46,6,'name','text','Name',1,1,1,1,1,1,'',1),(47,6,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(48,6,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(49,6,'display_name','text','Display Name',1,1,1,1,1,1,'',1),(52,3,'role_id','text','role_id',1,1,1,1,1,1,'',1),(70,11,'id','hidden','Id',1,1,1,0,0,1,NULL,1),(71,11,'address','text','Address',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',2),(72,11,'deleted_at','timestamp','Deleted At',0,1,1,1,0,1,NULL,3),(73,11,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,4),(74,11,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,5),(123,17,'id','number','Id',1,1,1,0,0,1,NULL,1),(124,17,'name','text','Name',1,1,1,1,1,1,NULL,2),(125,17,'key','text_area','Key',1,0,0,1,1,1,NULL,3),(126,17,'keyphrase','password','Keyphrase',0,0,0,1,1,1,NULL,4),(127,17,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,5),(128,17,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,6),(129,18,'id','number','Id',1,1,1,0,0,1,NULL,1),(130,18,'url','text','Url',1,1,1,1,1,1,NULL,2),(131,18,'domain','text','Domain',0,0,1,1,1,1,NULL,3),(132,18,'rate','number','Rate',1,0,1,1,1,1,NULL,4),(133,18,'ssh_username','text','Ssh Username',0,1,1,1,1,1,NULL,5),(134,18,'ssh_password','password','Ssh Password',0,0,1,1,1,1,NULL,6),(135,18,'ssh_root','text','Ssh Root',0,0,1,1,1,1,NULL,7),(136,18,'key_id','select_dropdown','Key Id',0,0,1,1,1,1,'{\"relationship\":{\"key\":\"id\",\"label\":\"name\"}}',8),(137,18,'db_host','text','Db Host',0,0,1,1,1,1,NULL,9),(138,18,'db_database','text','Db Database',0,1,1,1,1,1,NULL,10),(139,18,'db_username','text','Db Username',0,0,1,1,1,1,NULL,11),(140,18,'db_password','password','Db Password',0,0,1,1,1,1,NULL,12),(141,18,'check_certificate','checkbox','Check Certificate',1,1,1,1,1,1,NULL,13),(142,18,'certificate_attempts','number','Certificate Attempts',1,1,1,1,0,1,NULL,14),(143,18,'tried','number','Tried',1,1,1,1,0,1,NULL,15),(144,18,'checked_at','timestamp','Checked At',1,0,1,1,1,1,NULL,16),(145,18,'down_from','timestamp','Down From',0,0,1,1,1,1,NULL,17),(146,18,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,18),(147,18,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,19),(148,18,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,20);
 /*!40000 ALTER TABLE `data_rows` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +106,7 @@ CREATE TABLE `data_types` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `data_types_name_unique` (`name`),
   UNIQUE KEY `data_types_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +115,7 @@ CREATE TABLE `data_types` (
 
 LOCK TABLES `data_types` WRITE;
 /*!40000 ALTER TABLE `data_types` DISABLE KEYS */;
-INSERT INTO `data_types` VALUES (3,'users','users','User','Users','voyager-person','TCG\\Voyager\\Models\\User',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(5,'menus','menus','Menu','Menus','voyager-list','TCG\\Voyager\\Models\\Menu',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(6,'roles','roles','Role','Roles','voyager-lock','TCG\\Voyager\\Models\\Role',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(11,'emails','emails','Email','Emails','voyager-mail','App\\Email','EmailController',NULL,1,0,'2017-05-22 08:49:08','2017-05-26 05:20:01'),(16,'sites','sites','Site','Sites','voyager-browser','App\\Site','SiteController',NULL,1,0,'2017-05-26 11:17:42','2017-05-26 11:17:42'),(17,'keys','keys','Key','Keys',NULL,'App\\Key',NULL,NULL,1,0,'2017-05-29 07:04:02','2017-05-29 07:04:02');
+INSERT INTO `data_types` VALUES (3,'users','users','User','Users','voyager-person','TCG\\Voyager\\Models\\User',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(5,'menus','menus','Menu','Menus','voyager-list','TCG\\Voyager\\Models\\Menu',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(6,'roles','roles','Role','Roles','voyager-lock','TCG\\Voyager\\Models\\Role',NULL,'',1,0,'2017-05-22 07:41:29','2017-05-22 07:41:29'),(11,'emails','emails','Email','Emails','voyager-mail','App\\Email','EmailController',NULL,1,0,'2017-05-22 08:49:08','2017-05-26 05:20:01'),(17,'keys','keys','Key','Keys',NULL,'App\\Key',NULL,NULL,1,0,'2017-05-29 07:04:02','2017-05-29 07:04:02'),(18,'sites','sites','Site','Sites','voyager-browser','App\\Site','SiteController',NULL,1,0,'2017-06-01 06:48:21','2017-06-01 06:48:21');
 /*!40000 ALTER TABLE `data_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +161,7 @@ CREATE TABLE `email_site` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +170,7 @@ CREATE TABLE `email_site` (
 
 LOCK TABLES `email_site` WRITE;
 /*!40000 ALTER TABLE `email_site` DISABLE KEYS */;
+INSERT INTO `email_site` VALUES (1,83,104,NULL,NULL);
 /*!40000 ALTER TABLE `email_site` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +423,7 @@ CREATE TABLE `permission_role` (
 
 LOCK TABLES `permission_role` WRITE;
 /*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
-INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,4),(2,1),(2,4),(3,1),(3,4),(4,1),(4,4),(5,1),(5,2),(5,4),(6,1),(6,2),(6,4),(7,1),(7,4),(8,1),(8,4),(9,1),(9,4),(15,1),(15,2),(15,4),(16,1),(16,2),(16,4),(17,1),(18,1),(19,1),(20,1),(20,2),(20,4),(21,1),(21,2),(21,4),(22,1),(22,4),(23,1),(23,4),(24,1),(24,4),(50,1),(50,2),(50,4),(51,1),(51,2),(51,4),(52,1),(52,4),(53,1),(53,4),(54,1),(54,4),(75,1),(75,2),(75,4),(76,1),(76,2),(76,4),(77,1),(77,4),(78,1),(78,4),(79,1),(79,4),(80,1),(80,4),(81,1),(81,4),(82,1),(82,4),(83,1),(83,4),(84,1),(84,4),(86,1),(86,4),(87,1);
+INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,4),(2,1),(2,4),(3,1),(3,4),(4,1),(4,4),(5,1),(5,2),(5,4),(6,1),(6,2),(6,4),(7,1),(7,4),(8,1),(8,4),(9,1),(9,4),(15,1),(15,2),(15,4),(16,1),(16,2),(16,4),(17,1),(18,1),(19,1),(20,1),(20,2),(20,4),(21,1),(21,2),(21,4),(22,1),(22,4),(23,1),(23,4),(24,1),(24,4),(50,1),(50,2),(50,4),(51,1),(51,2),(51,4),(52,1),(52,4),(53,1),(53,4),(54,1),(54,4),(80,1),(80,4),(81,1),(81,4),(82,1),(82,4),(83,1),(83,4),(84,1),(84,4),(86,1),(86,4),(87,1),(88,1),(89,1),(90,1),(91,1),(92,1);
 /*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +443,7 @@ CREATE TABLE `permissions` (
   `permission_group_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `permissions_key_index` (`key`)
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,7 +452,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,'browse_admin',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(2,'browse_database',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(3,'browse_media',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(4,'browse_settings',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(5,'browse_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(6,'read_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(7,'edit_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(8,'add_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(9,'delete_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(15,'browse_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(16,'read_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(17,'edit_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(18,'add_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(19,'delete_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(20,'browse_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(21,'read_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(22,'edit_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(23,'add_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(24,'delete_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(50,'browse_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(51,'read_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(52,'edit_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(53,'add_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(54,'delete_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(75,'browse_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(76,'read_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(77,'edit_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(78,'add_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(79,'delete_sites','sites','2017-05-26 11:17:42','2017-05-26 11:17:42',NULL),(80,'browse_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(81,'read_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(82,'edit_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(83,'add_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(84,'delete_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(86,'ssh_artisan','Commands','2017-05-29 09:33:30','2017-05-29 09:33:35',NULL),(87,'ssh_all','Commands','2017-05-29 09:33:30','2017-05-29 09:33:35',NULL);
+INSERT INTO `permissions` VALUES (1,'browse_admin',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(2,'browse_database',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(3,'browse_media',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(4,'browse_settings',NULL,'2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(5,'browse_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(6,'read_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(7,'edit_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(8,'add_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(9,'delete_menus','menus','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(15,'browse_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(16,'read_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(17,'edit_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(18,'add_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(19,'delete_roles','roles','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(20,'browse_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(21,'read_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(22,'edit_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(23,'add_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(24,'delete_users','users','2017-05-22 07:41:30','2017-05-22 07:41:30',NULL),(50,'browse_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(51,'read_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(52,'edit_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(53,'add_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(54,'delete_emails','emails','2017-05-22 08:49:08','2017-05-22 08:49:08',NULL),(80,'browse_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(81,'read_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(82,'edit_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(83,'add_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(84,'delete_keys','keys','2017-05-29 07:04:02','2017-05-29 07:04:02',NULL),(86,'ssh_artisan','Commands','2017-05-29 09:33:30','2017-05-29 09:33:35',NULL),(87,'ssh_all','Commands','2017-05-29 09:33:30','2017-05-29 09:33:35',NULL),(88,'browse_sites','sites','2017-06-01 06:48:21','2017-06-01 06:48:21',NULL),(89,'read_sites','sites','2017-06-01 06:48:21','2017-06-01 06:48:21',NULL),(90,'edit_sites','sites','2017-06-01 06:48:21','2017-06-01 06:48:21',NULL),(91,'add_sites','sites','2017-06-01 06:48:21','2017-06-01 06:48:21',NULL),(92,'delete_sites','sites','2017-06-01 06:48:21','2017-06-01 06:48:21',NULL);
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -552,7 +552,7 @@ CREATE TABLE `sites` (
 
 LOCK TABLES `sites` WRITE;
 /*!40000 ALTER TABLE `sites` DISABLE KEYS */;
-INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,2,'2017-05-31 12:01:13','2017-05-31 12:00:16',NULL,NULL,'2017-05-31 12:01:13'),(11,'https://www.google.it/',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,0,'2017-05-31 12:00:16',NULL,NULL,NULL,'2017-05-31 12:00:17'),(26,'http://www.workup.it/ita/404status',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,1,'2017-05-31 14:01:14','2017-05-31 12:01:14',NULL,NULL,'2017-05-31 12:01:14'),(38,'http://lab3.workup.it',NULL,5,'root','%1t4_l4b3',NULL,NULL,NULL,NULL,NULL,NULL,1,2,2,'2017-05-31 14:01:14','2017-05-31 12:00:17',NULL,NULL,'2017-05-31 12:01:14'),(104,'http://138.68.90.95','demo.rubinred.it',5,'workup',NULL,'/home/workup/www/demo.rubinred.it',1,'localhost','demo_rubinred_it','demo_rubinred_it','testtest',0,0,0,'2017-05-31 14:17:31',NULL,NULL,NULL,'2017-05-31 12:00:18');
+INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,'2017-06-01 08:49:59',NULL,NULL,NULL,'2017-06-01 06:49:59'),(11,'https://www.google.it/',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,0,'2017-05-31 12:00:16',NULL,NULL,NULL,'2017-05-31 12:00:17'),(26,'http://www.workup.it/ita/404status',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,0,'2017-06-01 08:49:59',NULL,NULL,NULL,'2017-06-01 06:49:59'),(38,'http://lab3.workup.it',NULL,5,'root','%1t4_l4b3',NULL,NULL,NULL,NULL,NULL,NULL,1,0,0,'2017-06-01 08:49:59',NULL,NULL,NULL,'2017-06-01 06:49:59'),(104,'http://138.68.90.95','demo.rubinred.it',5,'workup',NULL,'/home/workup/www/demo.rubinred.it',1,'localhost','demo_rubinred_it','demo_rubinred_it','testtest',0,0,0,'2017-05-31 14:17:31',NULL,NULL,NULL,'2017-05-31 12:00:18');
 /*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -628,4 +628,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-31 17:34:11
+-- Dump completed on 2017-06-01 11:00:41

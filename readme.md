@@ -27,10 +27,9 @@
 ## To do
 
 * Fix mail login
-* Migliorare GUI
 * Guzzle async (?)
 * Cron tab
-* fix dump/conf upload
+* fix conf upload
 
 
 ## Quando ho finito
