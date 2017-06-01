@@ -33,7 +33,7 @@ CREATE TABLE `attempts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `attempts` (
 
 LOCK TABLES `attempts` WRITE;
 /*!40000 ALTER TABLE `attempts` DISABLE KEYS */;
-INSERT INTO `attempts` VALUES (225,2,NULL,0.28,NULL,NULL,NULL,'2017-06-01 07:03:04','2017-06-01 07:03:04'),(226,11,200,1.47,'OK',1,NULL,'2017-06-01 07:03:06','2017-06-01 07:03:06'),(227,26,301,0.79,'Moved Permanently',1,NULL,'2017-06-01 07:03:08','2017-06-01 07:03:08'),(228,26,404,1.21,'Not Found',1,NULL,'2017-06-01 07:03:10','2017-06-01 07:03:10'),(229,38,403,0.02,'Forbidden',0,NULL,'2017-06-01 07:03:10','2017-06-01 07:03:10'),(230,104,302,1.28,'Found',NULL,NULL,'2017-06-01 07:03:12','2017-06-01 07:03:12'),(231,104,200,3.90,'OK',NULL,NULL,'2017-06-01 07:03:15','2017-06-01 07:03:15'),(232,2,NULL,0.17,NULL,NULL,NULL,'2017-06-01 07:48:38','2017-06-01 07:48:38'),(233,11,200,1.02,'OK',1,NULL,'2017-06-01 07:48:39','2017-06-01 07:48:39'),(234,26,301,0.44,'Moved Permanently',1,NULL,'2017-06-01 07:48:40','2017-06-01 07:48:40'),(235,38,403,0.01,'Forbidden',0,NULL,'2017-06-01 07:48:40','2017-06-01 07:48:40'),(236,104,302,1.16,'Found',NULL,NULL,'2017-06-01 07:48:41','2017-06-01 07:48:41'),(237,26,404,0.79,'Not Found',1,NULL,'2017-06-01 07:48:43','2017-06-01 07:48:43'),(238,104,200,3.66,'OK',NULL,NULL,'2017-06-01 07:48:46','2017-06-01 07:48:46'),(239,2,NULL,0.05,NULL,NULL,NULL,'2017-06-01 07:50:15','2017-06-01 07:50:15'),(240,11,200,1.46,'OK',1,NULL,'2017-06-01 07:50:18','2017-06-01 07:50:18'),(241,26,301,0.72,'Moved Permanently',1,NULL,'2017-06-01 07:50:19','2017-06-01 07:50:19'),(242,38,403,0.02,'Forbidden',0,NULL,'2017-06-01 07:50:19','2017-06-01 07:50:19'),(243,104,302,1.24,'Found',NULL,NULL,'2017-06-01 07:50:20','2017-06-01 07:50:20'),(244,26,404,0.89,'Not Found',1,NULL,'2017-06-01 07:50:22','2017-06-01 07:50:22'),(245,104,200,3.95,'OK',NULL,NULL,'2017-06-01 07:50:26','2017-06-01 07:50:26');
+INSERT INTO `attempts` VALUES (266,2,NULL,0.30,NULL,NULL,NULL,'2017-06-01 08:47:48','2017-06-01 08:47:48'),(267,11,200,1.74,'OK',1,NULL,'2017-06-01 08:47:51','2017-06-01 08:47:51'),(268,26,301,0.72,'Moved Permanently',1,NULL,'2017-06-01 08:47:52','2017-06-01 08:47:52'),(269,38,403,0.01,'Forbidden',0,NULL,'2017-06-01 08:47:53','2017-06-01 08:47:53'),(270,104,302,1.53,'Found',NULL,NULL,'2017-06-01 08:47:54','2017-06-01 08:47:54'),(271,26,404,1.50,'Not Found',1,NULL,'2017-06-01 08:47:56','2017-06-01 08:47:56'),(272,104,200,3.99,'OK',NULL,NULL,'2017-06-01 08:48:00','2017-06-01 08:48:00'),(273,2,NULL,0.01,NULL,NULL,NULL,'2017-06-01 08:48:05','2017-06-01 08:48:05'),(274,11,200,1.27,'OK',1,NULL,'2017-06-01 08:48:07','2017-06-01 08:48:07'),(275,26,301,0.44,'Moved Permanently',1,NULL,'2017-06-01 08:48:08','2017-06-01 08:48:08'),(276,38,403,0.01,'Forbidden',0,NULL,'2017-06-01 08:48:08','2017-06-01 08:48:08'),(277,104,302,1.40,'Found',NULL,NULL,'2017-06-01 08:48:09','2017-06-01 08:48:09'),(278,26,404,1.29,'Not Found',1,NULL,'2017-06-01 08:48:11','2017-06-01 08:48:11'),(279,104,200,4.12,'OK',NULL,NULL,'2017-06-01 08:48:15','2017-06-01 08:48:15');
 /*!40000 ALTER TABLE `attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `downtimes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,7 @@ CREATE TABLE `downtimes` (
 
 LOCK TABLES `downtimes` WRITE;
 /*!40000 ALTER TABLE `downtimes` DISABLE KEYS */;
-INSERT INTO `downtimes` VALUES (1,11,'2017-05-24 06:31:00','2017-05-24 06:33:28','2017-05-24 06:33:28','2017-05-24 06:33:28'),(2,104,'2017-05-31 10:52:10','2017-05-31 11:31:03','2017-05-31 11:31:03','2017-05-31 11:31:03'),(3,26,'2017-05-31 12:00:17','2017-05-31 12:01:14','2017-05-31 12:01:14','2017-05-31 12:01:14'),(4,26,'2017-06-01 07:03:09','2017-06-01 07:48:40','2017-06-01 07:48:40','2017-06-01 07:48:40'),(5,26,'2017-06-01 07:48:42','2017-06-01 07:50:18','2017-06-01 07:50:18','2017-06-01 07:50:18');
+INSERT INTO `downtimes` VALUES (1,11,'2017-05-24 06:31:00','2017-05-24 06:33:28','2017-05-24 06:33:28','2017-05-24 06:33:28'),(2,104,'2017-05-31 10:52:10','2017-05-31 11:31:03','2017-05-31 11:31:03','2017-05-31 11:31:03'),(3,26,'2017-05-31 12:00:17','2017-05-31 12:01:14','2017-05-31 12:01:14','2017-05-31 12:01:14'),(4,26,'2017-06-01 07:03:09','2017-06-01 07:48:40','2017-06-01 07:48:40','2017-06-01 07:48:40'),(5,26,'2017-06-01 07:48:42','2017-06-01 07:50:18','2017-06-01 07:50:18','2017-06-01 07:50:18'),(6,26,'2017-06-01 07:50:21','2017-06-01 07:54:15','2017-06-01 07:54:15','2017-06-01 07:54:15'),(7,26,'2017-06-01 07:54:20','2017-06-01 07:55:04','2017-06-01 07:55:04','2017-06-01 07:55:04'),(8,26,'2017-06-01 07:55:11','2017-06-01 08:01:33','2017-06-01 08:01:33','2017-06-01 08:01:33'),(9,26,'2017-06-01 08:47:56','2017-06-01 08:48:07','2017-06-01 08:48:07','2017-06-01 08:48:07');
 /*!40000 ALTER TABLE `downtimes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,7 +363,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +372,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (43,'2014_10_12_000000_create_users_table',1),(44,'2016_01_01_000000_add_voyager_user_fields',1),(45,'2016_01_01_000000_create_data_types_table',1),(46,'2016_01_01_000000_create_pages_table',1),(47,'2016_01_01_000000_create_posts_table',1),(48,'2016_02_15_204651_create_categories_table',1),(49,'2016_05_19_173453_create_menu_table',1),(50,'2016_10_21_190000_create_roles_table',1),(51,'2016_10_21_190000_create_settings_table',1),(52,'2016_11_30_135954_create_permission_table',1),(53,'2016_11_30_141208_create_permission_role_table',1),(54,'2016_12_26_201236_data_types__add__server_side',1),(55,'2017_01_13_000000_add_route_to_menu_items_table',1),(56,'2017_01_14_005015_create_translations_table',1),(57,'2017_01_15_000000_add_permission_group_id_to_permissions_table',1),(58,'2017_01_15_000000_create_permission_groups_table',1),(69,'2017_01_15_000000_make_table_name_nullable_in_permissions_table',2),(70,'2017_03_06_000000_add_controller_to_data_types_table',2),(76,'2017_04_21_000000_add_order_to_data_rows_table',3),(77,'2017_05_22_095144_create_sites_table',3),(78,'2017_05_22_095158_create_emails_table',3),(79,'2017_05_22_095212_create_notifications_table',3),(81,'2017_05_22_095549_create_attempts_table',4),(82,'2017_05_22_134031_create_jobs_table',5),(83,'2017_05_22_134042_create_failed_jobs_table',5),(84,'2017_05_22_143142_add_tried_and_checked_at_columns',6),(85,'2017_05_23_071524_create_notifications_table',7),(86,'2017_05_23_071524_create_notificables_table',8),(92,'2017_05_23_144252_create_downtimes_table',9),(93,'2017_05_25_071218_create_email_site_table',10),(95,'2017_05_25_090027_add_load_time_column_to_attempts_table',11),(96,'2017_05_26_131208_add_ssh_collumns_to_site_table',12),(101,'2017_05_29_070304_cretae_ssh_keys_table',13),(103,'2017_05_29_133509_add_database_columns_to_sites_table',14),(108,'2017_05_30_131909_add_certificate_columns_to_sites_table',15),(109,'2017_05_30_132530_add_certificate_columns_to_attempts_table',15),(110,'2017_05_31_141321_add_domain_colum_to_sites_table',16);
+INSERT INTO `migrations` VALUES (43,'2014_10_12_000000_create_users_table',1),(44,'2016_01_01_000000_add_voyager_user_fields',1),(45,'2016_01_01_000000_create_data_types_table',1),(46,'2016_01_01_000000_create_pages_table',1),(47,'2016_01_01_000000_create_posts_table',1),(48,'2016_02_15_204651_create_categories_table',1),(49,'2016_05_19_173453_create_menu_table',1),(50,'2016_10_21_190000_create_roles_table',1),(51,'2016_10_21_190000_create_settings_table',1),(52,'2016_11_30_135954_create_permission_table',1),(53,'2016_11_30_141208_create_permission_role_table',1),(54,'2016_12_26_201236_data_types__add__server_side',1),(55,'2017_01_13_000000_add_route_to_menu_items_table',1),(56,'2017_01_14_005015_create_translations_table',1),(57,'2017_01_15_000000_add_permission_group_id_to_permissions_table',1),(58,'2017_01_15_000000_create_permission_groups_table',1),(69,'2017_01_15_000000_make_table_name_nullable_in_permissions_table',2),(70,'2017_03_06_000000_add_controller_to_data_types_table',2),(76,'2017_04_21_000000_add_order_to_data_rows_table',3),(77,'2017_05_22_095144_create_sites_table',3),(78,'2017_05_22_095158_create_emails_table',3),(79,'2017_05_22_095212_create_notifications_table',3),(81,'2017_05_22_095549_create_attempts_table',4),(82,'2017_05_22_134031_create_jobs_table',5),(83,'2017_05_22_134042_create_failed_jobs_table',5),(84,'2017_05_22_143142_add_tried_and_checked_at_columns',6),(85,'2017_05_23_071524_create_notifications_table',7),(86,'2017_05_23_071524_create_notificables_table',8),(92,'2017_05_23_144252_create_downtimes_table',9),(93,'2017_05_25_071218_create_email_site_table',10),(95,'2017_05_25_090027_add_load_time_column_to_attempts_table',11),(96,'2017_05_26_131208_add_ssh_collumns_to_site_table',12),(101,'2017_05_29_070304_cretae_ssh_keys_table',13),(103,'2017_05_29_133509_add_database_columns_to_sites_table',14),(108,'2017_05_30_131909_add_certificate_columns_to_sites_table',15),(109,'2017_05_30_132530_add_certificate_columns_to_attempts_table',15),(110,'2017_05_31_141321_add_domain_colum_to_sites_table',16),(112,'2017_06_01_102814_add_features_booleans_to_sites_table',17);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -527,16 +527,20 @@ CREATE TABLE `sites` (
   `url` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `domain` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rate` int(11) NOT NULL,
+  `enable_ssh` tinyint(1) NOT NULL DEFAULT '0',
   `ssh_username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ssh_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ssh_root` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `key_id` int(11) DEFAULT NULL,
+  `enable_db` tinyint(1) NOT NULL DEFAULT '0',
   `db_host` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `db_database` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `db_username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `db_password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `check_certificate` tinyint(1) NOT NULL DEFAULT '0',
   `certificate_attempts` int(11) NOT NULL DEFAULT '0',
+  `enable_nginx_configuration` tinyint(1) NOT NULL DEFAULT '0',
+  `enable_crontab` tinyint(1) NOT NULL DEFAULT '0',
   `tried` int(11) NOT NULL DEFAULT '0',
   `checked_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `down_from` timestamp NULL DEFAULT NULL,
@@ -553,7 +557,7 @@ CREATE TABLE `sites` (
 
 LOCK TABLES `sites` WRITE;
 /*!40000 ALTER TABLE `sites` DISABLE KEYS */;
-INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,3,'2017-06-01 07:50:15','2017-06-01 07:03:04',NULL,'2017-06-01 09:06:32','2017-06-01 07:50:15'),(11,'https://www.google.it/',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,0,'2017-06-01 07:50:15',NULL,NULL,'2017-06-01 09:06:29','2017-06-01 07:50:17'),(26,'http://www.workup.it/ita/404status',NULL,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,1,'2017-06-01 09:50:21','2017-06-01 07:50:21',NULL,'2017-06-01 09:06:27','2017-06-01 07:50:21'),(38,'http://lab3.workup.it',NULL,5,'root','%1t4_l4b3',NULL,NULL,NULL,NULL,NULL,NULL,1,3,3,'2017-06-01 09:50:19','2017-06-01 07:03:10',NULL,'2017-06-01 09:06:26','2017-06-01 07:50:19'),(104,'http://138.68.90.95','demo.rubinred.it',5,'workup',NULL,'/home/workup/www/demo.rubinred.it',1,'localhost','demo_rubinred_it','demo_rubinred_it','testtest',0,0,0,'2017-06-01 07:50:19',NULL,NULL,'2017-06-01 09:06:23','2017-06-01 07:50:20');
+INSERT INTO `sites` VALUES (2,'https://www.notworkingwebsitefake.com',NULL,5,0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,0,0,0,0,2,'2017-06-01 08:48:05','2017-06-01 08:47:48',NULL,'2017-06-01 09:06:32','2017-06-01 08:48:05'),(11,'https://www.google.it/',NULL,5,0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,1,0,0,0,0,'2017-06-01 08:48:05',NULL,NULL,'2017-06-01 09:06:29','2017-06-01 08:48:06'),(26,'http://www.workup.it/ita/404status',NULL,5,0,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,1,0,0,0,1,'2017-06-01 10:48:10','2017-06-01 08:48:10',NULL,'2017-06-01 09:06:27','2017-06-01 08:48:10'),(38,'http://lab3.workup.it',NULL,5,1,'root','%1t4_l4b3',NULL,NULL,0,NULL,NULL,NULL,NULL,1,2,0,0,2,'2017-06-01 10:48:08','2017-06-01 08:47:53',NULL,'2017-06-01 09:06:26','2017-06-01 08:48:08'),(104,'http://138.68.90.95','demo.rubinred.it',5,1,'workup',NULL,'/home/workup/www/demo.rubinred.it',1,1,'localhost','demo_rubinred_it','demo_rubinred_it','testtest',0,0,1,1,0,'2017-06-01 08:48:08',NULL,NULL,'2017-06-01 09:06:23','2017-06-01 08:48:09');
 /*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -629,4 +633,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-01 11:50:53
+-- Dump completed on 2017-06-01 12:49:11

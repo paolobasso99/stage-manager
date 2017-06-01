@@ -39,6 +39,5 @@ class CheckAllSites extends Command
     {
         $this->line('Checking...');
         app('SiteChecker')->checkAll();
-        $this->info('Check complete');
     }
 }

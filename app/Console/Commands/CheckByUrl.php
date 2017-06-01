@@ -66,7 +66,5 @@ class CheckByUrl extends Command
             }
 
         }
-
-        $this->info('Check complete');
     }
 }

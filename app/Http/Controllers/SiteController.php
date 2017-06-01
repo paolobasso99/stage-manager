@@ -77,26 +77,15 @@ class SiteController extends VoyagerBreadController
         $loadTimePerDay = $this->getLoadTimePerDay($site, 7);
 
         //Show the SSH console?
-        $hasSsh = false;
-        if ($site->ssh_username != null) {
-            if (Voyager::can('ssh_artisan') || Voyager::can('ssh_all')) {
-                $hasSsh = true;
-            }
-        }
+        $hasSsh = $site->enable_ssh && (Voyager::can('ssh_artisan') || Voyager::can('ssh_all'));
 
         //Show dump manager?
-        $hasDatabase = false;
-        if ($site->db_database != null && Voyager::can('ssh_all')) {
-            $hasDatabase = true;
-        }
+        $hasDatabase = $site->enable_db && Voyager::can('ssh_all');
 
         //Show sites-available manager?
-        $hasSitesAvailable = false;
-        if ($site->domain != null && Voyager::can('ssh_all')) {
-            $hasSitesAvailable = true;
-        }
+        $hasSitesAvailable = $site->enable_nginx_configuration && Voyager::can('ssh_all');
 
-        $hasCrontab = $hasSsh;
+        $hasCrontab = $site->enable_crontab && Voyager::can('ssh_all');
 
         //Return the view
         return view($view, compact(
