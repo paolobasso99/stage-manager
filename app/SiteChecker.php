@@ -6,6 +6,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use GuzzleHttp\TransferStats;
 
+use App;
+
 use Carbon\Carbon;
 
 class SiteChecker
