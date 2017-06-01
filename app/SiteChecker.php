@@ -45,7 +45,7 @@ class SiteChecker
         try {
 
             //Use the Guzzle client to perform a GET request
-            $client->get($site->url, [
+            $client->getAsync($site->url, [
 
                 //Set client options
                 'allow_redirects' => config('check.guzzle.allow_redirects'),
@@ -58,7 +58,7 @@ class SiteChecker
                 'on_stats' => function (TransferStats $statistics) use ($site) {
                     $site->processResponse($statistics);
                 }
-                
+
             ]);
 
         } catch (GuzzleException $e) {

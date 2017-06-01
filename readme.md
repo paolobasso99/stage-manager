@@ -27,7 +27,6 @@
 ## To do
 
 * Fix mail login
-* Guzzle async (?)
 * fix conf upload
 
 
