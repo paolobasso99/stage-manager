@@ -58,7 +58,11 @@
                         <h3 class="panel-title">Last down</h3>
                     </div>
                     <div class="panel-body" style="padding-top:0;">
-                        {{ $lastDown->end_at }}
+                        @if ($lastDown != null)
+                            {{ $lastDown->end_at }}
+                        @else
+                            There is no down recorded
+                        @endif
                     </div>
 
                     <hr style="margin:0;">

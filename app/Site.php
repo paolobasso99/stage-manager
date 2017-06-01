@@ -59,11 +59,11 @@ class Site extends Model
         if($response != null){
 
             //Check if it's a good or a bad response
-            if ($response->getStatusCode() < 400) {
+            if ($response->getStatusCode() < 300) {
 
                 $this->goodResponse();
 
-            } else {
+            } elseif ($response->getStatusCode() >= 400) {
 
                 $this->badResponse();
 
