@@ -28,7 +28,7 @@
 ## To do
 
 * Fix mail login
-* fix conf upload
+* Upload sulle path giuste
 
 
 ## Quando ho finito

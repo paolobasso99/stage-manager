@@ -17,7 +17,7 @@ class SitesAvailableController extends SshController
     public function upload(Site $site, Request $request)
     {
         //Validate the request
-        $validator = Validator::make($request->only('radius'), [
+        $validator = Validator::make($request->all(), [
             'file' => 'required'
         ]);
 
@@ -36,13 +36,14 @@ class SitesAvailableController extends SshController
                 ]);
         }
 
-        $fileName = parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp;
+        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
 
-        $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
+        //$remoteFile = '/etc/nginx/sites-available/' . $site->domain;
+        $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $site->domain;
 
         //Store local file
         $localFile = $request->file('file')->storeAs(
-            storage_path('sites-available'), $fileName
+            'uploads/nginx-configurations', $fileName
         );
 
         $this->setSshCredentials($site);
@@ -52,7 +53,7 @@ class SitesAvailableController extends SshController
         try {
 
             //Upload file
-            SSH::into('runtime')->put($localFile, $remoteFile);
+            SSH::into('runtime')->put(storage_path('app/' . $localFile), $remoteFile);
 
             //Remove local file
             Storage::disk('local')->delete($localFile);
@@ -81,9 +82,11 @@ class SitesAvailableController extends SshController
                 ]);
         }
 
-        $this->setSshCredentials($site);;
+        $this->setSshCredentials($site);
 
-        $localFile = storage_path('sites-available/' . parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp);
+        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+
+        $localFile = 'downloads/nginx-configurations/' . $fileName;
         $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
 
         //Perform command
@@ -93,7 +96,7 @@ class SitesAvailableController extends SshController
             Storage::disk('local')->put($localFile, '');
 
             //Download remote file
-            SSH::into('runtime')->get($remoteFile, $localFile);
+            SSH::into('runtime')->get($remoteFile, storage_path('app/' . $localFile));
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception
@@ -104,7 +107,7 @@ class SitesAvailableController extends SshController
         }
 
         //Download file and delete local version
-        return response()->download($localFile, $site->domain)->deleteFileAfterSend(true);
+        return response()->download(storage_path('app/' . $localFile), $site->domain)->deleteFileAfterSend(true);
 
     }
 }

@@ -14,6 +14,7 @@ use App\Key;
 class SshController extends Controller
 {
     protected $output;
+    protected $localFile;
 
     public function __construct()
     {
@@ -47,4 +48,5 @@ class SshController extends Controller
             Config::set('remote.connections.runtime.password', $site->ssh_password);
         }
     }
+    
 }

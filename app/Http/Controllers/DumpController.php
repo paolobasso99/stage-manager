@@ -17,7 +17,7 @@ class DumpController extends SshController
     public function upload(Site $site, Request $request)
     {
         //Validate the request
-        $validator = Validator::make($request->only('radius'), [
+        $validator = Validator::make($request->all(), [
             'file' => 'required'
         ]);
 
@@ -37,12 +37,12 @@ class DumpController extends SshController
         }
 
 
-        $fileName = parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp . '.sql';
+        $fileName = 'dump-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp) . '.sql';
 
         $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
 
         $localFile = $request->file('file')->storeAs(
-            storage_path('dumps'), $fileName
+            'uploads/dumps', $fileName
         );
 
 
@@ -59,23 +59,30 @@ class DumpController extends SshController
         try {
 
             //Upload file
-            SSH::into('runtime')->put($localFile, $remoteFile);
+            SSH::into('runtime')->put(storage_path('app/' . $localFile), $remoteFile);
 
             //Remove local file
             Storage::disk('local')->delete($localFile);
 
             //Execute command and delete remote file
             SSH::into('runtime')->run([
+                'cd',
                 $command,
                 'rm ' . $remoteFile
             ]);
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception
-            return 'Connection via SSH failed, check the credentials.';
+            return back()->with([
+                    'message'    => "Connection via SSH failed, check the credentials.",
+                    'alert-type' => 'error',
+                ]);
         }
 
-        return back();
+        return back()->with([
+                'message'    => "File successfully uploaded ",
+                'alert-type' => 'success',
+            ]);
     }
 
     public function download(Site $site)
@@ -89,11 +96,11 @@ class DumpController extends SshController
         }
 
 
-        $this->setSshCredentials($site);;
+        $this->setSshCredentials($site);
 
-        $fileName = parse_url($site->url, PHP_URL_HOST) . \Carbon\Carbon::now()->timestamp . '.sql';
+        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp) . 'sql';
 
-        $localFile = storage_path('dumps/' . $fileName);
+        $localFile = 'downloads/dumps/' . $fileName;
         $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
 
         $command = 'mysqldump';
@@ -106,16 +113,22 @@ class DumpController extends SshController
         try {
 
             //Create remote dump
-            SSH::into('runtime')->run($command);
+            SSH::into('runtime')->run([
+                'cd',
+                $command
+            ]);
 
             //Create empty file in local
             Storage::disk('local')->put($localFile, '');
 
             //Download remote file
-            SSH::into('runtime')->get($remoteFile, $localFile);
+            SSH::into('runtime')->get($remoteFile, storage_path('app/' . $localFile));
 
             //Remove remote file
-            SSH::into('runtime')->run('rm ' . $remoteFile);
+            SSH::into('runtime')->run([
+                'cd',
+                'rm ' . $remoteFile
+            ]);
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception
@@ -126,7 +139,7 @@ class DumpController extends SshController
         }
 
         //Download dump and delete local version
-        return response()->download($localFile, 'dump.sql')->deleteFileAfterSend(true);
+        return response()->download(storage_path('app/' . $localFile), 'dump.sql')->deleteFileAfterSend(true);
 
     }
 }
