@@ -28,8 +28,6 @@
 ## To do
 
 * Fix mail login
-* Upload sulle path giuste
-* Se sudo chiedesse la password (upload crontabs)?
 
 
 ## Quando ho finito
