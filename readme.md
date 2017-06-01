@@ -7,7 +7,8 @@
 * Copiare ```.env.example``` in ```.env```
 * Configurare LDAP/mail/database in ```.env```
 * Login tramite LDAP
-* Assegnare il ruolo di admin all'utente ```php artisan voyager:admin your@email.com```
+* Assegnare il ruolo di admin all'utente ```php artisan voyager:admin {email}```
+* Rimuovere utenti superflui ed email 'example@example.com'
 * ```php artisan check:sync-emails``` per sincronizare le email con LDAP.
 * Aggiungere [Cron](https://laravel.com/docs/5.4/scheduling).
 
