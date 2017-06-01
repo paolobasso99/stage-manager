@@ -26,7 +26,8 @@ class DashboardController extends Controller
         return view('dashboard')
                    ->with('counter', $counter)
                    ->with('lastDown', \App\Downtime::first())
-                   ->with('downPerMonth', $downPerMonth);
+                   ->with('downPerMonth', $downPerMonth)
+                   ->with('loadTimePerDay', $this->getLoadTimePerDay(3));
     }
 
     //Get an array rapresenting the number of downtimes per month
@@ -43,6 +44,34 @@ class DashboardController extends Controller
                 ['end_at', '<=', Carbon::now()->subMonths($i)->lastOfMonth()],
                 ['end_at', '>=', Carbon::now()->subMonths($i)->firstOfMonth()]
             ])->count();
+
+        }
+
+        return $stats;
+    }
+
+    //Get an array rapresenting the average load time per day
+    private function getLoadTimePerDay($numberOfDays) {
+        $stats = array();
+
+        // $stats = ['Day' => load time]
+        for ($i = $numberOfDays - 1; $i >= 0; $i--) {
+
+            //Select all attempts that happened in the day
+            $load_time = \App\Attempt::where([
+                ['created_at', '<=', Carbon::now()->subDays($i)->endOfDay()],
+                ['created_at', '>=', Carbon::now()->subDays($i)->startOfDay()]
+            ])->pluck('load_time')->toArray();
+
+            //Get average
+            if (count($load_time) > 0) {
+                $load_time = array_sum($load_time) / count($load_time);
+            } else {
+                $load_time = 0;
+            }
+
+            //Save load time
+            $stats[Carbon::now()->subDays($i)->format('l')] = $load_time;
 
         }
 

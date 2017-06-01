@@ -64,10 +64,16 @@
 
             <div class="col-md-6">
                 <div class="col-md-5">
+                    <label for="downPerMonth">
+                        <h4>Online and offline time</h4>
+                    </label>
                     <canvas id="onlineTime" width="300" height="300"></canvas>
                 </div>
 
                 <div class="col-md-7">
+                    <label for="downPerMonth">
+                        <h4>Average load speed</h4>
+                    </label>
                     <canvas id="loadSpeed" width="300" height="300"></canvas>
                 </div>
             </div>
@@ -291,6 +297,11 @@
                     ],
                     borderWidth: 1
                 }]
+            },
+            options: {
+                legend: {
+                    display: false
+                }
             }
         });
 

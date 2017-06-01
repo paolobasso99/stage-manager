@@ -40,10 +40,8 @@
                 <h2>Stats</h2>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-6">
-                <canvas id="chart" width="400" height="400"></canvas>
-            </div>
             <div class="col-md-6">
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
 
@@ -63,6 +61,29 @@
                         {{ $lastDown->end_at }}
                     </div>
 
+                    <hr style="margin:0;">
+
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">Today average speed</h3>
+                    </div>
+                    <div class="panel-body" style="padding-top:0;">
+                        {{ $loadTimePerDay[\Carbon\Carbon::now()->format('l')] }} seconds
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <label for="downPerMonth">
+                        <h4>Down times</h4>
+                    </label>
+                    <canvas id="downPerMonth" width="400" height="400"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <label for="downPerMonth">
+                        <h4>Average load speed</h4>
+                    </label>
+                    <canvas id="loadTimePerDay" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
@@ -75,7 +96,7 @@
 
     <!-- Chart.js -->
     <script>
-        var chart = new Chart($("#chart"), {
+        var downPerMonth = new Chart($("#downPerMonth"), {
             type: 'bar',
             data: {
                 labels: [
@@ -87,6 +108,36 @@
                     data: [
                         @foreach ($downPerMonth as $month => $times)
                             {{ $times }},
+                        @endforeach
+                    ],
+                    backgroundColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ]
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        var loadTimePerDay = new Chart($("#loadTimePerDay"), {
+            type: 'bar',
+            data: {
+                labels: [
+                    @foreach ($loadTimePerDay as $day => $time)
+                        '{{$day}}',
+                    @endforeach
+                ],
+                datasets: [{
+                    data: [
+                        @foreach ($loadTimePerDay as $day => $time)
+                            {{ $time }},
                         @endforeach
                     ],
                     backgroundColor: [
