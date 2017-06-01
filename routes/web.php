@@ -17,11 +17,11 @@ Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 
 Route::post('ssh', 'SshCommandsController@run')->name('ssh');
 
-Route::get('dumps/{site}', 'DumpController@download')->name('dumps.download');
-Route::post('dumps/{site}', 'DumpController@upload')->name('dumps.upload');
+Route::get('dump/{site}', 'DumpController@download')->name('dumps.download');
+Route::post('dump/{site}', 'DumpController@upload')->name('dumps.upload');
 
-Route::get('sites-available/{site}', 'SitesAvailableController@download')->name('sites-available.download');
-Route::post('sites-available/{site}', 'SitesAvailableController@upload')->name('sites-available.upload');
+Route::get('nginx-configuration/{site}', 'NginxConfigurationController@download')->name('sites-available.download');
+Route::post('nginx-configuration/{site}', 'NginxConfigurationController@upload')->name('sites-available.upload');
 
 Route::get('crontab/{site}', 'CrontabController@download')->name('crontab.download');
 Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload');

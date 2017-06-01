@@ -35,26 +35,33 @@ class CrontabController extends SshController
                 ]);
         }
 
-        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
-        //$remoteFile = '/etc/crontab';
-        $remoteFile = '/home' . '/' . $site->ssh_username . '/crontab';
+        $fileName = 'crontab-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+
+        $remoteTempFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
+        $remoteFile = '/etc/crontab';
 
         //Store local file
         $localFile = $request->file('file')->storeAs(
             'uploads/crontabs', $fileName
         );
 
-        $this->setSshCredentials($site);;
+        $this->setSshCredentials($site);
 
 
         //Perform task
         try {
 
             //Upload file
-            SSH::into('runtime')->put(storage_path('app/' . $localFile), $remoteFile);
+            SSH::into('runtime')->put(storage_path('app/' . $localFile), $remoteTempFile);
 
             //Remove local file
             Storage::disk('local')->delete($localFile);
+
+            //Move file to the right path
+            SSH::into('runtime')->run([
+                'cd',
+                'echo ' . $site->ssh_password . ' | sudo -S mv ' . $fileName . ' ' . $remoteFile
+            ]);
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception

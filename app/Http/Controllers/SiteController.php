@@ -83,7 +83,7 @@ class SiteController extends VoyagerBreadController
         $hasDatabase = $site->enable_db && Voyager::can('ssh_all');
 
         //Show sites-available manager?
-        $hasSitesAvailable = $site->enable_nginx_configuration && Voyager::can('ssh_all');
+        $hasNginxConfiguration = $site->enable_nginx_configuration && Voyager::can('ssh_all');
 
         $hasCrontab = $site->enable_crontab && Voyager::can('ssh_all');
 
@@ -96,7 +96,7 @@ class SiteController extends VoyagerBreadController
             'emails',
             'hasSsh',
             'hasDatabase',
-            'hasSitesAvailable',
+            'hasNginxConfiguration',
             'hasCrontab',
             'loadTimePerDay'
         ));

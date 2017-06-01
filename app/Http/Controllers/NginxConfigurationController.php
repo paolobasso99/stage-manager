@@ -11,7 +11,7 @@ use Validator;
 
 use App\Site;
 
-class SitesAvailableController extends SshController
+class NginxConfigurationController extends SshController
 {
 
     public function upload(Site $site, Request $request)
@@ -36,10 +36,10 @@ class SitesAvailableController extends SshController
                 ]);
         }
 
-        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+        $fileName = $site->domain . '-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
 
-        //$remoteFile = '/etc/nginx/sites-available/' . $site->domain;
-        $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $site->domain;
+        $remoteTempFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
+        $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
 
         //Store local file
         $localFile = $request->file('file')->storeAs(
@@ -53,10 +53,16 @@ class SitesAvailableController extends SshController
         try {
 
             //Upload file
-            SSH::into('runtime')->put(storage_path('app/' . $localFile), $remoteFile);
+            SSH::into('runtime')->put(storage_path('app/' . $localFile), $remoteTempFile);
 
             //Remove local file
             Storage::disk('local')->delete($localFile);
+
+            //Move file to the right path
+            SSH::into('runtime')->run([
+                'cd',
+                'echo ' . $site->ssh_password . ' | sudo -S mv ' . $fileName . ' ' . $remoteFile
+            ]);
 
         } catch(\RunTimeException $e) {
             //Catch wrong credentials exception

@@ -102,7 +102,7 @@
                   </li>
               @endif
 
-              @if ($hasSitesAvailable)
+              @if ($hasNginxConfiguration)
                   <li role="presentation">
                       <a data-toggle="tab" href="#nginx">Nginx configuration</a>
                   </li>
@@ -209,7 +209,7 @@
                     </div>
                 @endif
 
-                @if ($hasSitesAvailable)
+                @if ($hasNginxConfiguration)
                     <div id="nginx" class="tab-pane">
 
                         <div class="panel-heading" style="border-bottom:0;">
@@ -220,7 +220,7 @@
 
                                 <div class="col-md-6">
                                     <a href="{{ route('sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        Get {{ $site->domain }}
+                                        Download {{ $site->domain }}
                                     </a>
                                 </div>
                                 <div class="col-md-6">
@@ -243,7 +243,7 @@
                     </div>
                 @endif
 
-                @if ($hasSitesAvailable)
+                @if ($hasNginxConfiguration)
                     <div id="crontab" class="tab-pane">
 
                         <div class="panel-heading" style="border-bottom:0;">

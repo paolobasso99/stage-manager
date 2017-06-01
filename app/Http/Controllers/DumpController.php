@@ -46,7 +46,7 @@ class DumpController extends SshController
         );
 
 
-        $this->setSshCredentials($site);;
+        $this->setSshCredentials($site);
 
         //Define the command
         $command = 'mysqldump';

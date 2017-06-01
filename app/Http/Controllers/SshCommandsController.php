@@ -32,7 +32,7 @@ class SshCommandsController extends SshController
 
         }
 
-        $this->setSshCredentials($site);;
+        $this->setSshCredentials($site);
 
         //Perform command
         try {

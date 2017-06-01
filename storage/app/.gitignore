@@ -2,13 +2,5 @@
 !public/
 !.gitignore
 
-!uploads/
 !downloads/
-
-uploads/crontabs/*
-uploads/dumps/*
-uploads/nginx-configurations/*
-
-downloads/crontabs/*
-downloads/dumps/*
-downloads/nginx-configurations/*
+!uploads/
