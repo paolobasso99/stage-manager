@@ -38,6 +38,6 @@ class CheckAllSites extends Command
     public function handle()
     {
         $this->line('Checking...');
-        app('SiteChecker')->checkAll();
+        app('Checker')->checkAll();
     }
 }

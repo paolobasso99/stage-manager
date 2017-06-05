@@ -1,17 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Checker;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use GuzzleHttp\TransferStats;
-
-use App;
-use App\ResponseProcessor;
-
 use Carbon\Carbon;
 
-class SiteChecker
+use App\Site;
+
+use App\Checker\ResponseChecker;
+use App\Checker\CertificateChecker;
+
+class Checker
 {
     //Chek one site
     public function checkOne(Site $site, Client $client)
@@ -34,8 +35,8 @@ class SiteChecker
                 //Perform request
                 'on_stats' => function (TransferStats $statistics) use ($site) {
 
-                    (new ResponseProcessor($site))->process($statistics);
-                    
+                    (new ResponseChecker($site, $statistics))->check();
+
                 }
 
             ]);
@@ -44,6 +45,7 @@ class SiteChecker
             //
         }
 
+        $site->save();
     }
 
     //Check the sites that needs to be check

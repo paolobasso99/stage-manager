@@ -38,6 +38,6 @@ class CheckSites extends Command
     public function handle()
     {
         $this->line('Checking...');
-        app('SiteChecker')->check();
+        app('Checker')->check();
     }
 }

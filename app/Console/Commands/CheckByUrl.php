@@ -59,7 +59,7 @@ class CheckByUrl extends Command
                 $this->comment('Checking ' . $url . ' ...');
 
                 //Check the site
-                app('SiteChecker')->checkOne($site, $client);
+                app('Checker')->checkOne($site, $client);
 
             } else {
                 $this->error('A website with the url "' . $url . '" does not exist in the database.');

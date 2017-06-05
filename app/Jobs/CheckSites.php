@@ -29,6 +29,6 @@ class CheckSites implements ShouldQueue
      */
     public function handle()
     {
-        app('SiteChecker')->check();
+        app('Checker')->check();
     }
 }
