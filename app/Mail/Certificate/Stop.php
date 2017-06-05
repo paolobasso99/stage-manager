@@ -32,8 +32,8 @@ class Stop extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.responseFail.stop')
-                    ->subject('LAST WARNING for ' . $this->site->url)
+        return $this->markdown('emails.check.certificate.stop')
+                    ->subject('Last warning for the SSL of ' . $this->site->url)
                     ->with('site', $this->site);
     }
 }

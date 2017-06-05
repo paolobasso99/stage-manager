@@ -58,39 +58,51 @@ class Notificator
         }
     }
 
-
+    /**
+     * Determinate if a notification is needed
+     *
+     * @return Boolean
+     */
     private function needResponseWarning()
     {
-        return $this->site->tried > 0
-            && $this->site->tried % config('check.mail.response_attempts_to_notificate') == 0
-            && $this->site->tried < config('check.mail.response_attempts_to_stop');
+        return config('check.notifications.response.notify_on_fail')
+            && $this->site->tried > 0
+            && $this->site->tried % config('check.notifications.response.attempts_to_notify') == 0
+            && $this->site->tried < config('check.notifications.response.attempts_to_stop_notifications');
     }
 
     private function needResponseStop()
     {
-        return $this->site->tried > 0 && $this->site->tried == config('check.mail.response_attempts_to_stop');
+        return config('check.notifications.response.notify_on_fail')
+            && $this->site->tried > 0
+            && $this->site->tried == config('check.notifications.response.attempts_to_stop_notifications');
     }
 
     private function needResponseRestore()
     {
-        return false;
+        return config('check.notifications.response.notify_on_restore')
+            && false;
     }
 
 
     private function needCertificateWarning()
     {
-        return $this->site->certificate_attempts > 0
-            && $this->site->certificate_attempts % config('check.mail.certificate_attempts_to_notificate') == 0
-            && $this->site->certificate_attempts < config('check.mail.certificate_attempts_to_stop');
+        return config('check.notifications.certificate.notify_on_fail')
+            && $this->site->certificate_attempts > 0
+            && $this->site->certificate_attempts % config('check.notifications.certificate.attempts_to_notify') == 0
+            && $this->site->certificate_attempts < config('check.notifications.certificate.attempts_to_stop_notifications');
     }
 
     private function needCertificateStop()
     {
-        return $this->site->certificate_attempts > 0 && $this->site->certificate_attempts == config('check.mail.certificate_attempts_to_stop');;
+        return config('check.notifications.certificate.notify_on_fail')
+            && $this->site->certificate_attempts > 0
+            && $this->site->certificate_attempts == config('check.notifications.certificate.attempts_to_stop_notifications');
     }
 
     private function needCertificateRestore()
     {
-        return false;
+        return config('check.certificate.response.notify_on_restore')
+            && false;
     }
 }

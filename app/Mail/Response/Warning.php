@@ -32,8 +32,8 @@ class Warning extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.responseFail.warning')
-                    ->subject('WARNING for ' . $this->site->url)
+        return $this->markdown('emails.check.response.warning')
+                    ->subject('The website ' . $this->site->url . ' does not respond')
                     ->with('site', $this->site);
     }
 }

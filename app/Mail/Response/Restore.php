@@ -32,8 +32,8 @@ class Restore extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.responseFail.stop')
-                    ->subject('LAST WARNING for ' . $this->site->url)
+        return $this->markdown('emails.check.response.restore')
+                    ->subject('The website ' . $this->site->url . ' is back online')
                     ->with('site', $this->site);
     }
 }

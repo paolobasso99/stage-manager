@@ -14,20 +14,29 @@ return [
     ],
 
     //Config for mails
-    'mail' => [
+    'notifications' => [
 
-        //Number of attempts needed to send an email of bad response
-        'response_attempts_to_notificate' => '5',
+        'response' => [
 
-        //Number of attempts needed to send the last email of bad response and stop sending notifications
-        'response_attempts_to_stop' => '20',
+            'notify_on_fail' => true,
+            'notify_on_restore' => true,
 
+            //Attempts
+            'attempts_to_notify' => '5',
+            'attempts_to_stop_notifications' => '20'
 
-        //Number of attempts needed to send an email of failed checking
-        'certificate_attempts_to_notificate' => '5',
+        ],
 
-        //Number of attempts needed to send the last email of certificate check failed and stop sending notifications
-        'certificate_attempts_to_stop' => '20',
+        'certificate' => [
+
+            'notify_on_fail' => true,
+            'notify_on_restore' => true,
+
+            //Attempts
+            'attempts_to_notify' => '5',
+            'attempts_to_stop_notifications' => '20'
+
+        ]
 
     ],
 

@@ -28,6 +28,7 @@
 ## To do
 
 * Fix mail login
+* Restore email
 
 
 ## Quando ho finito

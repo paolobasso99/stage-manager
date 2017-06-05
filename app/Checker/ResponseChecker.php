@@ -69,22 +69,10 @@ class ResponseChecker
 
         }
 
-        //Save attempt
-        $this->saveAttempt();
+        //Ignore 3xx responses
+        if(!$this->isResponseRedirect()){
 
-        //Save site table modifications
-        $this->site->save();
-
-        //Notificate if its needed
-        (new Notificator($this->site))->notificate();
-
-    }
-
-
-    private function saveAttempt()
-    {
-        if (!$this->isResponseRedirect()) {
-
+            //Save attempt
             Attempt::create([
                 'site_id' => $this->site->id,
                 'status' => $this->getResponseCode(),
@@ -93,8 +81,15 @@ class ResponseChecker
                 'certificate_validity' => $this->certificate->isValid()
             ]);
 
+            //Notificate if its needed
+            (new Notificator($this->site))->notificate();
         }
+
+        //Save site table modifications
+        $this->site->save();
+
     }
+
 
     private function hasResponse()
     {
@@ -114,7 +109,7 @@ class ResponseChecker
 
     private function isResponseBad()
     {
-        return !$this->hasResponse() || $this->getResponseCode() >= 400;
+        return (!$this->hasResponse()) || $this->getResponseCode() >= 400;
     }
 
 

@@ -32,8 +32,8 @@ class Warning extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.certificate-fail')
-                    ->subject('SSL chek fails for ' . $this->site->url)
+        return $this->markdown('emails.check.certificate.warning')
+                    ->subject('SSL check fails for ' . $this->site->url)
                     ->with('site', $this->site);
     }
 }
