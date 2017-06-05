@@ -13,40 +13,6 @@ use Carbon\Carbon;
 
 class SiteController extends VoyagerBreadController
 {
-    public function update(Request $request, $id)
-    {
-
-        $site = Site::find($id);
-
-        $site->url = $request->url;
-        $site->domain = $request->domain;
-        $site->rate = $request->rate;
-        $site->enable_ssh = $request->enable_ssh;
-        $site->ssh_username = $request->ssh_username;
-        $site->ssh_password = encrypt($request->ssh_password);
-        $site->ssh_root = $request->ssh_root;
-        $site->key_id = $request->key_id;
-        $site->enable_db = $request->enable_db;
-        $site->db_host = $request->db_host;
-        $site->db_database = $request->db_database;
-        $site->db_username = $request->db_username;
-        $site->db_password = encrypt($request->db_password);
-        $site->check_certificate = $request->check_certificate;
-        $site->certificate_attempts = $request->certificate_attempts;
-        $site->enable_nginx_configuration = $request->enable_nginx_configuration;
-        $site->enable_crontab = $request->enable_crontab;
-
-        $site->save();
-
-        if (isset($request->emails)) {
-            $site->emails()->sync($request->emails);
-        } else {
-            $site->emails()->sync(array());
-        }
-
-        return redirect(route('voyager.sites.show', $site));
-    }
-
     public function store(Request $request)
     {
         $request->merge([
@@ -62,5 +28,105 @@ class SiteController extends VoyagerBreadController
         Site::find($id)->emails()->detach();
 
         return parent::destroy($request, $id);
+    }
+
+
+    //***************************************
+    //                ______
+    //               |  ____|
+    //               | |__
+    //               |  __|
+    //               | |____
+    //               |______|
+    //
+    //  Edit an item of our Data Type BR(E)AD
+    //
+    //****************************************
+
+    public function edit(Request $request, $id)
+    {
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        Voyager::canOrFail('edit_'.$dataType->name);
+
+        $relationships = $this->getRelationships($dataType);
+
+        $dataTypeContent = (strlen($dataType->model_name) != 0)
+            ? app($dataType->model_name)->with($relationships)->findOrFail($id)
+            : DB::table($dataType->name)->where('id', $id)->first();
+
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        $view = 'voyager::bread.edit-add';
+
+        if (view()->exists("voyager::$slug.edit-add")) {
+            $view = "voyager::$slug.edit-add";
+        }
+
+
+        //BEGIN custom part
+        $dataTypeContent->ssh_password = decrypt($dataTypeContent->ssh_password);
+        $dataTypeContent->db_password = decrypt($dataTypeContent->db_password);
+        //END custom part
+
+
+        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        //BEGIN custom part
+        $request->merge([
+            'ssh_password' => encrypt($request->ssh_password),
+            'db_password' => encrypt($request->db_password)
+        ]);
+        //END custom part
+
+
+        $slug = $this->getSlug($request);
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        Voyager::canOrFail('edit_'.$dataType->name);
+
+        //Validate fields with ajax
+        $val = $this->validateBread($request->all(), $dataType->addRows);
+
+        if ($val->fails()) {
+            return response()->json(['errors' => $val->messages()]);
+        }
+
+        if (!$request->ajax()) {
+            $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
+            $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
+
+
+            //BEGIN custom part
+            if (isset($request->emails)) {
+                $data->emails()->sync($request->emails);
+            } else {
+                $data->emails()->sync(array());
+            }
+
+            if (isset($request->key_id)) {
+                $data->keyId()->associate($request->key_id);
+            } else {
+                $data->keyId()->dissociate();
+            }
+
+            $data->save();
+            //END custom part
+
+
+            return redirect()
+            ->route("voyager.{$dataType->slug}.edit", ['id' => $id])
+            ->with([
+                'message'    => "Successfully Updated {$dataType->display_name_singular}",
+                'alert-type' => 'success',
+                ]);
+        }
     }
 }

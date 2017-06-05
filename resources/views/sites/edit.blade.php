@@ -1,12 +1,18 @@
 @extends('voyager::master')
 
-@section('content')
-    <h1 class="page-title">
-        <i class="voyager-browser"></i> Edit Site
-    </h1>
+@section('css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
 
+@section('page_header')
+    <h1 class="page-title">
+        <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ 'Edit' }}@else{{ 'New' }}@endif {{ $dataType->display_name_singular }}
+    </h1>
+    @include('voyager::multilingual.language-selector')
+@stop
+
+@section('content')
     <div class="page-content container-fluid">
-        @include('voyager::alerts')
         <div class="row">
             <div class="col-md-12">
 

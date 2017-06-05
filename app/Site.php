@@ -39,7 +39,7 @@ class Site extends Model
     //Relation with keys table
     public function keyId()
     {
-        return $this->belongsTo(Key::class);
+        return $this->belongsTo(Key::class, 'key_id');
     }
 
     //Relation with attempts table

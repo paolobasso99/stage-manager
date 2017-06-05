@@ -9,10 +9,12 @@ class Key extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'keys';
+
     //Relation with sites table
     public function sites()
     {
-        return $this->hasMany(Site::class);
+        return $this->hasMany(Site::class, 'key_id');
     }
 
     //Check if a key exist

@@ -59,6 +59,7 @@
                                 <label for="key_id">Ssh key</label>
                                 <select class="form-control" id="key_id" name="key_id">
                                     @foreach ($keys as $key)
+                                        <option selected value>Select a key</option>
 
                                         <option value="{{ $key->id }}"
                                             @if (isset($dataTypeContent->id))
