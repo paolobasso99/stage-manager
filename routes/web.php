@@ -25,3 +25,11 @@ Route::post('nginx-configuration/{site}', 'NginxConfigurationController@upload')
 
 Route::get('crontab/{site}', 'CrontabController@download')->name('crontab.download');
 Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload');
+
+//Dummy
+use Adldap\Laravel\Facades\Adldap;
+Route::get('dummy', function(){
+    $ldapUsers = Adldap::search()->users()->find('Matteo Faldani');
+
+    dd($ldapUsers);
+});

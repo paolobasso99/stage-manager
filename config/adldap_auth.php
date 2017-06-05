@@ -131,7 +131,6 @@ return [
         |
         */
 
-        //'ldap' => 'userprincipalname',
         'ldap' => 'mail',
 
         /*
@@ -167,7 +166,7 @@ return [
     |
     */
 
-    'login_fallback' => env('ADLDAP_LOGIN_FALLBACK', false),
+    'login_fallback' => env('ADLDAP_LOGIN_FALLBACK', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -240,7 +239,6 @@ return [
 
     'sync_attributes' => [
 
-        //'email' => 'userprincipalname',
         'email' => 'mail',
         'name' => 'cn',
 
