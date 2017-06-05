@@ -1,7 +1,6 @@
 @extends('voyager::bread.read')
 
 @section('content')
-
     <div class="page-content container-fluid">
 
         <div class="row">

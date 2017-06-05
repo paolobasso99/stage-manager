@@ -8,7 +8,6 @@
 * Configurare LDAP/mail/database in ```.env```
 * Login tramite LDAP
 * Assegnare il ruolo di admin all'utente ```php artisan voyager:admin {email}```
-* Rimuovere utenti superflui ed email 'example@example.com'
 * ```php artisan check:sync-emails``` per sincronizare le email con LDAP.
 * Aggiungere [Cron](https://laravel.com/docs/5.4/scheduling).
 
@@ -33,5 +32,8 @@
 
 ## Quando ho finito
 
+* Aggiungi validation to sites
 * Rimuovi testing email
 * Implementa ShouldQueue per le emails
+* Elimina dummy routes
+* Elimina dummy users
