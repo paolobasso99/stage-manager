@@ -28,8 +28,10 @@ Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload'
 
 //Dummy
 use Adldap\Laravel\Facades\Adldap;
-Route::get('dummy', function(){
+Route::get('dummy/ldap', function(){
     $ldapUsers = Adldap::search()->users()->find('Matteo Faldani');
 
     dd($ldapUsers);
 });
+
+Route::get('dummy/ssh/{site}', 'SshController@setSshCredentials');

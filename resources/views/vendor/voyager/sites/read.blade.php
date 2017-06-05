@@ -14,11 +14,11 @@
                     <div class="panel-body" style="padding-top:0;">
                         @if ($site->down_from == null)
                             <p class="text-success">
-                                <strong>Online</strong>
+                                <i class="voyager-check"></i> <strong>Online</strong>
                             </p>
                         @else
                             <p class="text-danger">
-                                <strong>Offline from {{ $site->down_from }}</strong>
+                                <i class="voyager-x"></i> <strong>Offline from {{ $site->down_from }}</strong>
                             </p>
                         @endif
                     </div>
@@ -186,7 +186,7 @@
 
                                 <div class="col-md-6">
                                     <a href="{{ route('dumps.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        Download dump
+                                        <i class="voyager-download"></i> Download dump
                                     </a>
                                 </div>
                                 <div class="col-md-6">
@@ -220,7 +220,7 @@
 
                                 <div class="col-md-6">
                                     <a href="{{ route('sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        Download {{ $site->domain }}
+                                        <i class="voyager-download"></i> Download {{ $site->domain }}
                                     </a>
                                 </div>
                                 <div class="col-md-6">
@@ -254,7 +254,7 @@
 
                                 <div class="col-md-6">
                                     <a href="{{ route('crontab.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        Download crontab
+                                        <i class="voyager-download"></i> Download crontab
                                     </a>
                                 </div>
                                 <div class="col-md-6">

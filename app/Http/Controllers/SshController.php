@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
-
 use SSH;
 use Config;
 
@@ -23,6 +22,7 @@ class SshController extends Controller
 
     protected function setSshCredentials(Site $site)
     {
+
         //Get ip
         $ip = gethostbyname(
             parse_url($site->url, PHP_URL_HOST)
@@ -43,10 +43,11 @@ class SshController extends Controller
             $key = Key::find($site->key_id);
             Config::set('remote.connections.runtime.keytext', $key->key);
             Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
+
         } else {
             //Use password credentials
-            Config::set('remote.connections.runtime.password', $site->ssh_password);
+            Config::set('remote.connections.runtime.password', decrypt($site->ssh_password));
         }
     }
-    
+
 }

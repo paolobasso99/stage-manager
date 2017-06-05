@@ -51,7 +51,7 @@ class DumpController extends SshController
         //Define the command
         $command = 'mysqldump';
         $command .= ' -u ' . $site->db_username;
-        $command .= ' -p' . $site->db_password;
+        $command .= ' -p' . decrypt($site->db_password);
         $command .= ' ' . $site->db_database;
         $command .= ' < ' . $remoteFile;
 
@@ -105,7 +105,7 @@ class DumpController extends SshController
 
         $command = 'mysqldump';
         $command .= ' -u ' . $site->db_username;
-        $command .= ' -p' . $site->db_password;
+        $command .= ' -p' . decrypt($site->db_password);
         $command .= ' ' . $site->db_database;
         $command .= ' > ' . $fileName;
 
