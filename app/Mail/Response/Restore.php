@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\ResponseFail;
+namespace App\Mail\Response;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class StopChecking extends Mailable
+class Restore extends Mailable
 {
     use Queueable, SerializesModels;
 

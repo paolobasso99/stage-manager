@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\ResponseFail;
+namespace App\Mail\Certificate;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class Warning extends Mailable
+class Restore extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class Warning extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.responseFail.warning')
-                    ->subject('WARNING for ' . $this->site->url)
+        return $this->markdown('emails.certificate-fail')
+                    ->subject('SSL chek fails for ' . $this->site->url)
                     ->with('site', $this->site);
     }
 }

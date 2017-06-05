@@ -6,9 +6,6 @@ use Carbon\Carbon;
 use Spatie\SslCertificate\SslCertificate;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
-use Illuminate\Support\Facades\Mail;
-use App\Mail\CertificateFail;
-
 use App\Site;
 
 class CertificateChecker

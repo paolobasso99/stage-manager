@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use App\Site;
 
 use App\Checker\ResponseChecker;
-use App\Checker\CertificateChecker;
 
 class Checker
 {
@@ -26,7 +25,7 @@ class Checker
             $client->getAsync($site->url, [
 
                 //Set client options
-                'allow_redirects' => config('check.guzzle.allow_redirects'),
+                'allow_redirects' => true,
                 'connect_timeout' => config('check.guzzle.connect_timeout'),
                 'headers' => [
                     'User-Agent' => config('check.guzzle.user_agent')

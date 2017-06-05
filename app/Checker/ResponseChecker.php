@@ -4,8 +4,6 @@ namespace App\Checker;
 
 use Carbon\Carbon;
 use GuzzleHttp\TransferStats;
-use Spatie\SslCertificate\SslCertificate;
-use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResponseFail\Warning;
@@ -13,6 +11,7 @@ use App\Mail\ResponseFail\Stop;
 use App\Mail\CertificateFail;
 
 use App\Checker\CertificateChecker;
+use App\Checker\Notificator;
 
 use App\Downtime;
 use App\Attempt;
@@ -68,13 +67,23 @@ class ResponseChecker
                 $this->site->down_from = Carbon::now();
             }
 
-            //If it's needed send a notification
-            $this->sendEmailIfNeeded();
-
         }
 
-        //Record attempt
-        if ($this->isResponseBad() || $this->isResponseGood()) {
+        //Save attempt
+        $this->saveAttempt();
+
+        //Save site table modifications
+        $this->site->save();
+
+        //Notificate if its needed
+        (new Notificator($this->site))->notificate();
+
+    }
+
+
+    private function saveAttempt()
+    {
+        if (!$this->isResponseRedirect()) {
 
             Attempt::create([
                 'site_id' => $this->site->id,
@@ -85,16 +94,18 @@ class ResponseChecker
             ]);
 
         }
-
-        $this->site->save();
     }
-
 
     private function hasResponse()
     {
         return $this->response != null;
     }
 
+
+    private function isResponseRedirect()
+    {
+        return $this->hasResponse() && $this->getResponseCode() >= 300 && $this->getResponseCode() < 400;
+    }
 
     private function isResponseGood()
     {
@@ -125,33 +136,4 @@ class ResponseChecker
         return null;
     }
 
-
-    private function sendEmailIfNeeded()
-    {
-        //Get addresses
-        $addresses = $this->site->emails->pluck('address')->toArray();
-
-        //Testing emails
-        $addresses[] = 'admin@admin.com';
-
-        //Chek if notification is needed and send
-        if($this->site->tried % config('check.mail.response_attempts_to_notificate') == 0
-            && $this->site->tried < config('check.mail.response_attempts_to_stop'))
-        {
-
-            Mail::to($addresses)->send(new Warning($this->site));
-
-        }
-        if ($this->site->tried == config('check.mail.response_attempts_to_stop')) {
-
-            Mail::to($addresses)->send(new StopChecking($this->site));
-
-        }
-
-        if ($this->site->certificate_attempts == config('check.mail.certificate_attempts_to_notificate')) {
-
-            Mail::to($addresses)->send(new CertificateCheckFail($this->site));
-
-        }
-    }
 }
