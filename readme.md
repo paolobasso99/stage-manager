@@ -28,6 +28,7 @@
 ## To do
 
 * Fix mail login
+* Fix site update
 
 
 ## Quando ho finito
