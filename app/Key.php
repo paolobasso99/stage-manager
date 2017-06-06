@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Server;
+
 class Key extends Model
 {
     use SoftDeletes;
@@ -14,7 +16,7 @@ class Key extends Model
     //Relation with sites table
     public function sites()
     {
-        return $this->hasMany(Site::class, 'key_id');
+        return $this->hasMany(Server::class, 'key_id');
     }
 
     //Check if a key exist

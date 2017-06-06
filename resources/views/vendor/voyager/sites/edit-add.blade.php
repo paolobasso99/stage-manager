@@ -88,14 +88,12 @@
                                                 @endif
                                             @endif>
 
-                                            {{ $contact->address }}
+                                            {{ $contact->email }}
 
                                         </option>
 
                                     @endforeach
                                 </select>
-                                <label for="checkAll">Select All</label>
-                                <input type="checkbox" id="checkAll" >
                             </div>
 
                         </div><!-- panel-body -->
@@ -157,16 +155,6 @@
         $("#key_id").select2({
             placeholder: "Select a key",
             allowClear: true
-        });
-
-        $("#checkAll").click(function(){
-            if($("#checkAll").is(':checked') ){
-                $("#contacts > option").prop("selected","selected");// Select All Options
-                $("#contacts").trigger("change");// Trigger change to select 2
-            }else{
-                $("#contacts > option").removeAttr("selected");
-                $("#contacts").trigger("change");// Trigger change to select 2
-            }
         });
     </script>
 @endsection
