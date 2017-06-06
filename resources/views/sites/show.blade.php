@@ -42,7 +42,7 @@
                         <h3 class="panel-title">Attempts</h3>
                     </div>
                     <div class="panel-body" style="padding-top:0;">
-                        <p>{{ $site->tried }}</p>
+                        <p>{{ $site->response_attempts }}</p>
                     </div>
 
                     <hr style="margin:0;">

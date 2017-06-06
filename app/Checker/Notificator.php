@@ -72,22 +72,22 @@ class Notificator
     private function needResponseWarning()
     {
         return config('check.notifications.response.notify_on_fail')
-            && $this->site->tried > 0
-            && $this->site->tried % config('check.notifications.response.attempts_to_notify') == 0
-            && $this->site->tried < config('check.notifications.response.attempts_to_stop_notifications');
+            && $this->site->response_attempts > 0
+            && $this->site->response_attempts % config('check.notifications.response.attempts_to_notify') == 0
+            && $this->site->response_attempts < config('check.notifications.response.attempts_to_stop_notifications');
     }
 
     private function needResponseStop()
     {
         return config('check.notifications.response.notify_on_fail')
-            && $this->site->tried > 0
-            && $this->site->tried == config('check.notifications.response.attempts_to_stop_notifications');
+            && $this->site->response_attempts > 0
+            && $this->site->response_attempts == config('check.notifications.response.attempts_to_stop_notifications');
     }
 
     private function needResponseRestore()
     {
         return config('check.notifications.response.notify_on_restore')
-            && $this->site->tried >= config('check.notifications.response.attempts_to_notify');
+            && $this->site->response_attempts >= config('check.notifications.response.attempts_to_notify');
     }
 
 

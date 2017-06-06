@@ -11,13 +11,13 @@
                         <h3 class="panel-title">Status</h3>
                     </div>
                     <div class="panel-body" style="padding-top:0;">
-                        @if ($site->down_from == null)
+                        @if ($site->response_down_from == null)
                             <p class="text-success">
                                 <i class="voyager-check"></i> <strong>Online</strong>
                             </p>
                         @else
                             <p class="text-danger">
-                                <i class="voyager-x"></i> <strong>Offline from {{ $site->down_from }}</strong>
+                                <i class="voyager-x"></i> <strong>Offline from {{ $site->response_down_from }}</strong>
                             </p>
                         @endif
                     </div>

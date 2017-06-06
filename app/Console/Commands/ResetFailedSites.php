@@ -48,9 +48,9 @@ class ResetFailedSites extends Command
 
             $this->comment('Resetting ' . $site->url . ' ...');
 
-            $site->tried = 0;
+            $site->response_attempts = 0;
             $site->certificate_attempts = 0;
-            $site->down_from = null;
+            $site->response_down_from = null;
             $site->certificate_down_from = null;
             $site->save();
         }

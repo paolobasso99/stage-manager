@@ -41,35 +41,40 @@ class ResponseChecker
     //Process response
     public function check()
     {
+        //Controll if the check response is enabled and kick 3xx
+        if( !$this->isToCheck() ) {
+            return;
+        }
 
+        //Handle the response
         if ($this->isResponseGood()) {
 
             //Notificate
             $this->notificate->goodResponse();
 
             //Reset attempt counter
-            $this->site->tried = 0;
+            $this->site->response_attempts = 0;
 
-            //Reset down_from and create downtime record
-            if ($this->site->down_from != null) {
+            //Reset response_down_from and create downtime record
+            if ($this->site->response_down_from != null) {
 
                 Downtime::create([
                     'site_id' => $this->site->id,
-                    'start_at' => $this->site->down_from,
+                    'start_at' => $this->site->response_down_from,
                     'end_at' => Carbon::now()
                 ]);
 
-                $this->site->down_from = null;
+                $this->site->response_down_from = null;
             }
-            
+
         } elseif ($this->isResponseBad()) {
 
             //Set attempt counter
-            $this->site->tried++;
+            $this->site->response_attempts++;
 
-            //Set down_from
-            if ($this->site->down_from == null) {
-                $this->site->down_from = Carbon::now();
+            //Set response_down_from
+            if ($this->site->response_down_from == null) {
+                $this->site->response_down_from = Carbon::now();
             }
 
             //Notificate
@@ -77,25 +82,25 @@ class ResponseChecker
 
         }
 
-        //Ignore 3xx responses
-        if(!$this->isResponseRedirect()){
+        //Save attempt
+        Attempt::create([
+            'site_id' => $this->site->id,
+            'status' => $this->getResponseCode(),
+            'load_time' => $this->statistics->getTransferTime(),
+            'message' => $this->getResponseMessage(),
+            'certificate_validity' => $this->certificate->isValid()
+        ]);
 
-            //Save attempt
-            Attempt::create([
-                'site_id' => $this->site->id,
-                'status' => $this->getResponseCode(),
-                'load_time' => $this->statistics->getTransferTime(),
-                'message' => $this->getResponseMessage(),
-                'certificate_validity' => $this->certificate->isValid()
-            ]);
-
-        }
 
         //Save sites table modifications
         $this->site->save();
 
     }
 
+    private function isToCheck()
+    {
+        return $this->site->check_response && (!$this->isResponseRedirect());
+    }
 
     private function hasResponse()
     {

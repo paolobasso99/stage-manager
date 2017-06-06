@@ -82,7 +82,7 @@ class Site extends Model
     //Get if the site is failed
     public function isFailed()
     {
-        if($this->tried > 0 || $this->down_from != null || $this->certificate_attempts > 0 || $this->certificate_down_from != null){
+        if($this->response_attempts > 0 || $this->response_down_from != null || $this->certificate_attempts > 0 || $this->certificate_down_from != null){
             return true;
         }
 
@@ -109,8 +109,8 @@ class Site extends Model
     //Get all failed sites
     public static function failed()
     {
-        return Site::where('tried', '>', 0)
-                    ->orWhere('down_from', '!=', null)
+        return Site::where('response_attempts', '>', 0)
+                    ->orWhere('response_down_from', '!=', null)
                     ->orWhere('certificate_attempts', '>', 0)
                     ->orWhere('certificate_down_from', '!=', null)
                     ->get();
