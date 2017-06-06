@@ -27,8 +27,9 @@
 
 ## To do
 
+* key-server relation GUI
+* Crypt password nel db
 * Fix mail login
-* softDelete per contact_site
 
 
 ## Quando ho finito
