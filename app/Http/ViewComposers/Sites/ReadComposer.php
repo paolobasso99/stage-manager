@@ -22,12 +22,12 @@ class ReadComposer
     {
         $site = $view->getData()['dataTypeContent'];
 
-        $emails = $site->emails;
+        $contacts = $site->contacts;
 
         $loadTimePerDay = $this->getLoadTimePerDay($site, 7);
 
         //Show the SSH console?
-        $hasSsh = $site->enable_ssh && (Voyager::can('ssh_artisan') || Voyager::can('ssh_all'));
+        $hasSsh = $site->server->enable_ssh && (Voyager::can('ssh_artisan') || Voyager::can('ssh_all'));
 
         //Show dump manager?
         $hasDatabase = $site->enable_db && Voyager::can('ssh_all');
@@ -35,11 +35,12 @@ class ReadComposer
         //Show sites-available manager?
         $hasNginxConfiguration = $site->enable_nginx_configuration && Voyager::can('ssh_all');
 
-        $hasCrontab = $site->enable_crontab && Voyager::can('ssh_all');
+        //Show crontab manager?
+        $hasCrontab = $site->server->enable_crontab && Voyager::can('ssh_all');
 
         //Include dependencies to the view
         $view->with('site', $site);
-        $view->with('emails', $emails);
+        $view->with('contacts', $contacts);
         $view->with('loadTimePerDay', $loadTimePerDay);
         $view->with('hasSsh', $hasSsh);
         $view->with('hasDatabase', $hasDatabase);

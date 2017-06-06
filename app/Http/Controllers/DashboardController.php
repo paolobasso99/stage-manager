@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $counter = array();
         $counter['sites'] = \App\Site::count();
         $counter['users'] = \App\User::count();
-        $counter['emails'] = \App\Email::count();
+        $counter['contacts'] = \App\Contact::count();
         $counter['downTimes'] = \App\Downtime::count();
 
         $downPerMonth = $this->getDownTimesPerMonth(5);

@@ -29,8 +29,8 @@
                     <div class="dimmer"></div>
                     <div class="panel-content">
                         <i class='voyager-mail'></i>
-                        <h4>{{ $counter['emails'] }} Emails</h4>
-                        <a href="{{ route('voyager.emails.index') }}" class="btn btn-primary">View emails</a>
+                        <h4>{{ $counter['contacts'] }} Contacts</h4>
+                        <a href="{{ route('voyager.contacts.index') }}" class="btn btn-primary">View contacts</a>
                     </div>
                 </div>
             </div>

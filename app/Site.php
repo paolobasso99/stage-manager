@@ -16,6 +16,7 @@ use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
 use App\Downtime;
 use App\Attempt;
+use App\Server;
 
 class Site extends Model
 {
@@ -25,21 +26,17 @@ class Site extends Model
         'url',
         'domain',
         'rate',
-        'ssh_username',
-        'ssh_password',
-        'ssh_root'
     ];
 
-    //Relation with emails table
-    public function emails()
-    {
-        return $this->belongsToMany(Email::class, 'email_site');
+    //Relation with servers table
+    public function server(){
+        return $this->belongsTo(Server::class);
     }
 
-    //Relation with keys table
-    public function keyId()
+    //Relation with emails table
+    public function contacts()
     {
-        return $this->belongsTo(Key::class, 'key_id');
+        return $this->belongsToMany(Contact::class, 'contact_site');
     }
 
     //Relation with attempts table

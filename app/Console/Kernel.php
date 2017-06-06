@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
          Commands\CheckByUrl::class,
          Commands\CheckAllSites::class,
          Commands\ResetFailedSites::class,
-         Commands\SyncEmailsWithLDAP::class
+         Commands\SyncContactsWithLDAP::class
      ];
 
     /**
@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         //Sync emails with LDAP daily
-        $schedule->command('check:sync-emails')->daily();
+        $schedule->command('check:sync-ldap')->daily();
     }
 
     /**

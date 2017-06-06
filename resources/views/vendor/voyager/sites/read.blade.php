@@ -84,9 +84,9 @@
               <a data-toggle="tab" href="#datas">Other datas</a>
           </li>
 
-          @if (count($emails) > 0)
+          @if (count($contacts) > 0)
               <li role="presentation">
-                  <a data-toggle="tab" href="#emails">Emails</a>
+                  <a data-toggle="tab" href="#contacts">contacts</a>
               </li>
           @endif
 
@@ -126,19 +126,19 @@
                 </div>
             </div>
 
-            @if (count($emails) > 0)
-            <div id="emails" class="tab-pane">
+            @if (count($contacts) > 0)
+            <div id="contacts" class="tab-pane">
 
                 <div class="panel-heading" style="border-bottom:0;">
-                    <h3 class="panel-title">Emails</h3>
+                    <h3 class="panel-title">contacts</h3>
                 </div>
                 <div class="panel-body" style="padding-top:0;">
 
                     <ul class="list-inline">
-                        @foreach ($emails as $email)
+                        @foreach ($contacts as $contact)
 
                             <li class="label label-default">
-                                {{ $email->address }}
+                                {{ $contact->address }}
                             </li>
 
                         @endforeach
@@ -160,7 +160,7 @@
 
                             <div class="form-group">
                                 <span>
-                                    {{ '[' . $site->ssh_username . '@' . parse_url($site->url, PHP_URL_HOST) . ']#' }}
+                                    {{ '[' . $site->server->ssh_username . '@' . parse_url($site->url, PHP_URL_HOST) . ']#' }}
                                 </span>
                                 <input autocomplete="off" id="ssh-input" type="text" name="ssh-input" value="">
                             </div>

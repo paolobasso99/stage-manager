@@ -5,15 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Email extends Model
+class Contact extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['address'];
+    protected $fillable = ['name', 'email'];
 
     //Relation with sites table
     public function sites()
     {
-        return $this->belongsToMany(Site::class, 'email_site');
+        return $this->belongsToMany(Site::class, 'contact_site');
     }
 }

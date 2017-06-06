@@ -22,12 +22,12 @@ class CreateEditComposer
     {
         $site = $view->getData()['dataTypeContent'];
 
-        $emails = \App\Email::all();
+        $contacts = \App\Contact::all();
 
         $keys = \App\Key::all();
 
         $view->with('site', $site);
-        $view->with('emails', $emails);
+        $view->with('contacts', $contacts);
         $view->with('keys', $keys);
     }
 }

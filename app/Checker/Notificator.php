@@ -24,7 +24,7 @@ class Notificator
         $this->site = $site;
 
         //Get addresses
-        $this->addresses = $this->site->emails->pluck('address')->toArray();
+        $this->addresses = $this->site->contacts->pluck('email')->toArray();
         $this->addresses[] = 'admin@admin.com';
     }
 

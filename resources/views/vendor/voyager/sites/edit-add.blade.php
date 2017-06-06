@@ -77,18 +77,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="emails">Emails</label>
-                                <select class="form-control" id="emails" name="emails[]" multiple="multiple">
-                                    @foreach ($emails as $email)
+                                <label for="contacts">contacts</label>
+                                <select class="form-control" id="contacts" name="contacts[]" multiple="multiple">
+                                    @foreach ($contacts as $contact)
 
-                                        <option value="{{ $email->id }}"
+                                        <option value="{{ $contact->id }}"
                                             @if (isset($dataTypeContent->id))
-                                                @if (in_array($email->id, $site->emails->pluck('id')->toArray()))
+                                                @if (in_array($contact->id, $site->contacts->pluck('id')->toArray()))
                                                     selected
                                                 @endif
                                             @endif>
 
-                                            {{ $email->address }}
+                                            {{ $contact->address }}
 
                                         </option>
 
@@ -149,8 +149,8 @@
 
     <!-- Select2 -->
     <script type="text/javascript">
-        $("#emails").select2({
-            placeholder: "Select emails",
+        $("#contacts").select2({
+            placeholder: "Select contacts",
             allowClear: true
         });
 
@@ -161,11 +161,11 @@
 
         $("#checkAll").click(function(){
             if($("#checkAll").is(':checked') ){
-                $("#emails > option").prop("selected","selected");// Select All Options
-                $("#emails").trigger("change");// Trigger change to select 2
+                $("#contacts > option").prop("selected","selected");// Select All Options
+                $("#contacts").trigger("change");// Trigger change to select 2
             }else{
-                $("#emails > option").removeAttr("selected");
-                $("#emails").trigger("change");// Trigger change to select 2
+                $("#contacts > option").removeAttr("selected");
+                $("#contacts").trigger("change");// Trigger change to select 2
             }
         });
     </script>

@@ -15,17 +15,17 @@ class SiteController extends VoyagerBreadController
 {
     public function store(Request $request)
     {
-        $request->merge([
-            'ssh_password' => encrypt($request->ssh_password),
-            'db_password' => encrypt($request->db_password)
-        ]);
+        // $request->merge([
+        //     'ssh_password' => encrypt($request->ssh_password),
+        //     'db_password' => encrypt($request->db_password)
+        // ]);
 
         return parent::store($request);
     }
 
     public function destroy(Request $request, $id)
     {
-        Site::find($id)->emails()->detach();
+        Site::find($id)->contacts()->detach();
 
         return parent::destroy($request, $id);
     }
@@ -67,8 +67,8 @@ class SiteController extends VoyagerBreadController
 
 
         //BEGIN custom part
-        $dataTypeContent->ssh_password = decrypt($dataTypeContent->ssh_password);
-        $dataTypeContent->db_password = decrypt($dataTypeContent->db_password);
+        // $dataTypeContent->ssh_password = decrypt($dataTypeContent->ssh_password);
+        // $dataTypeContent->db_password = decrypt($dataTypeContent->db_password);
         //END custom part
 
 
@@ -106,9 +106,9 @@ class SiteController extends VoyagerBreadController
 
             //BEGIN custom part
             if (isset($request->emails)) {
-                $data->emails()->sync($request->emails);
+                $data->contacts()->sync($request->emails);
             } else {
-                $data->emails()->sync(array());
+                $data->contacts()->sync(array());
             }
 
             if (isset($request->key_id)) {

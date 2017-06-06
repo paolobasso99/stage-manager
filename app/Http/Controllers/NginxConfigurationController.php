@@ -16,6 +16,8 @@ class NginxConfigurationController extends SshController
 
     public function upload(Site $site, Request $request)
     {
+        $domain = parse_url($site->url, PHP_URL_HOST);
+
         //Validate the request
         $validator = Validator::make($request->all(), [
             'file' => 'required'
@@ -36,10 +38,10 @@ class NginxConfigurationController extends SshController
                 ]);
         }
 
-        $fileName = $site->domain . '-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+        $fileName = $domain . '-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
 
         $remoteTempFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
-        $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
+        $remoteFile = '/etc/nginx/sites-available/' . $domain;
 
         //Store local file
         $localFile = $request->file('file')->storeAs(
@@ -73,13 +75,15 @@ class NginxConfigurationController extends SshController
         }
 
         return back()->with([
-                'message'    => "Successfully uploaded " . $site->domain,
+                'message'    => "Successfully uploaded " . $domain,
                 'alert-type' => 'success',
             ]);
     }
 
     public function download(Site $site)
     {
+        $domain = parse_url($site->url, PHP_URL_HOST);
+
         //Check permissions
         if (!Voyager::can('ssh_all')) {
             return back()->with([
@@ -93,7 +97,7 @@ class NginxConfigurationController extends SshController
         $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
 
         $localFile = 'downloads/nginx-configurations/' . $fileName;
-        $remoteFile = '/etc/nginx/sites-available/' . $site->domain;
+        $remoteFile = '/etc/nginx/sites-available/' . $domain;
 
         //Perform command
         try {
@@ -113,7 +117,7 @@ class NginxConfigurationController extends SshController
         }
 
         //Download file and delete local version
-        return response()->download(storage_path('app/' . $localFile), $site->domain)->deleteFileAfterSend(true);
+        return response()->download(storage_path('app/' . $localFile), $domain)->deleteFileAfterSend(true);
 
     }
 }

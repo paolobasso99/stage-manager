@@ -3,17 +3,17 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Email;
+use App\Contact;
 use Adldap\Laravel\Facades\Adldap;
 
-class SyncEmailsWithLDAP extends Command
+class SyncContactsWithLDAP extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'check:sync-emails';
+    protected $signature = 'check:sync-ldap';
 
     /**
      * The console command description.
@@ -49,10 +49,11 @@ class SyncEmailsWithLDAP extends Command
                 $this->comment('Syncing ' . $ldapUser->getEmail() . ' ...');
 
                 //Check if it already exist
-                if(!Email::where('address', '=', $ldapUser->getEmail())->exists()){
+                if(!Contact::where('email', '=', $ldapUser->getEmail())->exists()){
                     //Create
-                    Email::create([
-                        'address' => $ldapUser->getEmail()
+                    Contact::create([
+                        'email' => $ldapUser->getEmail(),
+                        'name' => $ldapUser->getDisplayName()
                     ]);
                 }
 

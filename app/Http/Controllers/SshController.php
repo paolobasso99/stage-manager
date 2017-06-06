@@ -23,30 +23,25 @@ class SshController extends Controller
     protected function setSshCredentials(Site $site)
     {
 
-        //Get ip
-        $ip = gethostbyname(
-            parse_url($site->url, PHP_URL_HOST)
-        );
-
         //Set login credentials
-        Config::set('remote.connections.runtime.host', $ip);
-        Config::set('remote.connections.runtime.username', $site->ssh_username);
+        Config::set('remote.connections.runtime.host', $site->server->ip);
+        Config::set('remote.connections.runtime.username', $site->server->ssh_username);
 
         //Use key or password
-        if ($site->key_id != null) {
+        if ($site->server->key_id != null) {
             //Check if the key exist in the DB
-            if(!Key::exist($site->key_id)){
-                return 'The key with an "id" of "' . $site->key_id . '" does not exist';
+            if(!Key::exist($site->server->key_id)){
+                return 'The key with an "id" of "' . $site->server->key_id . '" does not exist';
             }
 
             //Set key credentials
-            $key = Key::find($site->key_id);
+            $key = Key::find($site->server->key_id);
             Config::set('remote.connections.runtime.keytext', $key->key);
             Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
 
         } else {
             //Use password credentials
-            Config::set('remote.connections.runtime.password', decrypt($site->ssh_password));
+            Config::set('remote.connections.runtime.password', $site->server->ssh_password);
         }
     }
 

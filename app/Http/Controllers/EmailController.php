@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 
-use App\Email;
+use App\Contact;
 
 class EmailController extends VoyagerBreadController
 {

@@ -25,3 +25,5 @@ Route::post('nginx-configuration/{site}', 'NginxConfigurationController@upload')
 
 Route::get('crontab/{site}', 'CrontabController@download')->name('crontab.download');
 Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload');
+
+//Route::get('dummy/{site}', 'SshCommandsController@runGet');
