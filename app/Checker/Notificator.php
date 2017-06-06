@@ -4,13 +4,13 @@ namespace App\Checker;
 
 use Illuminate\Support\Facades\Mail;
 
-use App\Mail\Response\Warning as ResponseWarning;
-use App\Mail\Response\Stop as ResponseStop;
-use App\Mail\Response\Restore as ResponseRestore;
+use App\Mail\ResponseWarning;
+use App\Mail\ResponseStop;
+use App\Mail\ResponseRestore;
 
-use App\Mail\Certificate\Warning as CertificateWarning;
-use App\Mail\Certificate\Stop as CertificateStop;
-use App\Mail\Certificate\Restore as CertificateRestore;
+use App\Mail\CertificateWarning;
+use App\Mail\CertificateStop;
+use App\Mail\CertificateRestore;
 
 use App\Site;
 

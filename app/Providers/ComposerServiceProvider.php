@@ -16,7 +16,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         //sites.read
         View::composer(
-            'voyager::sites.read', 'App\Http\ViewComposers\Sites\ShowComposer'
+            'voyager::sites.read', 'App\Http\ViewComposers\Sites\ReadComposer'
         );
 
         //sites.edit-add

@@ -10,7 +10,7 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use App\Site;
 use Carbon\Carbon;
 
-class ShowComposer
+class ReadComposer
 {
     /**
      * Bind data to the view.

@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         //Sync emails with LDAP daily
-        $schedule->command('check:emails')->daily();
+        $schedule->command('check:sync-emails')->daily();
     }
 
     /**

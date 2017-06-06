@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Certificate;
+namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class Restore extends Mailable
+class ResponseWarning extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class Restore extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.check.certificate.restore')
-                    ->subject('SSL of ' . $this->site->url . ' is back online')
+        return $this->markdown('emails.check.response.warning')
+                    ->subject('The website ' . $this->site->url . ' does not respond')
                     ->with('site', $this->site);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Certificate;
+namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class Stop extends Mailable
+class ResponseStop extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class Stop extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.check.certificate.stop')
-                    ->subject('Last warning for the SSL of ' . $this->site->url)
+        return $this->markdown('emails.check.response.stop')
+                    ->subject('Last warning for ' . $this->site->url)
                     ->with('site', $this->site);
     }
 }

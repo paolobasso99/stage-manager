@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Response;
+namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class Stop extends Mailable
+class ResponseRestore extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,8 +32,8 @@ class Stop extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.check.response.stop')
-                    ->subject('Last warning for ' . $this->site->url)
+        return $this->markdown('emails.check.response.restore')
+                    ->subject('The website ' . $this->site->url . ' is back online')
                     ->with('site', $this->site);
     }
 }
