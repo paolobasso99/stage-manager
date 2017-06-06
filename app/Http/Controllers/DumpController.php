@@ -39,7 +39,7 @@ class DumpController extends SshController
 
         $fileName = 'dump-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp) . '.sql';
 
-        $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
+        $remoteFile = '/home' . '/' . $site->server->ssh_username . '/' . $fileName;
 
         $localFile = $request->file('file')->storeAs(
             'uploads/dumps', $fileName
@@ -98,10 +98,10 @@ class DumpController extends SshController
 
         $this->setSshCredentials($site);
 
-        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp) . 'sql';
+        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp) . '.sql';
 
         $localFile = 'downloads/dumps/' . $fileName;
-        $remoteFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
+        $remoteFile = '/home' . '/' . $site->server->ssh_username . '/' . $fileName;
 
         $command = 'mysqldump';
         $command .= ' -u ' . $site->db_username;
