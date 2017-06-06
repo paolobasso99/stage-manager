@@ -97,8 +97,8 @@ class Site extends Model
         $toCheck = array();
 
         foreach ($sites as $site) {
-            //Check if last control was made too before the rate
-            if ($site->checked_at <= Carbon::now()->subMinutes($site->rate) || $site->isFailed()) {
+            //Check if last control was made too before the check_rate
+            if ($site->checked_at <= Carbon::now()->subMinutes($site->check_rate) || $site->isFailed()) {
                 $toCheck[] = $site;
             }
         }
