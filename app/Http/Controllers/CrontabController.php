@@ -37,7 +37,7 @@ class CrontabController extends SshController
 
         $fileName = 'crontab-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
 
-        $remoteTempFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
+        $remoteTempFile = '/home' . '/' . $site->server->ssh_username . '/' . $fileName;
         $remoteFile = '/etc/crontab';
 
         //Store local file

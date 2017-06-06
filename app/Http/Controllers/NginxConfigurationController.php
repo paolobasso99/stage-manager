@@ -40,7 +40,7 @@ class NginxConfigurationController extends SshController
 
         $fileName = $domain . '-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
 
-        $remoteTempFile = '/home' . '/' . $site->ssh_username . '/' . $fileName;
+        $remoteTempFile = '/home' . '/' . $site->server->ssh_username . '/' . $fileName;
         $remoteFile = '/etc/nginx/sites-available/' . $domain;
 
         //Store local file
