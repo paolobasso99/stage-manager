@@ -67,8 +67,7 @@ class SiteController extends VoyagerBreadController
 
 
         //BEGIN custom part
-        // $dataTypeContent->ssh_password = decrypt($dataTypeContent->ssh_password);
-        // $dataTypeContent->db_password = decrypt($dataTypeContent->db_password);
+        
         //END custom part
 
 
@@ -79,10 +78,10 @@ class SiteController extends VoyagerBreadController
     {
 
         //BEGIN custom part
-        $request->merge([
-            'ssh_password' => encrypt($request->ssh_password),
-            'db_password' => encrypt($request->db_password)
-        ]);
+        // $request->merge([
+        //     'ssh_password' => encrypt($request->ssh_password),
+        //     'db_password' => encrypt($request->db_password)
+        // ]);
         //END custom part
 
 
@@ -109,12 +108,6 @@ class SiteController extends VoyagerBreadController
                 $data->contacts()->sync($request->emails);
             } else {
                 $data->contacts()->sync(array());
-            }
-
-            if (isset($request->key_id)) {
-                $data->keyId()->associate($request->key_id);
-            } else {
-                $data->keyId()->dissociate();
             }
 
             $data->save();

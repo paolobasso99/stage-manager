@@ -21,7 +21,7 @@ class ComposerServiceProvider extends ServiceProvider
 
         //sites.edit-add
         View::composer(
-            'voyager::sites.edit-add', 'App\Http\ViewComposers\Sites\CreateEditComposer'
+            'voyager::sites.edit-add', 'App\Http\ViewComposers\Sites\EditAddComposer'
         );
 
     }

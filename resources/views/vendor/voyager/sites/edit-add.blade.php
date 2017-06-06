@@ -56,7 +56,28 @@
                             @endforeach
 
                             <div class="form-group">
-                                <label for="key_id">Ssh key</label>
+                                <label for="server">Server</label>
+                                <select class="form-control" id="server" name="server">
+                                    @foreach ($servers as $server)
+                                        <option selected value>Select a server</option>
+
+                                        <option value="{{ $server->id }}"
+                                            @if (isset($dataTypeContent->id))
+                                                @if ($server == $site->server)
+                                                    selected
+                                                @endif
+                                            @endif>
+
+                                            {{ $server->name }}
+
+                                        </option>
+
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- <div class="form-group">
+                                <label for="key">Ssh key</label>
                                 <select class="form-control" id="key_id" name="key_id">
                                     @foreach ($keys as $key)
                                         <option selected value>Select a key</option>
@@ -74,7 +95,7 @@
 
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <label for="contacts">contacts</label>
@@ -147,14 +168,21 @@
 
     <!-- Select2 -->
     <script type="text/javascript">
+
+        $("#server").select2({
+            placeholder: "Select a server",
+            allowClear: true
+        });
+
         $("#contacts").select2({
             placeholder: "Select contacts",
             allowClear: true
         });
 
-        $("#key_id").select2({
+        $("#key").select2({
             placeholder: "Select a key",
             allowClear: true
         });
+
     </script>
 @endsection
