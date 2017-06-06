@@ -76,7 +76,7 @@
                                 </select>
                             </div>
 
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="key">Ssh key</label>
                                 <select class="form-control" id="key_id" name="key_id">
                                     @foreach ($keys as $key)
@@ -95,7 +95,7 @@
 
                                     @endforeach
                                 </select>
-                            </div> --}}
+                            </div>
 
                             <div class="form-group">
                                 <label for="contacts">contacts</label>

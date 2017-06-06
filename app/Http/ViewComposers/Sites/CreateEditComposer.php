@@ -10,7 +10,7 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use App\Site;
 use Carbon\Carbon;
 
-class EditAddComposer
+class CreateEditComposer
 {
     /**
      * Bind data to the view.
@@ -28,7 +28,6 @@ class EditAddComposer
 
         $view->with('site', $site);
         $view->with('contacts', $contacts);
-        $view->with('keys', $keys);
         $view->with('servers', $servers);
     }
 }
