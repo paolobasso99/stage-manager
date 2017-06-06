@@ -90,23 +90,23 @@
               </li>
           @endif
 
-          @if ($hasSsh)
+          @if ($has['console'])
               <li role="presentation">
                   <a data-toggle="tab" href="#console">SSH console</a>
               </li>
 
-              @if ($hasDatabase)
+              @if ($has['database'])
                   <li role="presentation">
                       <a data-toggle="tab" href="#database">Database</a>
                   </li>
               @endif
 
-              @if ($hasNginxConfiguration)
+              @if ($has['nginx_configuration'])
                   <li role="presentation">
                       <a data-toggle="tab" href="#nginx">Nginx configuration</a>
                   </li>
               @endif
-              @if ($hasCrontab)
+              @if ($has['crontab'])
                   <li role="presentation">
                       <a data-toggle="tab" href="#crontab">Crontab</a>
                   </li>
@@ -148,7 +148,7 @@
             </div>
             @endif
 
-            @if ($hasSsh)
+            @if ($has['console'])
                 <div id="console" class="tab-pane">
 
                     <div class="panel-heading" style="border-bottom:0;">
@@ -174,7 +174,7 @@
                     </div>
                 </div>
 
-                @if ($hasDatabase)
+                @if ($has['database'])
                     <div id="database" class="tab-pane">
 
                         <div class="panel-heading" style="border-bottom:0;">
@@ -185,7 +185,7 @@
 
                                 <div class="col-md-6">
                                     <a href="{{ route('dumps.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        <i class="voyager-download"></i> Download dump
+                                        <i class="voyager-download"></i> Download
                                     </a>
                                 </div>
                                 <div class="col-md-6">
@@ -198,7 +198,7 @@
 
                                         <div class="form-group" style="margin: 0px;">
 
-                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload dump">
+                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload">
                                         </div>
                                     </form>
                                 </div>
@@ -208,18 +208,18 @@
                     </div>
                 @endif
 
-                @if ($hasNginxConfiguration)
+                @if ($has['nginx_configuration'])
                     <div id="nginx" class="tab-pane">
 
                         <div class="panel-heading" style="border-bottom:0;">
-                            <h3 class="panel-title">Sites available</h3>
+                            <h3 class="panel-title">Nginx site available</h3>
                         </div>
                         <div class="panel-body" style="padding-top:0;">
                             <div class="row">
 
                                 <div class="col-md-6">
                                     <a href="{{ route('sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        <i class="voyager-download"></i> Download {{ $site->domain }}
+                                        <i class="voyager-download"></i> Download
                                     </a>
                                 </div>
                                 <div class="col-md-6">
@@ -232,7 +232,7 @@
 
                                         <div class="form-group" style="margin: 0px;">
 
-                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload {{ $site->domain }}">
+                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload">
                                         </div>
                                     </form>
                                 </div>
@@ -242,7 +242,7 @@
                     </div>
                 @endif
 
-                @if ($hasNginxConfiguration)
+                @if ($has['crontab'])
                     <div id="crontab" class="tab-pane">
 
                         <div class="panel-heading" style="border-bottom:0;">
@@ -253,7 +253,7 @@
 
                                 <div class="col-md-6">
                                     <a href="{{ route('crontab.download', $site) }}" target="_blank" class="btn btn-primary">
-                                        <i class="voyager-download"></i> Download crontab
+                                        <i class="voyager-download"></i> Download
                                     </a>
                                 </div>
                                 <div class="col-md-6">
@@ -266,7 +266,7 @@
 
                                         <div class="form-group" style="margin: 0px;">
 
-                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload crontab">
+                                            <input class="btn btn-primary" type="submit" name="submit" value="Upload">
                                         </div>
                                     </form>
                                 </div>
@@ -285,7 +285,7 @@
 @section('javascript')
     @parent
 
-    @if ($hasSsh)
+    @if ($has['console'])
         <!-- SSH -->
         <script>
 

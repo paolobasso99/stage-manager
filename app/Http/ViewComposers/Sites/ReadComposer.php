@@ -22,30 +22,33 @@ class ReadComposer
     {
         $site = $view->getData()['dataTypeContent'];
 
-        $contacts = $site->contacts;
+        //Determinate if has a feature
+        $has = [
+            'console' => false,
+            'crontab' => false,
+            'database' => false,
+            'nginx_configuration' => false
+        ];
 
-        $loadTimePerDay = $this->getLoadTimePerDay($site, 7);
+        if(!is_null($site->server)){
+            //Show the SSH console?
+            $has['console'] = $site->server->enable_console && (Voyager::can('ssh_artisan') || Voyager::can('ssh_all'));
 
-        //Show the SSH console?
-        $hasSsh = $site->server->enable_ssh && (Voyager::can('ssh_artisan') || Voyager::can('ssh_all'));
+            //Show crontab manager?
+            $has['crontab'] = $site->server->enable_crontab && Voyager::can('ssh_all');
 
-        //Show dump manager?
-        $hasDatabase = $site->enable_db && Voyager::can('ssh_all');
+            //Show dump manager?
+            $has['database'] = $site->enable_db && Voyager::can('ssh_all');
 
-        //Show sites-available manager?
-        $hasNginxConfiguration = $site->enable_nginx_configuration && Voyager::can('ssh_all');
-
-        //Show crontab manager?
-        $hasCrontab = $site->server->enable_crontab && Voyager::can('ssh_all');
+            //Show sites-available manager?
+            $has['nginx_configuration'] = $site->enable_nginx_configuration && Voyager::can('ssh_all');
+        }
 
         //Include dependencies to the view
         $view->with('site', $site);
-        $view->with('contacts', $contacts);
-        $view->with('loadTimePerDay', $loadTimePerDay);
-        $view->with('hasSsh', $hasSsh);
-        $view->with('hasDatabase', $hasDatabase);
-        $view->with('hasNginxConfiguration', $hasNginxConfiguration);
-        $view->with('hasCrontab', $hasCrontab);
+        $view->with('contacts', $site->contacts);
+        $view->with('loadTimePerDay',  $this->getLoadTimePerDay($site, 7));
+        $view->with('has', $has);
     }
 
 

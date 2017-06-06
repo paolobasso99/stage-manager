@@ -28,7 +28,7 @@ class SshController extends Controller
         Config::set('remote.connections.runtime.username', $site->server->ssh_username);
 
         //Use key or password
-        if ($site->server->key_id != null) {
+        if (!is_null($site->server->key_id)) {
             //Check if the key exist in the DB
             if(!Key::exist($site->server->key_id)){
                 return 'The key with an "id" of "' . $site->server->key_id . '" does not exist';

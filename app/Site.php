@@ -82,7 +82,7 @@ class Site extends Model
     //Get if the site is failed
     public function isFailed()
     {
-        if($this->response_attempts > 0 || $this->response_down_from != null || $this->certificate_attempts > 0 || $this->certificate_down_from != null){
+        if($this->response_attempts > 0 || !is_null($this->response_down_from) || $this->certificate_attempts > 0 || !is_null($this->certificate_down_from)){
             return true;
         }
 

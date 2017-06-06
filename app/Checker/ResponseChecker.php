@@ -56,7 +56,7 @@ class ResponseChecker
             $this->site->response_attempts = 0;
 
             //Reset response_down_from and create downtime record
-            if ($this->site->response_down_from != null) {
+            if (!is_null($this->site->response_down_from)) {
 
                 Downtime::create([
                     'site_id' => $this->site->id,
@@ -73,7 +73,7 @@ class ResponseChecker
             $this->site->response_attempts++;
 
             //Set response_down_from
-            if ($this->site->response_down_from == null) {
+            if (is_null($this->site->response_down_from)) {
                 $this->site->response_down_from = Carbon::now();
             }
 
@@ -104,7 +104,7 @@ class ResponseChecker
 
     private function hasResponse()
     {
-        return $this->response != null;
+        return !is_null($this->response);
     }
 
 

@@ -45,7 +45,7 @@ class SyncContactsWithLDAP extends Command
 
         foreach ($ldapUsers as $ldapUser) {
             //Check if it has an email
-            if ($ldapUser->getEmail() != null) {
+            if (!is_null($ldapUser->getEmail())) {
                 $this->comment('Syncing ' . $ldapUser->getEmail() . ' ...');
 
                 //Check if it already exist

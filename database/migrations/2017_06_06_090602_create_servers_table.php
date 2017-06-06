@@ -16,8 +16,8 @@ class CreateServersTable extends Migration
         Schema::create('servers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ip');
-            $table->boolean('enable_crontab')->default(false);
             $table->boolean('enable_ssh')->default(false);
+            $table->boolean('enable_crontab')->default(false);
             $table->string('ssh_username')->nullable();
             $table->string('ssh_password')->nullable();
             $table->string('ssh_root')->nullable();
