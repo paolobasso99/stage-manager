@@ -25,8 +25,3 @@ Route::post('nginx-configuration/{site}', 'NginxConfigurationController@upload')
 
 Route::get('crontab/{site}', 'CrontabController@download')->name('crontab.download');
 Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload');
-
-//Dummy
-Route::get('dummy', function(){
-    app('Checker')->checkAll();
-});

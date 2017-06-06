@@ -23,16 +23,18 @@ class ResponseChecker
     protected $certificate;
     protected $statistics;
     protected $response;
+    protected $notificate;
 
-    public function __construct(Site $site, TransferStats $statistics)
+    public function __construct(Site $site, TransferStats $statistics, Notificator $notificate)
     {
         $this->site = $site;
 
-        $this->certificate = new CertificateChecker($site);
-
         $this->statistics = $statistics;
-
         $this->response = $statistics->getResponse();
+
+        $this->notificate = $notificate;
+
+        $this->certificate = new CertificateChecker($site, $notificate);
 
     }
 
@@ -41,6 +43,9 @@ class ResponseChecker
     {
 
         if ($this->isResponseGood()) {
+
+            //Notificate
+            $this->notificate->goodResponse();
 
             //Reset attempt counter
             $this->site->tried = 0;
@@ -56,7 +61,7 @@ class ResponseChecker
 
                 $this->site->down_from = null;
             }
-
+            
         } elseif ($this->isResponseBad()) {
 
             //Set attempt counter
@@ -66,6 +71,9 @@ class ResponseChecker
             if ($this->site->down_from == null) {
                 $this->site->down_from = Carbon::now();
             }
+
+            //Notificate
+            $this->notificate->badResponse();
 
         }
 
@@ -81,11 +89,9 @@ class ResponseChecker
                 'certificate_validity' => $this->certificate->isValid()
             ]);
 
-            //Notificate if its needed
-            (new Notificator($this->site))->notificate();
         }
 
-        //Save site table modifications
+        //Save sites table modifications
         $this->site->save();
 
     }

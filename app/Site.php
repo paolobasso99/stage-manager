@@ -85,7 +85,7 @@ class Site extends Model
     //Get if the site is failed
     public function isFailed()
     {
-        if($this->tried > 0 || $this->down_from != null || $this->certificate_attempts > 0){
+        if($this->tried > 0 || $this->down_from != null || $this->certificate_attempts > 0 || $this->certificate_down_from != null){
             return true;
         }
 
@@ -97,6 +97,7 @@ class Site extends Model
     public static function toCheck()
     {
         $sites =  \App\Site::all();
+        $toCheck = array();
 
         foreach ($sites as $site) {
             //Check if last control was made too before the rate
@@ -114,6 +115,7 @@ class Site extends Model
         return Site::where('tried', '>', 0)
                     ->orWhere('down_from', '!=', null)
                     ->orWhere('certificate_attempts', '>', 0)
+                    ->orWhere('certificate_down_from', '!=', null)
                     ->get();
     }
 }

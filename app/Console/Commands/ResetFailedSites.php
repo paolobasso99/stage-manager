@@ -51,6 +51,7 @@ class ResetFailedSites extends Command
             $site->tried = 0;
             $site->certificate_attempts = 0;
             $site->down_from = null;
+            $site->certificate_down_from = null;
             $site->save();
         }
 

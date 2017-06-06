@@ -28,9 +28,22 @@ class Notificator
         $this->addresses[] = 'admin@admin.com';
     }
 
-    public function notificate()
+    public function goodResponse()
     {
-        //Response
+        if ($this->needResponseRestore()) {
+            Mail::to($this->addresses)->send(new ResponseRestore($this->site));
+        }
+    }
+
+    public function goodCertificate()
+    {
+        if ($this->needCertificateRestore()) {
+            Mail::to($this->addresses)->send(new CertificateRestore($this->site));
+        }
+    }
+
+    public function badResponse()
+    {
         if ($this->needResponseWarning()) {
             Mail::to($this->addresses)->send(new ResponseWarning($this->site));
         }
@@ -38,23 +51,16 @@ class Notificator
         if ($this->needResponseStop()) {
             Mail::to($this->addresses)->send(new ResponseStop($this->site));
         }
+    }
 
-        if ($this->needResponseRestore()) {
-            Mail::to($this->addresses)->send(new ResponseRestore($this->site));
-        }
-
-
-        //Certificate
+    public function badCertificate()
+    {
         if ($this->needCertificateWarning()) {
             Mail::to($this->addresses)->send(new CertificateWarning($this->site));
         }
 
         if ($this->needCertificateStop()) {
             Mail::to($this->addresses)->send(new CertificateStop($this->site));
-        }
-
-        if ($this->needCertificateRestore()) {
-            Mail::to($this->addresses)->send(new CertificateRestore($this->site));
         }
     }
 
@@ -81,7 +87,7 @@ class Notificator
     private function needResponseRestore()
     {
         return config('check.notifications.response.notify_on_restore')
-            && false;
+            && $this->site->tried >= config('check.notifications.response.attempts_to_notify');
     }
 
 
@@ -102,7 +108,7 @@ class Notificator
 
     private function needCertificateRestore()
     {
-        return config('check.certificate.response.notify_on_restore')
-            && false;
+        return config('check.notifications.certificate.notify_on_restore')
+            && $this->site->certificate_attempts >= config('check.notifications.certificate.attempts_to_notify');
     }
 }

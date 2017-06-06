@@ -6,15 +6,21 @@ use Carbon\Carbon;
 use Spatie\SslCertificate\SslCertificate;
 use Spatie\SslCertificate\Exceptions\CouldNotDownloadCertificate;
 
+use App\Checker\ResponseChecker;
+use App\Checker\Notificator;
+
 use App\Site;
 
 class CertificateChecker
 {
     protected $site;
+    protected $notificate;
 
-    public function __construct(Site $site)
+    public function __construct(Site $site, Notificator $notificate)
     {
         $this->site = $site;
+
+        $this->notificate = $notificate;
     }
 
     public function isValid()
@@ -28,14 +34,31 @@ class CertificateChecker
 
             $isValid = SslCertificate::createForHostName($this->site->url)->isValid();
 
-            //Set certificate_attempts
-            $this->recordStatistics($isValid);
+            if ($isValid) {
+
+                $this->notificate->goodCertificate();
+
+                //Good certificate
+                $this->site->certificate_down_from = null;
+                $this->site->certificate_attempts = 0;
+
+            } else {
+                //Bad certificate
+                $this->site->certificate_down_from = Carbon::now();
+                $this->site->certificate_attempts++;
+
+                $this->notificate->badCertificate();
+            }
 
             return $isValid;
 
         } catch (CouldNotDownloadCertificate $exception) {
 
-            $this->recordStatistics(false);
+            //Bad certificate
+            $this->site->certificate_down_from = Carbon::now();
+            $this->site->certificate_attempts++;
+
+            $this->notificate->badCertificate();
 
             return false;
 
@@ -46,16 +69,5 @@ class CertificateChecker
     private function isToCheck()
     {
         return $this->site->check_certificate;
-    }
-
-    private function recordStatistics($isValid)
-    {
-
-        if ($isValid) {
-            $this->site->certificate_attempts = 0;
-        } else {
-            $this->site->certificate_attempts++;
-        }
-
     }
 }

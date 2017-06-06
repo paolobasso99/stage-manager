@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\Site;
 
 use App\Checker\ResponseChecker;
+use App\Checker\CertificateChecker;
+use App\Checker\Notificator;
 
 class Checker
 {
@@ -34,7 +36,10 @@ class Checker
                 //Perform request
                 'on_stats' => function (TransferStats $statistics) use ($site) {
 
-                    (new ResponseChecker($site, $statistics))->check();
+                    $notificate = new Notificator($site);
+
+                    $responseChecker = new ResponseChecker($site, $statistics, $notificate);
+                    $responseChecker->check();
 
                 }
 
