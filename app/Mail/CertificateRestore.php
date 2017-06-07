@@ -9,11 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class CertificateRestore extends Mailable
+class CertificateRestore extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $side;
+    public $site;
 
     /**
      * Create a new message instance.

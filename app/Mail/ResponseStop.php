@@ -9,11 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Site;
 
-class ResponseStop extends Mailable
+class ResponseStop extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    protected $side;
+    public $site;
 
     /**
      * Create a new message instance.

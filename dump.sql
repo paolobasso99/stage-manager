@@ -33,7 +33,7 @@ CREATE TABLE `attempts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,6 @@ CREATE TABLE `attempts` (
 
 LOCK TABLES `attempts` WRITE;
 /*!40000 ALTER TABLE `attempts` DISABLE KEYS */;
-INSERT INTO `attempts` VALUES (26,1,403,'Forbidden',0.02,NULL,NULL,'2017-06-06 11:01:39','2017-06-06 11:01:39'),(27,5,200,'OK',0.37,1,NULL,'2017-06-06 11:01:40','2017-06-06 11:01:40'),(28,4,200,'OK',0.72,NULL,NULL,'2017-06-06 11:01:41','2017-06-06 11:01:41'),(29,1,403,'Forbidden',0.02,NULL,NULL,'2017-06-06 11:01:51','2017-06-06 11:01:51'),(30,5,200,'OK',0.36,1,NULL,'2017-06-06 11:28:33','2017-06-06 11:28:33');
 /*!40000 ALTER TABLE `attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +60,7 @@ CREATE TABLE `contact_site` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +135,7 @@ CREATE TABLE `data_rows` (
 
 LOCK TABLES `data_rows` WRITE;
 /*!40000 ALTER TABLE `data_rows` DISABLE KEYS */;
-INSERT INTO `data_rows` VALUES (26,3,'id','number','id',1,0,0,0,0,0,'',1),(27,3,'name','text','name',1,1,1,1,1,1,'',1),(28,3,'email','text','email',1,1,1,1,1,1,'',1),(29,3,'password','password','password',1,0,0,1,1,0,'',1),(30,3,'remember_token','text','remember_token',0,0,0,0,0,0,'',1),(31,3,'created_at','timestamp','created_at',0,1,1,0,0,0,'',1),(32,3,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(33,3,'avatar','image','avatar',0,1,1,1,1,1,'',1),(34,5,'id','number','id',1,0,0,0,0,0,'',1),(35,5,'name','text','name',1,1,1,1,1,1,'',1),(36,5,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(37,5,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(45,6,'id','number','id',1,0,0,0,0,0,'',1),(46,6,'name','text','Name',1,1,1,1,1,1,'',1),(47,6,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(48,6,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(49,6,'display_name','text','Display Name',1,1,1,1,1,1,'',1),(52,3,'role_id','text','role_id',1,1,1,1,1,1,'',1),(70,11,'id','hidden','Id',1,1,1,0,0,1,NULL,1),(71,11,'address','text','Address',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',2),(72,11,'deleted_at','timestamp','Deleted At',0,1,1,1,0,1,NULL,3),(73,11,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,4),(74,11,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,5),(173,20,'id','number','Id',1,1,1,1,1,1,NULL,1),(174,20,'url','text','Url',1,1,1,1,1,1,NULL,2),(175,20,'server_id','number','Server',0,0,0,1,1,0,'\"\"',3),(176,20,'check_rate','number','Check Rate',1,0,1,1,1,0,NULL,4),(177,20,'check_response','checkbox','Check Response',1,1,1,1,1,1,NULL,5),(178,20,'response_attempts','number','Response Attempts',1,0,1,1,1,0,NULL,6),(179,20,'check_certificate','checkbox','Check Certificate',1,1,1,1,1,1,NULL,7),(180,20,'certificate_attempts','number','Certificate Attempts',1,0,1,1,1,0,NULL,8),(181,20,'enable_nginx_configuration','checkbox','Enable Nginx Configuration',1,1,1,1,1,1,NULL,9),(182,20,'ssh_root','text','Ssh Root',0,0,1,1,1,1,NULL,10),(183,20,'enable_db','checkbox','Enable Db',1,1,1,1,1,1,NULL,11),(184,20,'db_host','text','Db Host',0,0,1,1,1,1,NULL,12),(185,20,'db_database','text','Db Database',0,0,1,1,1,1,NULL,13),(186,20,'db_username','text','Db Username',0,0,1,1,1,1,NULL,14),(187,20,'db_password','text','Db Password',0,0,1,1,1,1,NULL,15),(188,20,'checked_at','timestamp','Checked At',1,0,0,0,0,0,NULL,16),(189,20,'response_down_from','timestamp','Response Down From',0,1,1,0,0,1,NULL,17),(190,20,'certificate_down_from','timestamp','Certificate Down From',0,1,1,0,0,1,NULL,18),(191,20,'deleted_at','timestamp','Deleted At',0,0,0,0,0,0,NULL,19),(192,20,'created_at','timestamp','Created At',0,1,0,0,0,0,NULL,20),(193,20,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,21),(194,21,'id','number','Id',1,1,1,0,0,1,NULL,1),(195,21,'name','text','Name',1,1,1,1,1,1,NULL,2),(196,21,'email','text','Email',1,1,1,1,1,1,NULL,3),(197,21,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,4),(198,21,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,5),(199,21,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,6),(224,24,'id','number','Id',1,1,1,1,1,1,NULL,1),(225,24,'name','text','Name',1,1,1,1,1,1,NULL,2),(226,24,'ip','text','Ip',1,1,1,1,1,1,NULL,3),(227,24,'enable_console','checkbox','Enable Console',1,1,1,1,1,1,NULL,4),(228,24,'enable_crontab','checkbox','Enable Crontab',1,1,1,1,1,1,NULL,5),(229,24,'ssh_username','text','Ssh Username',0,0,1,1,1,1,NULL,6),(230,24,'ssh_password','text','Ssh Password',0,0,0,1,1,1,NULL,7),(231,24,'key_id','number','Key Id',0,1,1,1,1,1,NULL,8),(232,24,'deleted_at','timestamp','Deleted At',0,0,0,0,0,1,NULL,9),(233,24,'created_at','timestamp','Created At',0,1,1,0,0,1,NULL,10),(234,24,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,11),(235,25,'id','number','Id',1,1,1,1,1,1,NULL,1),(236,25,'name','text','Name',1,1,1,1,1,1,NULL,2),(237,25,'key','text_area','Key',1,0,0,1,1,1,NULL,3),(238,25,'keyphrase','text','Keyphrase',0,0,0,1,1,1,NULL,4),(239,25,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,5),(240,25,'created_at','timestamp','Created At',0,1,1,0,0,1,NULL,6),(241,25,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,7);
+INSERT INTO `data_rows` VALUES (26,3,'id','number','id',1,0,0,0,0,0,'',1),(27,3,'name','text','name',1,1,1,1,1,1,'',1),(28,3,'email','text','email',1,1,1,1,1,1,'',1),(29,3,'password','password','password',1,0,0,1,1,0,'',1),(30,3,'remember_token','text','remember_token',0,0,0,0,0,0,'',1),(31,3,'created_at','timestamp','created_at',0,1,1,0,0,0,'',1),(32,3,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(33,3,'avatar','image','avatar',0,1,1,1,1,1,'',1),(34,5,'id','number','id',1,0,0,0,0,0,'',1),(35,5,'name','text','name',1,1,1,1,1,1,'',1),(36,5,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(37,5,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(45,6,'id','number','id',1,0,0,0,0,0,'',1),(46,6,'name','text','Name',1,1,1,1,1,1,'',1),(47,6,'created_at','timestamp','created_at',0,0,0,0,0,0,'',1),(48,6,'updated_at','timestamp','updated_at',0,0,0,0,0,0,'',1),(49,6,'display_name','text','Display Name',1,1,1,1,1,1,'',1),(52,3,'role_id','text','role_id',1,1,1,1,1,1,'',1),(70,11,'id','hidden','Id',1,1,1,0,0,1,NULL,1),(71,11,'address','text','Address',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',2),(72,11,'deleted_at','timestamp','Deleted At',0,1,1,1,0,1,NULL,3),(73,11,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,4),(74,11,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,5),(173,20,'id','number','Id',1,1,1,1,1,1,NULL,1),(174,20,'url','text','Url',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required\"}}',2),(175,20,'server_id','number','Server',0,0,0,1,1,0,'\"\"',3),(176,20,'check_rate','number','Check Rate',1,0,1,1,1,0,'{\"validation\":{\"rule\":\"required|numeric|min:1\"}}',4),(177,20,'check_response','checkbox','Check Response',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',5),(178,20,'response_attempts','number','Response Attempts',1,0,1,1,1,0,'{\"validation\":{\"rule\":\"\"}}',6),(179,20,'check_certificate','checkbox','Check Certificate',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',7),(180,20,'certificate_attempts','number','Certificate Attempts',1,0,1,1,1,0,NULL,8),(181,20,'enable_nginx_configuration','checkbox','Enable Nginx Configuration',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',9),(182,20,'ssh_root','text','Ssh Root',0,0,1,1,1,1,NULL,10),(183,20,'enable_db','checkbox','Enable Db',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',11),(184,20,'db_host','text','Db Host',0,0,1,1,1,1,NULL,12),(185,20,'db_database','text','Db Database',0,0,1,1,1,1,NULL,13),(186,20,'db_username','text','Db Username',0,0,1,1,1,1,NULL,14),(187,20,'db_password','text','Db Password',0,0,1,1,1,1,NULL,15),(188,20,'checked_at','timestamp','Checked At',1,0,0,0,0,0,NULL,16),(189,20,'response_down_from','timestamp','Response Down From',0,1,1,0,0,1,NULL,17),(190,20,'certificate_down_from','timestamp','Certificate Down From',0,1,1,0,0,1,NULL,18),(191,20,'deleted_at','timestamp','Deleted At',0,0,0,0,0,0,NULL,19),(192,20,'created_at','timestamp','Created At',0,1,0,0,0,0,NULL,20),(193,20,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,21),(194,21,'id','number','Id',1,1,1,0,0,1,NULL,1),(195,21,'name','text','Name',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required\"}}',2),(196,21,'email','text','Email',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required|email\"}}',3),(197,21,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,4),(198,21,'created_at','timestamp','Created At',0,1,1,1,0,1,NULL,5),(199,21,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,6),(224,24,'id','number','Id',1,1,1,1,1,1,NULL,1),(225,24,'name','text','Name',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required\"}}',2),(226,24,'ip','text','Ip',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required\"}}',3),(227,24,'enable_console','checkbox','Enable Console',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',4),(228,24,'enable_crontab','checkbox','Enable Crontab',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',5),(229,24,'ssh_username','text','Ssh Username',0,0,1,1,1,1,NULL,6),(230,24,'ssh_password','text','Ssh Password',0,0,0,1,1,1,NULL,7),(231,24,'key_id','number','Key Id',0,1,1,1,1,1,'{\"validation\":{\"rule\":\"\"}}',8),(232,24,'deleted_at','timestamp','Deleted At',0,0,0,0,0,1,NULL,9),(233,24,'created_at','timestamp','Created At',0,1,1,0,0,1,NULL,10),(234,24,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,11),(235,25,'id','number','Id',1,1,1,1,1,1,NULL,1),(236,25,'name','text','Name',1,1,1,1,1,1,'{\"validation\":{\"rule\":\"required\"}}',2),(237,25,'key','text_area','Key',1,0,0,1,1,1,'{\"validation\":{\"rule\":\"required\"}}',3),(238,25,'keyphrase','text','Keyphrase',0,0,0,1,1,1,NULL,4),(239,25,'deleted_at','timestamp','Deleted At',0,0,1,1,0,1,NULL,5),(240,25,'created_at','timestamp','Created At',0,1,1,0,0,1,NULL,6),(241,25,'updated_at','timestamp','Updated At',0,0,0,0,0,0,NULL,7);
 /*!40000 ALTER TABLE `data_rows` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +219,7 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +248,7 @@ CREATE TABLE `jobs` (
   `created_at` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_reserved_at_index` (`queue`,`reserved_at`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,7 +426,7 @@ CREATE TABLE `permission_role` (
 
 LOCK TABLES `permission_role` WRITE;
 /*!40000 ALTER TABLE `permission_role` DISABLE KEYS */;
-INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,4),(2,1),(2,4),(3,1),(3,4),(4,1),(4,4),(5,1),(5,2),(5,4),(6,1),(6,2),(6,4),(7,1),(7,4),(8,1),(8,4),(9,1),(9,4),(15,1),(15,2),(15,4),(16,1),(16,2),(16,4),(17,1),(18,1),(19,1),(20,1),(20,2),(20,4),(21,1),(21,2),(21,4),(22,1),(22,4),(23,1),(23,4),(24,1),(24,4),(50,1),(50,2),(50,4),(51,1),(51,2),(51,4),(52,1),(52,4),(53,1),(53,4),(54,1),(54,4),(86,1),(86,4),(87,1),(98,1),(99,1),(100,1),(101,1),(102,1),(103,1),(104,1),(105,1),(106,1),(107,1),(118,1),(119,1),(120,1),(121,1),(122,1),(123,1),(124,1),(125,1),(126,1),(127,1);
+INSERT INTO `permission_role` VALUES (1,1),(1,2),(1,4),(2,1),(2,4),(3,1),(3,4),(4,1),(4,4),(5,1),(5,2),(5,4),(6,1),(6,2),(6,4),(7,1),(7,4),(8,1),(8,4),(9,1),(9,4),(15,1),(15,2),(15,4),(16,1),(16,2),(16,4),(17,1),(17,4),(18,1),(18,4),(19,1),(19,4),(20,1),(20,2),(20,4),(21,1),(21,2),(21,4),(22,1),(22,4),(23,1),(23,4),(24,1),(24,4),(50,1),(50,2),(50,4),(51,1),(51,2),(51,4),(52,1),(52,4),(53,1),(53,4),(54,1),(54,4),(86,1),(86,4),(87,1),(98,1),(98,2),(98,4),(99,1),(99,2),(99,4),(100,1),(100,4),(101,1),(101,4),(102,1),(102,4),(103,1),(103,2),(103,4),(104,1),(104,2),(104,4),(105,1),(105,4),(106,1),(106,4),(107,1),(107,4),(118,1),(118,2),(118,4),(119,1),(119,2),(119,4),(120,1),(120,4),(121,1),(121,4),(122,1),(122,4),(123,1),(123,2),(123,4),(124,1),(124,2),(124,4),(125,1),(125,4),(126,1),(126,4),(127,1),(127,4);
 /*!40000 ALTER TABLE `permission_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +507,7 @@ CREATE TABLE `servers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -581,7 +580,7 @@ CREATE TABLE `sites` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -590,7 +589,7 @@ CREATE TABLE `sites` (
 
 LOCK TABLES `sites` WRITE;
 /*!40000 ALTER TABLE `sites` DISABLE KEYS */;
-INSERT INTO `sites` VALUES (1,'http://lab3.workup.it/',2,5,1,2,0,0,0,NULL,0,NULL,NULL,NULL,NULL,'2017-06-07 09:20:44','2017-06-06 11:01:00',NULL,NULL,'2017-06-06 08:48:00','2017-06-06 11:20:42'),(4,'http://demo.rubinred.it',1,5,1,0,0,0,1,'/home/workup/www/demo.rubinred.it',1,'localhost','demo_rubinred_it','demo_rubinred_it','eyJpdiI6InlPSm5UK25neVBsOG02bmxsVFFRWUE9PSIsInZhbHVlIjoiR204MGFheU5KUjkyWTdZZk1lMHpuUT09IiwibWFjIjoiMTU4NDBjZjY1Y2VhZTQxNGU0ODk3NzgzMzU1YmFjNzBiYzBjZjdmZWYwNjc4MTY1NjlkMTVlYzQzZmEyOTkxOCJ9','2017-06-07 09:20:54',NULL,NULL,NULL,'2017-06-06 09:59:27','2017-06-07 07:20:54'),(5,'https://www.google.it/',NULL,5,1,0,1,0,0,NULL,0,NULL,NULL,NULL,NULL,'2017-06-06 11:28:32',NULL,NULL,NULL,'2017-06-06 10:31:17','2017-06-06 11:28:33');
+INSERT INTO `sites` VALUES (1,'http://lab3.workup.it/',2,5,1,0,0,0,0,NULL,0,NULL,NULL,NULL,NULL,'2017-06-07 10:54:07',NULL,NULL,NULL,'2017-06-06 08:48:00','2017-06-07 08:54:07'),(4,'http://demo.rubinred.it',1,5,1,0,0,0,1,'/home/workup/www/demo.rubinred.it',1,'localhost','demo_rubinred_it','demo_rubinred_it','eyJpdiI6InlPSm5UK25neVBsOG02bmxsVFFRWUE9PSIsInZhbHVlIjoiR204MGFheU5KUjkyWTdZZk1lMHpuUT09IiwibWFjIjoiMTU4NDBjZjY1Y2VhZTQxNGU0ODk3NzgzMzU1YmFjNzBiYzBjZjdmZWYwNjc4MTY1NjlkMTVlYzQzZmEyOTkxOCJ9','2017-06-07 08:52:23',NULL,NULL,NULL,'2017-06-06 09:59:27','2017-06-07 08:52:24'),(5,'https://www.google.it/',NULL,5,1,0,1,0,0,NULL,0,NULL,NULL,NULL,NULL,'2017-06-07 08:52:24',NULL,NULL,NULL,'2017-06-06 10:31:17','2017-06-07 08:52:25');
 /*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -654,7 +653,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','omwgUjCU7xbGFqclX2UtOcJMHauDdln3B06vQVzyyelimpMMfu9a32moIL6c','2017-05-22 07:41:31','2017-05-22 07:41:31',NULL),(2,4,'artisan','artisan@artisan.com','users/default.png','$2y$10$zuFDf2zFggpf8CqqbtLqzevtWOMuL/w.zpZ9q/YXfvRpZzMwVCGhC','K2TaKNQzyOTRV5YWLCtUlsCp43kVvTJWvzkTHcjgPgMAnWqmObk3FUzZzoJY','2017-05-29 07:40:33','2017-05-29 07:40:33',NULL),(3,2,'Normal','normal@normal.com','users/default.png','$2y$10$3lgUuTtcDvrbOMkrq/hIzuNxGbYtOXPltVhF3F8Uvf.mKnD1ztQDy',NULL,'2017-05-29 08:12:48','2017-05-29 08:12:48',NULL);
+INSERT INTO `users` VALUES (1,1,'Admin','admin@admin.com','users/default.png','$2y$10$pi5vcwQAO9XZLoAqGTZW8u.sOLAmNoA4nnIA38eZHOfQp4pXKWYAu','omwgUjCU7xbGFqclX2UtOcJMHauDdln3B06vQVzyyelimpMMfu9a32moIL6c','2017-05-22 07:41:31','2017-05-22 07:41:31',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -667,4 +666,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-07 11:50:24
+-- Dump completed on 2017-06-07 12:54:47

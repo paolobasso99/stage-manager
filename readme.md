@@ -8,6 +8,7 @@
 * ```composer install```
 * Login tramite LDAP
 * Assegnare il ruolo di admin all'utente ```php artisan voyager:admin {email}```
+* Eliminare l'uttente ```admin@admin.com```
 * ```php artisan check:sync-ldap``` per sincronizare le email con LDAP.
 * Aggiungere [Cron](https://laravel.com/docs/5.4/scheduling).
 
@@ -20,6 +21,7 @@
 # Check
 * ```php artisan check```: Controlla i siti che dovrebbero essere controllati.
 * ```php artisan check:all```: Controlla tutti i siti.
+* ```php artisan check:job```: Aggiungi un checking job alla queue.
 * ```php artisan check:urls {urls*}```: Controlla un array di siti trovati in base all'url.
 * ```php artisan check:reset```: Resetta il contatore dei siti che hanno fallito il controllo
 * ```php artisan check:sync-ldap```: Sincronizza emails con LDAP
@@ -28,13 +30,3 @@
 ## To do
 
 * Fix mail login
-
-
-## Quando ho finito
-
-* Aggiungi validation to sites
-* Rimuovi testing email
-* Implementa ShouldQueue per le emails
-* Elimina dummy routes
-* Elimina dummy users
-* Fix roles

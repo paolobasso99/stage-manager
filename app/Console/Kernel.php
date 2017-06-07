@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
          Commands\CheckSites::class,
          Commands\CheckByUrl::class,
          Commands\CheckAllSites::class,
+         Commands\CheckAddJob::class,
          Commands\ResetFailedSites::class,
          Commands\SyncContactsWithLDAP::class
      ];
