@@ -8,7 +8,7 @@
                 <div class="panel panel-bordered">
 
                     <div class="panel-heading">
-                        <h3 class="panel-title">Edit Site</h3>
+                        <h3 class="panel-title">Edit server</h3>
                     </div>
 
                     <form role="form" class="form-edit-add" action="{{ route('voyager.servers.update', ['server' => $server]) }}" method="POST" enctype="multipart/form-data">
@@ -49,8 +49,8 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="ssh_password">SSH password</label>
-                                <input type="text" class="form-control" name="ssh_password" placeholder="SSH password" value="{{ $server->ssh_password }}">
+                                <label for="ssh_password">SSH password <small>(leave blank to keep the same password)</small></label>
+                                <input type="password" class="form-control" name="ssh_password" placeholder="SSH password">
                             </div>
 
                             <div class="form-group">

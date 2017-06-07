@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="db_password">Database password</label><br>
+                                <label for="db_password">Database password <small>(leave blank to keep the same password)</small></label><br>
                                 <input type="password" class="form-control" name="db_password" placeholder="Database password">
                             </div>
 

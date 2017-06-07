@@ -54,6 +54,12 @@ class SiteController extends VoyagerBreadController
             'certificate_attempts' => 0,
             'checked_at' => Carbon::now(),
         ]);
+
+        if (isset($request->db_password)) {
+            $request->merge([
+                'db_password' => encrypt($request->db_password)
+            ]);
+        }
         //END custom part
 
 
@@ -150,6 +156,19 @@ class SiteController extends VoyagerBreadController
 
     public function update(Request $request, $id)
     {
+
+        //BEGIN custom part
+        if (isset($request->db_password)) {
+            $request->merge([
+                'db_password' => encrypt($request->db_password)
+            ]);
+        } else {
+            $request->merge([
+                'db_password' => Site::find($id)->db_password
+            ]);
+        }
+        //END custom part
+
 
         $slug = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();

@@ -27,7 +27,6 @@
 
 ## To do
 
-* Crypt password nel db
 * Fix mail login
 
 

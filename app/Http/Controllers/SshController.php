@@ -37,11 +37,14 @@ class SshController extends Controller
             //Set key credentials
             $key = Key::find($server->key_id);
             Config::set('remote.connections.runtime.keytext', $key->key);
-            Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
+
+            if (!is_null($key->keyphrase)) {
+                Config::set('remote.connections.runtime.keyphrase', decrypt($key->keyphrase));
+            }
 
         } else {
             //Use password credentials
-            Config::set('remote.connections.runtime.password', $server->ssh_password);
+            Config::set('remote.connections.runtime.password', decrypt($server->ssh_password));
         }
     }
 

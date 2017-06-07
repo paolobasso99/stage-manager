@@ -40,6 +40,19 @@ class ComposerServiceProvider extends ServiceProvider
             'servers.create', 'App\Http\ViewComposers\Servers\CreateEditComposer'
         );
 
+        //servers.read
+        View::composer(
+            'voyager::keys.read', 'App\Http\ViewComposers\Keys\ReadComposer'
+        );
+        //keys.edit
+        View::composer(
+            'keys.edit', 'App\Http\ViewComposers\Keys\CreateEditComposer'
+        );
+        //keys.create
+        View::composer(
+            'keys.create', 'App\Http\ViewComposers\Keys\CreateEditComposer'
+        );
+
     }
 
     /**

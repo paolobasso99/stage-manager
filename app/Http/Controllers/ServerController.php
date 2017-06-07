@@ -9,6 +9,7 @@ use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 
 use App\Site;
+use App\Server;
 use Carbon\Carbon;
 
 class ServerController extends VoyagerBreadController
@@ -48,6 +49,15 @@ class ServerController extends VoyagerBreadController
 
     public function store(Request $request)
     {
+        
+        //BEGIN custom part
+        if (isset($request->ssh_password)) {
+            $request->merge([
+                'ssh_password' => encrypt($request->ssh_password)
+            ]);
+        }
+        //END custom part
+
 
         $slug = $this->getSlug($request);
 
@@ -122,6 +132,17 @@ class ServerController extends VoyagerBreadController
     public function update(Request $request, $id)
     {
 
+        if (isset($request->ssh_password)) {
+            $request->merge([
+                'ssh_password' => encrypt($request->ssh_password)
+            ]);
+        } else {
+            $request->merge([
+                'ssh_password' => Server::find($id)->ssh_password
+            ]);
+        }
+
+
         $slug = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
         Voyager::canOrFail('edit_'.$dataType->name);
@@ -129,6 +150,7 @@ class ServerController extends VoyagerBreadController
         if ($val->fails()) {
             return response()->json(['errors' => $val->messages()]);
         }
+
         if (!$request->ajax()) {
             $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
 
