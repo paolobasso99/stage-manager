@@ -94,24 +94,24 @@
               <li role="presentation">
                   <a data-toggle="tab" href="#console">SSH console</a>
               </li>
-
-              @if ($has['database'])
-                  <li role="presentation">
-                      <a data-toggle="tab" href="#database">Database</a>
-                  </li>
-              @endif
-
-              @if ($has['nginx_configuration'])
-                  <li role="presentation">
-                      <a data-toggle="tab" href="#nginx">Nginx configuration</a>
-                  </li>
-              @endif
-              @if ($has['crontab'])
-                  <li role="presentation">
-                      <a data-toggle="tab" href="#crontab">Crontab</a>
-                  </li>
-              @endif
           @endif
+          @if ($has['database'])
+              <li role="presentation">
+                  <a data-toggle="tab" href="#database">Database</a>
+              </li>
+          @endif
+
+          @if ($has['nginx_configuration'])
+              <li role="presentation">
+                  <a data-toggle="tab" href="#nginx">Nginx configuration</a>
+              </li>
+          @endif
+          @if ($has['crontab'])
+              <li role="presentation">
+                  <a data-toggle="tab" href="#crontab">Crontab</a>
+              </li>
+          @endif
+
         </ul>
 
         <div class="tab-content panel panel-bordered">

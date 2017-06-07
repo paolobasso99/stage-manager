@@ -27,7 +27,7 @@
 
 ## To do
 
-* key-server relation GUI
+* Dump... anche per servers
 * Crypt password nel db
 * Fix mail login
 

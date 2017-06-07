@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ViewComposers\Sites;
+namespace App\Http\ViewComposers\Servers;
 
 use Illuminate\View\View;
 
@@ -20,13 +20,11 @@ class CreateEditComposer
      */
     public function compose(View $view)
     {
-        $site = $view->getData()['dataTypeContent'];
+        $server = $view->getData()['dataTypeContent'];
 
-        $contacts = \App\Contact::all();
-        $servers = \App\Server::all();
+        $keys = \App\Key::all();
 
-        $view->with('site', $site);
-        $view->with('contacts', $contacts);
-        $view->with('servers', $servers);
+        $view->with('server', $server);
+        $view->with('keys', $keys);
     }
 }

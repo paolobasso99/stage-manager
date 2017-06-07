@@ -20,18 +20,18 @@
                         <div class="panel-body">
 
                             <div class="form-group ">
-                                <label for="name">Url</label>
+                                <label for="url">Url</label>
                                 <input type="text" class="form-control" name="url" placeholder="Url" value="{{ $site->url }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="server">Server</label>
+                                <label for="server_id">Server</label>
                                 <select class="form-control" id="server" name="server_id">
                                     @foreach ($servers as $server)
                                         @if (is_null($site->server_id))
                                             <option selected value>Select a server</option>
                                         @endif
-                                        
+
                                         <option value="{{ $server->id }}"
                                             @if (!is_null($site->server_id))
                                                 @if ($site->server_id == $server->id)
@@ -48,27 +48,27 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Check rate</label>
+                                <label for="check_rate">Check rate</label>
                                 <input type="text" class="form-control" name="check_rate" placeholder="Check rate" value="{{ $site->check_rate }}">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Check response</label><br>
+                                <label for="check_response">Check response</label><br>
                                 <input type="checkbox" name="check_response" class="toggleswitch" @if ($site->check_response) checked="" @endif>
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Check certificate</label><br>
+                                <label for="check_certificate">Check certificate</label><br>
                                 <input type="checkbox" name="check_certificate" class="toggleswitch" @if ($site->check_certificate) checked="" @endif>
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Enable nginx configuration</label><br>
+                                <label for="enable_nginx_configuration">Enable nginx configuration</label><br>
                                 <input type="checkbox" name="enable_nginx_configuration" class="toggleswitch" @if ($site->enable_nginx_configuration) checked="" @endif>
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">SSH root path</label><br>
+                                <label for="ssh_root">SSH root path</label><br>
                                 <input type="text" class="form-control" name="ssh_root" placeholder="SSH root path" value="{{ $site->ssh_root }}">
                             </div>
 
@@ -95,22 +95,22 @@
                             <h3>Database</h3>
 
                             <div class="form-group ">
-                                <label for="name">Enable database</label><br>
+                                <label for="enable_db">Enable database</label><br>
                                 <input type="checkbox" name="enable_db" class="toggleswitch" @if ($site->enable_db) checked="" @endif>
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Database host</label><br>
+                                <label for="db_host">Database host</label><br>
                                 <input type="text" class="form-control" name="db_host" placeholder="Database host" value="{{ $site->db_host }}">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Database username</label><br>
+                                <label for="db_username">Database username</label><br>
                                 <input type="text" class="form-control" name="db_username" placeholder="Database username" value="{{ $site->db_username }}">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Database password</label><br>
+                                <label for="db_password">Database password</label><br>
                                 <input type="password" class="form-control" name="db_password" placeholder="Database password">
                             </div>
 

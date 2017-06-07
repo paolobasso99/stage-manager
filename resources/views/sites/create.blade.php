@@ -11,7 +11,7 @@
                         <h3 class="panel-title">Create Site</h3>
                     </div>
 
-                    <form role="form" class="form-edit-add" action="{{ route('voyager.sites.store', ['site' => $site]) }}" method="POST" enctype="multipart/form-data">
+                    <form role="form" class="form-edit-add" action="{{ route('voyager.sites.store') }}" method="POST" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 
@@ -20,12 +20,12 @@
                         <div class="panel-body">
 
                             <div class="form-group ">
-                                <label for="name">Url</label>
+                                <label for="url">Url</label>
                                 <input type="text" class="form-control" name="url" placeholder="Url" value="{{ $site->url }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="server">Server</label>
+                                <label for="server_id">Server</label>
                                 <select class="form-control" id="server" name="server_id">
                                     @foreach ($servers as $server)
                                         <option selected value>Select a server</option>
@@ -41,27 +41,27 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Check rate</label>
+                                <label for="check_rate">Check rate</label>
                                 <input type="text" class="form-control" name="check_rate" placeholder="Check rate" value="5">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Check response</label><br>
+                                <label for="check_response">Check response</label><br>
                                 <input type="checkbox" name="check_response" class="toggleswitch" checked="">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Check certificate</label><br>
+                                <label for="check_certificate">Check certificate</label><br>
                                 <input type="checkbox" name="check_certificate" class="toggleswitch">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Enable nginx configuration</label><br>
+                                <label for="enable_nginx_configuration">Enable nginx configuration</label><br>
                                 <input type="checkbox" name="enable_nginx_configuration" class="toggleswitch">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">SSH root path</label><br>
+                                <label for="ssh_root">SSH root path</label><br>
                                 <input type="text" class="form-control" name="ssh_root" placeholder="SSH root path">
                             </div>
 
@@ -85,22 +85,22 @@
                             <h3>Database</h3>
 
                             <div class="form-group ">
-                                <label for="name">Enable database</label><br>
+                                <label for="enable_db">Enable database</label><br>
                                 <input type="checkbox" name="enable_db" class="toggleswitch">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Database host</label><br>
+                                <label for="db_host">Database host</label><br>
                                 <input type="text" class="form-control" name="db_host" placeholder="Database host">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Database username</label><br>
+                                <label for="db_username">Database username</label><br>
                                 <input type="text" class="form-control" name="db_username" placeholder="Database username">
                             </div>
 
                             <div class="form-group ">
-                                <label for="name">Database password</label><br>
+                                <label for="db_password">Database password</label><br>
                                 <input type="password" class="form-control" name="db_password" placeholder="Database password">
                             </div>
 
