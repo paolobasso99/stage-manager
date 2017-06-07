@@ -9,11 +9,11 @@ use SSH;
 use Storage;
 use Validator;
 
-use App\Site;
+use App\Server;
 
 class CrontabController extends SshController
 {
-    public function upload(Site $site, Request $request)
+    public function upload(Server $server, Request $request)
     {
         //Validate the request
         $validator = Validator::make($request->all(), [
@@ -35,9 +35,9 @@ class CrontabController extends SshController
                 ]);
         }
 
-        $fileName = 'crontab-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+        $fileName = 'crontab-' . md5($server->ip . \Carbon\Carbon::now()->timestamp);
 
-        $remoteTempFile = '/home' . '/' . $site->server->ssh_username . '/' . $fileName;
+        $remoteTempFile = '/home' . '/' . $server->ssh_username . '/' . $fileName;
         $remoteFile = '/etc/crontab';
 
         //Store local file
@@ -45,7 +45,7 @@ class CrontabController extends SshController
             'uploads/crontabs', $fileName
         );
 
-        $this->setSshCredentials($site);
+        $this->setSshCredentials($server);
 
 
         //Perform task
@@ -60,7 +60,7 @@ class CrontabController extends SshController
             //Move file to the right path
             SSH::into('runtime')->run([
                 'cd',
-                'echo ' . $site->ssh_password . ' | sudo -S mv ' . $fileName . ' ' . $remoteFile
+                'echo ' . $server->ssh_password . ' | sudo -S mv ' . $fileName . ' ' . $remoteFile
             ]);
 
         } catch(\RunTimeException $e) {
@@ -77,7 +77,7 @@ class CrontabController extends SshController
             ]);
     }
 
-    public function download(Site $site)
+    public function download(Server $server)
     {
         //Check permissions
         if (!Voyager::can('ssh_all')) {
@@ -87,9 +87,9 @@ class CrontabController extends SshController
                 ]);
         }
 
-        $this->setSshCredentials($site);
+        $this->setSshCredentials($server);
 
-        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+        $fileName = md5($server->ip . \Carbon\Carbon::now()->timestamp);
 
         $localFile = 'downloads/crontabs/' . $fileName;
         $remoteFile = '/etc/crontab';

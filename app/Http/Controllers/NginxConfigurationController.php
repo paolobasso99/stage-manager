@@ -38,7 +38,7 @@ class NginxConfigurationController extends SshController
                 ]);
         }
 
-        $fileName = $domain . '-' . md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+        $fileName = $domain . '-' . md5($site->server->ip . \Carbon\Carbon::now()->timestamp);
 
         $remoteTempFile = '/home' . '/' . $site->server->ssh_username . '/' . $fileName;
         $remoteFile = '/etc/nginx/sites-available/' . $domain;
@@ -48,7 +48,7 @@ class NginxConfigurationController extends SshController
             'uploads/nginx-configurations', $fileName
         );
 
-        $this->setSshCredentials($site);
+        $this->setSshCredentials($site->server);
 
 
         //Perform task
@@ -63,7 +63,7 @@ class NginxConfigurationController extends SshController
             //Move file to the right path
             SSH::into('runtime')->run([
                 'cd',
-                'echo ' . $site->ssh_password . ' | sudo -S mv ' . $fileName . ' ' . $remoteFile
+                'echo ' . $site->server->ssh_password . ' | sudo -S mv ' . $fileName . ' ' . $remoteFile
             ]);
 
         } catch(\RunTimeException $e) {
@@ -92,9 +92,9 @@ class NginxConfigurationController extends SshController
                 ]);
         }
 
-        $this->setSshCredentials($site);
+        $this->setSshCredentials($site->server);
 
-        $fileName = md5(parse_url($site->url, PHP_URL_HOST) . '-' . \Carbon\Carbon::now()->timestamp);
+        $fileName = $domain . '-' .  md5($site->server->ip . \Carbon\Carbon::now()->timestamp);
 
         $localFile = 'downloads/nginx-configurations/' . $fileName;
         $remoteFile = '/etc/nginx/sites-available/' . $domain;

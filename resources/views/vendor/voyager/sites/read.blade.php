@@ -155,7 +155,7 @@
                         <h3 class="panel-title">SSH console</h3>
                     </div>
                     <div class="panel-body" style="padding-top:0;">
-                        <form id="ssh-form" action="{{ route('ssh') }}" method="post">
+                        <form id="ssh-form" action="{{ route('ssh', ['server' => $site->server, 'site' => $site]) }}" method="post">
                             {{ csrf_field() }}
 
                             <div class="form-group">
@@ -218,12 +218,12 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <a href="{{ route('sites-available.download', $site) }}" target="_blank" class="btn btn-primary">
+                                    <a href="{{ route('nginx-configuration.download', $site) }}" target="_blank" class="btn btn-primary">
                                         <i class="voyager-download"></i> Download
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="{{ route('sites-available.upload', $site) }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('nginx-configuration.upload', $site) }}" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
 
                                         <div class="form-group">
@@ -295,10 +295,9 @@
 
                 axios({
                     method:'post',
-                    url: '{{ route('ssh') }}',
+                    url: '{{ route('ssh', ['server' => $site->server, 'site' => $site]) }}',
                     data: {
-                        command: $('#ssh-input').val(),
-                        site_id: {{ $site->id }}
+                        command: $('#ssh-input').val()
                     }
                 }).then(function (response) {
                         $('#ssh-output').html(response.data);

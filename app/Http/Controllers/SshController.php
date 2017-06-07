@@ -7,7 +7,7 @@ use TCG\Voyager\Facades\Voyager;
 use SSH;
 use Config;
 
-use App\Site;
+use App\Server;
 use App\Key;
 
 class SshController extends Controller
@@ -20,28 +20,28 @@ class SshController extends Controller
         $this->middleware('admin.user');
     }
 
-    protected function setSshCredentials(Site $site)
+    protected function setSshCredentials(Server $server)
     {
 
         //Set login credentials
-        Config::set('remote.connections.runtime.host', $site->server->ip);
-        Config::set('remote.connections.runtime.username', $site->server->ssh_username);
+        Config::set('remote.connections.runtime.host', $server->ip);
+        Config::set('remote.connections.runtime.username', $server->ssh_username);
 
         //Use key or password
-        if (!is_null($site->server->key_id)) {
+        if (!is_null($server->key_id)) {
             //Check if the key exist in the DB
-            if(!Key::exist($site->server->key_id)){
-                return 'The key with an "id" of "' . $site->server->key_id . '" does not exist';
+            if(!Key::exist($server->key_id)){
+                return 'The key with an "id" of "' . $server->key_id . '" does not exist';
             }
 
             //Set key credentials
-            $key = Key::find($site->server->key_id);
+            $key = Key::find($server->key_id);
             Config::set('remote.connections.runtime.keytext', $key->key);
             Config::set('remote.connections.runtime.keyphrase', $key->keyphrase);
 
         } else {
             //Use password credentials
-            Config::set('remote.connections.runtime.password', $site->server->ssh_password);
+            Config::set('remote.connections.runtime.password', $server->ssh_password);
         }
     }
 

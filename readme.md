@@ -27,7 +27,6 @@
 
 ## To do
 
-* Dump... anche per servers
 * Crypt password nel db
 * Fix mail login
 

@@ -15,15 +15,13 @@ Voyager::routes();
 Route::get('/', 'DashboardController@index')->name('voyager.dashboard');
 
 
-Route::post('ssh', 'SshCommandsController@run')->name('ssh');
+Route::post('ssh/{server}/{site?}', 'SshCommandsController@run')->name('ssh');
+
+Route::get('crontab/{server}', 'CrontabController@download')->name('crontab.download');
+Route::post('crontab/{server}', 'CrontabController@upload')->name('crontab.upload');
 
 Route::get('dump/{site}', 'DumpController@download')->name('dumps.download');
 Route::post('dump/{site}', 'DumpController@upload')->name('dumps.upload');
 
-Route::get('nginx-configuration/{site}', 'NginxConfigurationController@download')->name('sites-available.download');
-Route::post('nginx-configuration/{site}', 'NginxConfigurationController@upload')->name('sites-available.upload');
-
-Route::get('crontab/{site}', 'CrontabController@download')->name('crontab.download');
-Route::post('crontab/{site}', 'CrontabController@upload')->name('crontab.upload');
-
-//Route::get('dummy/{site}', 'SshCommandsController@runGet');
+Route::get('nginx-configuration/{site}', 'NginxConfigurationController@download')->name('nginx-configuration.download');
+Route::post('nginx-configuration/{site}', 'NginxConfigurationController@upload')->name('nginx-configuration.upload');
