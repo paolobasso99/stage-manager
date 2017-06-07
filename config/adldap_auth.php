@@ -131,7 +131,7 @@ return [
         |
         */
 
-        'ldap' => 'mail',
+        'ldap' => 'userprincipalname',
 
         /*
         |--------------------------------------------------------------------------
@@ -239,7 +239,7 @@ return [
 
     'sync_attributes' => [
 
-        'email' => 'mail',
+        'email' => 'userprincipalname',
         'name' => 'cn',
 
     ],
