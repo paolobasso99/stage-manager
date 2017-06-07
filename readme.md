@@ -25,8 +25,3 @@
 * ```php artisan check:urls {urls*}```: Controlla un array di siti trovati in base all'url.
 * ```php artisan check:reset```: Resetta il contatore dei siti che hanno fallito il controllo
 * ```php artisan check:sync-ldap```: Sincronizza emails con LDAP
-
-
-## To do
-
-* Fix mail login
