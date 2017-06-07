@@ -11,6 +11,7 @@
 * Eliminare l'uttente ```admin@admin.com```
 * ```php artisan check:sync-ldap``` per sincronizare le email con LDAP.
 * Aggiungere [Cron](https://laravel.com/docs/5.4/scheduling).
+* Start queue
 
 
 ## Commands
